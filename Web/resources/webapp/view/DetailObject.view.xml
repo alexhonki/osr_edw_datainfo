@@ -1,0 +1,51 @@
+<mvc:View controllerName="osr.edw.data.info.controller.DetailObject"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+          xmlns:core="sap.ui.core"
+          xmlns:l="sap.ui.layout"
+          xmlns:f="sap.ui.layout.form"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          displayBlock="true"
+          xmlns="sap.m"
+          class="sapUiSizeCompact">
+
+  <Page title="{i18n>title}"
+        showNavButton="false"
+        navButtonPress="onNavBack"
+       >
+    <headerContent>
+      <!-- <core:Fragment fragmentName="osr.scv.org.explorer.view.fragment.HeaderContent"
+                     type="XML" /> -->
+    </headerContent>
+    <content>
+      <IconTabBar id="scv-tabbar"
+                  expanded="true"
+                  class="sapUiResponsiveContentPadding"
+                  select="onSelectTab"
+                  expand="onExpandTab"
+                  expandable="false"
+                  stretchContentHeight="true">
+
+        <items>
+          <IconTabFilter id="scv-current"
+                         iconDensityAware="false"
+                         icon="sap-icon://employee"
+                         text="{i18n>detailobject.tab.current}"
+                         key="current-tab-key">
+            <content>
+
+              <!-- <core:Fragment fragmentName="osr.scv.org.explorer.view.fragment.objectdetail.Current"
+                             type="XML" /> -->
+
+            </content>
+
+          </IconTabFilter>
+
+
+        </items>
+      </IconTabBar>
+    </content>
+  </Page>
+
+</mvc:View>

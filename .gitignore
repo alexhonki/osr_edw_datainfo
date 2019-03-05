@@ -1,0 +1,5 @@
+#put the list of files or folder that need to be ignored by the git
+#so that it does not get tracked
+#e.g node_modules, different yaml if required
+
+node_modules/
