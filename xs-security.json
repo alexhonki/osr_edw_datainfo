@@ -1,0 +1,12 @@
+{
+	"xsappname": "OSR_EDW_SOURCE_DATA_INFO",
+	"scopes": [{
+		"name": "$XSAPPNAME.DATA_INFO",
+		"description": "Scope for OSR EDW SOURCE Data Info"
+	}],
+	"role-templates": [{
+		"name": "OSR_EDW_SOURCE_DATA_INFO_EXPLORER",
+		"description": "Role for OSR EDW Source Data Info",
+		"scope-references": ["$XSAPPNAME.DATA_INFO"]
+	}]
+}
