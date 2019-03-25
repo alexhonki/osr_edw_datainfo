@@ -1,4 +1,4 @@
 {
-    "name":    "OSR_EDW_SOURCE_DATA_INFO.Persistence",
+    "name":    "osr.edw.source.data.info.db",
     "subfolder": "append"
 }

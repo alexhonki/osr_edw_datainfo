@@ -1,0 +1,139 @@
+namespace osr.edw.source.data.info.db.data;
+
+/*===============================================
+   Context: OSR EDW Source Data info
+===============================================*/
+context DataInfo {
+
+    /*@@layout{"layoutInfo":{}}*/
+    entity Master {
+        key SCV_ID        : Integer not null;
+            CREATED_AT    : UTCDateTime;
+            UPDATED_AT    : UTCDateTime;
+            CREATED_BY    : String(200);
+            CHANGED_BY    : String(200);
+            MASTER_SCV_ID : Integer;
+            IS_MASTER     : String(1);
+            REJECTED_IDS  : String(200);
+            IS_HIDDEN     : String(1);
+    }
+    technical configuration {
+        column store;
+    };
+
+    /*@@layout{"layoutInfo":{}}*/
+
+    entity Organisation {
+        key ORG_ID                 : Binary(32) not null;
+            SCV_ID                 : Integer    not null;
+            SOURCE                 : String(10) not null;
+            SOURCE_ID              : String(20) not null;
+            ABN                    : String(20);
+            ACN                    : String(20);
+            VALID_FROM             : LocalDate;
+            VALID_TO               : LocalDate;
+            NAME_ORG1              : String(200);
+            NAME_ORG2              : String(40);
+            NAME_ORG3              : String(40);
+            NAME_ORG4              : String(40);
+            NAME_TRDG              : String(200);
+            ORG_TYPE               : String(4);
+            ORG_CLASS              : String(4);
+            ORG_SUB_CLASS          : String(4);
+            ORG_STATUS             : String(4);
+            ORG_START_DT           : LocalDate;
+            ORG_END_DT             : LocalDate;
+            ORG_NAME_START_DT      : LocalDate;
+            REGN_START_DT          : LocalDate;
+            REGN_END_DT            : LocalDate;
+            CHARITY_REGN_DT        : LocalDate;
+            CHARITY_CANCN_DT       : LocalDate;
+            GST_REGN_DT            : LocalDate;
+            GST_CANCN_DT           : LocalDate;
+            ENT_TYP_CD             : String(3);
+            ENT_TYP_CD_DESC        : String(100);
+            ANZSIC_CD              : String(5);
+            ANZSIC_DESC            : String(100);
+            FUND_CHARITY_CODE      : String(20);
+            FUND_CHARITY_CODE_DESC : String(200);
+            PARENT_ABN             : String(20);
+            PARENT_ACN             : String(20);
+            PARENT_NAME_ORG        : String(200);
+            DEREGISTRATION_CODE    : String(8);
+            IDENTITY_ID            : String(20);
+            LAST_CONTACT_UPDATE_DT : LocalDate;
+            STD_NAME_ORG1          : String(200);
+            STD_NAME_ORG2          : String(100);
+            STD_NAME_ORG3          : String(100);
+            STD_NAME_ORG4          : String(100);
+            STD_NAME_TRDG          : String(200);
+            STD_PARENT_NAME_ORG    : String(200);
+            INACTIVE               : String(1);
+            SCV_LOAD_ID            : Integer;
+            UPDATED_AT             : UTCDateTime;
+    }
+    technical configuration {
+        fuzzy search index on (NAME_ORG1);
+        fuzzy search index on (NAME_ORG2);
+        fuzzy search index on (NAME_ORG3);
+        fuzzy search index on (NAME_ORG4);
+        fuzzy search index on (PARENT_NAME_ORG);
+        fuzzy search index on (STD_NAME_ORG1);
+        fuzzy search index on (STD_NAME_ORG2);
+        fuzzy search index on (STD_NAME_ORG3);
+        fuzzy search index on (STD_NAME_ORG4);
+        fuzzy search index on (STD_PARENT_NAME_ORG);
+    };
+
+
+    /*@@layout{"layoutInfo":{}}*/
+    entity ContactNumber {
+        key CONTACT_NUMBER_ID : Binary(32) not null;
+            SCV_ID            : String(10);
+            SOURCE            : String(10);
+            SOURCE_ID         : String(20);
+            VALID_FROM        : LocalDate;
+            VALID_TO          : LocalDate;
+            CONTACT_NUMBER    : String(30);
+            NUMBER_EXT        : String(20);
+            NUMBER_TYPE       : String(10);
+            NUMBER_LONG       : String(30);
+            STD_PHONE         : String(30);
+            STD_PHONE2        : String(30);
+            SCV_LOAD_ID       : Integer;
+            UPDATED_AT        : UTCDateTime;
+    };
+
+
+    /*@@layout{"layoutInfo":{}}*/
+    entity Search {
+        SCV_ID                  : Integer;
+        SOURCE_ID               : String(20);
+        SOURCE                  : String(20);
+        SEARCH_STRING           : String(1024);
+        SEARCH_STRING_CLEANSED  : String(1024);
+        ORG_NAMES_ONLY          : String(1024);
+        ORG_NAMES_ONLY_CLEANSED : String(1024);
+    }
+    technical configuration {
+        column store;
+        fulltext index i_SEARCH_STRING           on (SEARCH_STRING)
+            token separators '|'
+            text mining off
+            search only on;
+        fulltext index i_SEARCH_STRING_CLEANSED  on (SEARCH_STRING_CLEANSED)
+            token separators '|'
+            text mining off
+            search only on;
+        fulltext index i_ORG_NAMES_ONLY          on (ORG_NAMES_ONLY)
+            token separators '|'
+            text mining off
+            search only on;
+        fulltext index i_ORG_NAMES_ONLY_CLEANSED on (ORG_NAMES_ONLY_CLEANSED)
+            token separators '|'
+            text mining off
+            search only on;
+    };
+
+/*@@layout{"layoutInfo":{"x":281,"y":-485.5}}*/
+};

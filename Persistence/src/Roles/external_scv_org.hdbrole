@@ -1,0 +1,17 @@
+{
+	"role":{
+		"name": "osr.scv.org.foundation.db.roles::external_access_g#",
+		"object_privileges": [ 
+			{		
+				"name": "osr.scv.org.foundation.db.functions::TF_ScvOrgSearchOrganisation",
+				"type": "FUNCTION",
+				"privileges_with_grant_option": ["EXECUTE"]
+			},
+			{		
+				"name": "osr.scv.org.foundation.db.functions::TF_ScvOrgSearchAddress",
+				"type": "FUNCTION",
+				"privileges_with_grant_option": ["EXECUTE"]
+			}	
+		]
+     }
+}
