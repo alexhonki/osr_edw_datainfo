@@ -77,7 +77,11 @@
 				"async": true,
 				"viewPath": "osr.edw.data.info.view",
 				"controlAggregation": "pages",
-				"controlId": "idAppControl"
+				"controlId": "idAppControl",
+				"transition": "slide",
+        "bypassed": {
+          "target": "notFound"
+        }
 			},
 			"routes": [{
         "pattern": "",
@@ -97,7 +101,7 @@
 			"targets": {
 				"home": {
 					"viewType": "XML",
-					"viewName": "App",
+					"viewName": "DetailObject",
 					"transition": "slide",
 					"clearAggregation": true
 				},
@@ -105,7 +109,12 @@
 					"viewType": "XML",
 					"viewName": "DetailObject",
 					"transition": "slide"
-				}
+				},
+        "notFound": {
+					"viewType": "XML",
+          "viewName": "NotFound",
+          "controlAggregation": "pages"
+        }
 			}
 		}
 	}
