@@ -1,173 +1,173 @@
 {
-  "osr.scv.org.foundation.db.synonyms::RMS_BUT000_ORG": {
+  "osr.edw.source.data.info.db.synonyms::RMS_BUT000_ORG": {
     "target": {
       "object": "osr.edw.propagation.rms.proxy::CV_BUT000_ORG",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::RMS_BUT021_FS": {
+  "osr.edw.source.data.info.db.synonyms::RMS_BUT021_FS": {
     "target": {
       "object": "osr.edw.staging.md.rms.proxy::CV_BUT021FS",
        "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::RMS_BUT0ID": {
+  "osr.edw.source.data.info.db.synonyms::RMS_BUT0ID": {
     "target": {
       "object": "osr.edw.staging.md.rms.proxy::CV_BUT0ID",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-    "osr.scv.org.foundation.db.synonyms::RMS_BUT100": {
+    "osr.edw.source.data.info.db.synonyms::RMS_BUT100": {
     "target": {
       "object": "osr.edw.staging.md.rms.proxy::CV_BUT100",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::RMS_ADRC": {
+  "osr.edw.source.data.info.db.synonyms::RMS_ADRC": {
     "target": {
       "object": "osr.edw.propagation.rms.proxy::CV_ADRC",
        "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::RMS_ADR2": {
+  "osr.edw.source.data.info.db.synonyms::RMS_ADR2": {
     "target": {
       "object": "osr.edw.staging.md.rms.proxy::CV_ADR2",
        "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::RMS_ADR6": {
+  "osr.edw.source.data.info.db.synonyms::RMS_ADR6": {
     "target": {
       "object": "osr.edw.propagation.rms.proxy::CV_ADR6",
        "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ABR_AGENCY_DATA": {
+  "osr.edw.source.data.info.db.synonyms::ABR_AGENCY_DATA": {
     "target": {
       "object": "osr.edw.propagation.md.abr.proxy::CV_AGENCY_DATA",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ABR_SRC_AGENCY_DATA": {
+  "osr.edw.source.data.info.db.synonyms::ABR_SRC_AGENCY_DATA": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_AGENCY_DATA",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ABR_BUSINESS_LOCATION": {
+  "osr.edw.source.data.info.db.synonyms::ABR_BUSINESS_LOCATION": {
     "target": {
       "object": "osr.edw.propagation.md.abr.proxy::CV_BUSINESS_LOCATION",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ABR_BUSINESS_NAMES": {
+  "osr.edw.source.data.info.db.synonyms::ABR_BUSINESS_NAMES": {
     "target": {
       "object": "osr.edw.propagation.md.abr.proxy::CV_BUSINESS_NAMES",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
- "osr.scv.org.foundation.db.synonyms::ABR_SRC_ACNC": {
+ "osr.edw.source.data.info.db.synonyms::ABR_SRC_ACNC": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_ACNC",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_ACNC": {
+"osr.edw.source.data.info.db.synonyms::ABR_ACNC": {
     "target": {
       "object": "osr.edw.staging.md.abr.proxy::CV_ACNC",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
- "osr.scv.org.foundation.db.synonyms::ABR_ENTITY_MAPPING": {
+ "osr.edw.source.data.info.db.synonyms::ABR_ENTITY_MAPPING": {
     "target": {
       "object": "osr.edw.staging.md.abr.proxy::CV_ENTITY_MAPPING",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_CONTACTS": {
+"osr.edw.source.data.info.db.synonyms::ABR_CONTACTS": {
     "target": {
       "object": "osr.edw.propagation.md.abr.proxy::CV_CONTACTS",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_SRC_CONTACTS": {
+"osr.edw.source.data.info.db.synonyms::ABR_SRC_CONTACTS": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_CONTACTS",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_CODE_FUND_CHARITY": {
+"osr.edw.source.data.info.db.synonyms::ABR_CODE_FUND_CHARITY": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_CODE_FUND_CHARITY",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_FUNDS": {
+"osr.edw.source.data.info.db.synonyms::ABR_FUNDS": {
     "target": {
       "object": "osr.edw.staging.md.abr.proxy::CV_FUNDS",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_SRC_BUSINESS_LOCATION": {
+"osr.edw.source.data.info.db.synonyms::ABR_SRC_BUSINESS_LOCATION": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_BUSINESS_LOCATION",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_SRC_BUSINESS_NAMES": {
+"osr.edw.source.data.info.db.synonyms::ABR_SRC_BUSINESS_NAMES": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_BUSINESS_NAMES",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ABR_SRC_FUNDS": {
+"osr.edw.source.data.info.db.synonyms::ABR_SRC_FUNDS": {
     "target": {
       "object": "osr.edw.source.md.abr.proxy::CV_FUNDS",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-"osr.scv.org.foundation.db.synonyms::ASIC_ORGANISATION": {
+"osr.edw.source.data.info.db.synonyms::ASIC_ORGANISATION": {
     "target": {
       "object": "osr.edw.propagation.md.asic.proxy::CV_ORGANISATION",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ASIC_XREF": {
+  "osr.edw.source.data.info.db.synonyms::ASIC_XREF": {
     "target": {
       "object": "osr.edw.source.md.asic.proxy::CV_XREF",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ASIC_ADDRESS": {
+  "osr.edw.source.data.info.db.synonyms::ASIC_ADDRESS": {
     "target": {
       "object": "osr.edw.propagation.md.asic.proxy::CV_ADDRESS",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ATO_BASNIND": {
+  "osr.edw.source.data.info.db.synonyms::ATO_BASNIND": {
     "target": {
       "object": "osr.edw.propagation.td.ato.proxy::CV_BASNIND",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ATO_ITRNIND": {
+  "osr.edw.source.data.info.db.synonyms::ATO_ITRNIND": {
     "target": {
       "object": "osr.edw.propagation.td.ato.proxy::CV_ITRNIND",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-  "osr.scv.org.foundation.db.synonyms::ATO_BASCONTACT": {
+  "osr.edw.source.data.info.db.synonyms::ATO_BASCONTACT": {
     "target": {
       "object": "osr.edw.staging.md.ato.proxy::CV_BASCONTACT",
       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
     }
   },
-	"osr.scv.org.foundation.db.synonyms::TMR_CustContact": {
+	"osr.edw.source.data.info.db.synonyms::TMR_CustContact": {
 		"target": {
 			"object": "osr.edw.propagation.tmr.proxy::CV_CUSTCONTACT",
 			"schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
 		}
 	},
-	"osr.scv.org.foundation.db.synonyms::TMR_CustMain": {
+	"osr.edw.source.data.info.db.synonyms::TMR_CustMain": {
 		"target": {
 			"object": "osr.edw.propagation.tmr.proxy::CV_CUSTMAIN",
 			"schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
