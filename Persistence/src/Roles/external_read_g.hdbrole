@@ -1,0 +1,9 @@
+{
+  "role": {
+    "name": "osr.edw.source.data.info.db.roles::read_g#",
+    "schema_privileges": [{
+      "privileges_with_grant_option": ["SELECT", "SELECT CDS METADATA", "EXECUTE", "DEBUG"]
+    }]
+
+  }
+}

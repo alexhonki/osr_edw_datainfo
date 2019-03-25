@@ -36,6 +36,8 @@ modules:
     path: Persistence
     requires:
       - name: OsrEdwSourceDataInfoContainer
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
       - name: OSR-EDW-PLATFORM-grantor
         group: SERVICE_REPLACEMENTS
         properties:
@@ -67,7 +69,3 @@ resources:
     parameters:
       service-name: OSR_EDW_PLATFORM-deploy
     type: org.cloudfoundry.existing-service
-  - name: hdi_Persistence
-    properties:
-      hdi-container-name_2: '${service-name}'
-    type: com.sap.xs.hdi-container
