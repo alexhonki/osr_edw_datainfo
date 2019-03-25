@@ -1,0 +1,29 @@
+FUNCTION "osr.edw.source.data.info.db.Functions::TF_GENERATE_SYSUUID"( )
+       RETURNS TABLE (
+       				"SYSUUID" Binary(32)
+    			)
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+    DECLARE COUNTER INTEGER;
+	DECLARE RESULT_TABLE TABLE ( "SYSUUID" Binary(32) );
+    -- run through each of the SQL group base on the table 
+-- base on the second group onward 
+COUNTER := 0;
+WHILE COUNTER < 100 DO 
+
+    TEMP_RESULT = SELECT SYSUUID FROM "osr.edw.source.data.info.db.synonyms::SYS.DUMMY";
+
+:RESULT_TABLE.INSERT(:TEMP_RESULT);	
+COUNTER := COUNTER + 1;
+
+END WHILE;
+
+RETURN
+-- return the table that contains all the result
+SELECT * FROM :RESULT_TABLE;
+    
+END;

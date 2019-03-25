@@ -1,0 +1,8 @@
+{
+  "osr.edw.source.data.info.db.synonyms::SYS.DUMMY": {
+    "target": {
+      "object": "DUMMY",
+      "schema": "SYS"
+    }
+  }
+} 
