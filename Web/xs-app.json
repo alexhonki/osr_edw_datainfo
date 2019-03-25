@@ -1,6 +1,21 @@
 {
 	"authenticationMethod": "route",
-	"routes": [  {
+	"routes": [{
+		"source": "/osr/edw/source/data/(.*)",
+		"destination": "Services_url",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	},{
+		"source": "/api/static(.*)",
+		"destination": "Services_url",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	}, {
+		"source": "/org/srv/xs(.*)",
+		"destination": "Services_url",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa"
+	}, {
 		"source": "^/(.*)$",
 		"localDir": "resources",
 		"scope": ["$XSAPPNAME.DATA_INFO"],
