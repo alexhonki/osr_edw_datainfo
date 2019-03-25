@@ -5,7 +5,7 @@
 		"description": "Scope for OSR EDW SOURCE Data Info"
 	}],
 	"role-templates": [{
-		"name": "OSR_EDW_SOURCE_DATA_INFO_EXPLORER",
+		"name": "OSR_EDW_SOURCE_DATA_INFO_VIEWER",
 		"description": "Role for OSR EDW Source Data Info",
 		"scope-references": ["$XSAPPNAME.DATA_INFO"]
 	}]

@@ -1,5 +1,12 @@
 {
-	"welcomeFile": "webapp/index.html",
-	"authenticationMethod": "none",
-	"routes": []
+	"authenticationMethod": "route",
+	"routes": [  {
+		"source": "^/(.*)$",
+		"localDir": "resources",
+		"scope": ["$XSAPPNAME.DATA_INFO"],
+		"replace": {
+			"pathSuffixes": ["index.html"],
+			"vars": ["ui5liburl"]
+		}
+	}]
 }
