@@ -70,6 +70,9 @@
 				"uri": "css/style.css"
 			}]
 		},
+		"config": {
+			"searchHelper": "/osr/edw/source/data/search/"
+		},
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
@@ -79,21 +82,19 @@
 				"controlAggregation": "pages",
 				"controlId": "idAppControl",
 				"transition": "slide",
-        "bypassed": {
-          "target": "notFound"
-        }
+				"bypassed": {
+					"target": "notFound"
+				}
 			},
 			"routes": [{
-        "pattern": "",
-        "name": "homepage",
-        "target": "home"
-      },
-			{
+				"pattern": "",
+				"name": "homepage",
+				"target": "detailobject"
+			}, {
 				"pattern": "home",
 				"name": "home",
-				"target": "home"
-			},
-			{
+				"target": "detailobject"
+			}, {
 				"pattern": "detailobject",
 				"name": "detailobject",
 				"target": "detailobject"
@@ -110,11 +111,11 @@
 					"viewName": "DetailObject",
 					"transition": "slide"
 				},
-        "notFound": {
+				"notFound": {
 					"viewType": "XML",
-          "viewName": "NotFound",
-          "controlAggregation": "pages"
-        }
+					"viewName": "NotFound",
+					"controlAggregation": "pages"
+				}
 			}
 		}
 	}

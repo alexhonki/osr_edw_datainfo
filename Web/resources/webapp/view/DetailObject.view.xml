@@ -57,10 +57,10 @@
                           selectedKey=""
                           change="onAbnSelectChange"
                           items="{
-                                  path: 'orgModel>/ABN'
+                                  path: 'viewHolder>/Sources/Results'
                                 }">
-                    <core:Item key="{orgModel>}"
-                               text="{orgModel>}" />
+                    <core:Item key="{viewHolder>SOURCE_NAME}"
+                               text="{viewHolder>SOURCE_NAME}" />
                   </Select>
 
 

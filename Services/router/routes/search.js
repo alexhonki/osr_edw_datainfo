@@ -4,18 +4,25 @@ const express = require("express");
 const async = require("async");
 const searchHelper = require("./searchHelper");
 
-module.exports = function() {
+module.exports = function () {
 	let app = express.Router();
 
 	//root entry path for placeholder
-	app.get("/", function(req, res) {
+	app.get("/", function (req, res) {
 		res.send("Instantiation of Services search");
 	});
 
 	//for execution of search
-	app.get("/execute", function(req, res) {
+	app.get("/execute", function (req, res) {
 
 		searchHelper.executeSearch(req, res);
+
+	});
+
+	//for execution of search
+	app.get("/getSources", function (req, res) {
+
+		searchHelper.getSources(req, res);
 
 	});
 
