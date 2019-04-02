@@ -45,6 +45,7 @@ sap.ui.define([
 
 
 			oController._onLoadSources();
+			oController._onLoadMetadata();
 			//when it hit this route, disable busy indicator if there's any.
 			oController.showBusyIndicator(false);
 
