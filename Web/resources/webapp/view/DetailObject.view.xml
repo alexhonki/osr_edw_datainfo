@@ -63,6 +63,10 @@
                                text="{viewHolder>SOURCE_NAME}" />
                   </Select>
 
+                  <Button text="Add new source"
+                          press="onAddSource"
+                          icon="sap-icon://add"
+                          ariaDescribedBy="addNewSourceButton" />
 
                 </f:content>
               </f:SimpleForm>
