@@ -93,7 +93,7 @@
                 filterProperty="FREQUENCY">
         <Label text="{i18n>source.frequency}" />
         <t:template>
-          <Text text="{path:'metaData>FREQUENCY', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>FREQUENCY'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -103,7 +103,7 @@
                 filterProperty="ROW_COUNTS">
         <Label text="{i18n>source.row_counts}" />
         <t:template>
-          <Text text="{path:'metaData>ROW_COUNTS', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>ROW_COUNTS'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -113,7 +113,7 @@
                 filterProperty="YEAR_TYPE">
         <Label text="{i18n>source.year_type}" />
         <t:template>
-          <Text text="{path:'metaData>YEAR_TYPE', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>YEAR_TYPE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -123,7 +123,7 @@
                 filterProperty="FILE_RECEIVED">
         <Label text="{i18n>source.file_received}" />
         <t:template>
-          <Text text="{path:'metaData>FILE_RECEIVED', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>FILE_RECEIVED'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
