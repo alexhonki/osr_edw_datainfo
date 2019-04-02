@@ -23,6 +23,7 @@ sap.ui.define([
 			//setting up of all models to serve if needed.
 			//some are binded straight away
 			this.setModel(new JSONModel(), "viewHolder");
+			this.setModel(new JSONModel(), "metaData");
 
 			this.getRouter().getRoute("homepage").attachPatternMatched(this._onRouteMatched, this);
 
@@ -41,8 +42,8 @@ sap.ui.define([
 			//set the icontab bar to select the first tab everytime.
 			//setting the key in the view.
 			oController.getView().byId("scv-tabbar").setSelectedKey("current-tab-key");
-			
-			
+
+
 			oController._onLoadSources();
 			//when it hit this route, disable busy indicator if there's any.
 			oController.showBusyIndicator(false);
@@ -64,11 +65,46 @@ sap.ui.define([
 					//loading effect end if needed
 				},
 				success: function (data) {
-					
+
 					let oSources = {};
 					oSources.Sources = data;
 					//set data from database
 					oController.getModel("viewHolder").setData(oSources, false);
+				},
+				error: function (error) {
+					//check for http error and serve accordingly.
+					if (error.status === 403) {
+						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.responseText === "No Data") {
+						return;
+					} else {
+						oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+					}
+
+				}
+			});
+		},
+
+		_onLoadMetadata: function () {
+			let oController = this;
+			//for api call search
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+
+			$.ajax(sApiUrl + "getMetadata", {
+				data: '',
+				type: "GET",
+				beforeSend: function () {
+					//loading effect start if needed
+				},
+				complete: function () {
+					//loading effect end if needed
+				},
+				success: function (data) {
+
+					let oSources = {};
+					oSources.Sources = data;
+					//set data from database
+					oController.getModel("metaData").setData(oSources, false);
 				},
 				error: function (error) {
 					//check for http error and serve accordingly.
