@@ -1,0 +1,122 @@
+<core:FragmentDefinition xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+                         xmlns:core="sap.ui.core"
+                         xmlns:f="sap.ui.layout.form"
+                         xmlns:l="sap.ui.layout"
+                         xmlns:mvc="sap.ui.core.mvc"
+                         xmlns:t="sap.ui.table"
+                         xmlns:timeline="sap.suite.ui.commons"
+                         xmlns="sap.m">
+
+		  <Toolbar design="Transparent"
+		           ariaLabelledBy="headerToolbar"
+		           class="osrRegistrationBar">
+		    <Title level="H3"
+		           text="{i18n>headercontent.history} {viewModel>/STD_NAME_ORG1} {viewModel>/STD_NAME_ORG2} {viewModel>/STD_NAME_ORG3} {viewModel>/STD_NAME_ORG4}" />
+		    <ToolbarSpacer/>
+		    <Title level="H3"
+		           text="{i18n>headercontent.scvid} {viewModel>/SCV_ID}"  />
+		  </Toolbar>
+
+			<t:Table
+				id="history-address-table"
+				selectionMode="None"
+				rows="{scvExplorerModel}"
+				visibleRowCount="15"
+				enableCellFilter="true"
+				enableSelectAll="false"
+				enableBusyIndicator="true"
+				ariaLabelledBy="title"
+				visible="{= ${viewModel>/SHOW_HISTORY_TABLE} === true}">
+
+				<t:columns>
+					<t:Column
+						sortProperty="ADR_KIND"
+						autoResizable="true"
+						filterProperty="ADR_KIND">
+						<Label text="{i18n>history.address.type}" />
+						<t:template>
+							<Text text="{path:'scvExplorerModel>ADR_KIND', formatter:'.Formatters.formatAddressKind'}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="STD_ADDR_ADDRESS_DELIVERY"
+						autoResizable="true"
+						filterProperty="STD_ADDR_ADDRESS_DELIVERY" >
+						<Label text="{i18n>history.address.address}" />
+						<t:template>
+							<Text text="{scvExplorerModel>STD_ADDR_ADDRESS_DELIVERY}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="STD_ADDR_LOCALITY"
+						autoResizable="true"
+						filterProperty="STD_ADDR_LOCALITY">
+						<Label text="{i18n>history.address.city}" />
+						<t:template>
+							<Text text="{scvExplorerModel>STD_ADDR_LOCALITY}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="STD_ADDR_POSTCODE1"
+						autoResizable="true"
+						filterProperty="STD_ADDR_POSTCODE1"
+						width="10%">
+						<Label text="{i18n>history.address.postcode}" />
+						<t:template>
+							<Text text="{scvExplorerModel>STD_ADDR_POSTCODE1}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="STD_ADDR_REGION"
+						autoResizable="true"
+						filterProperty="STD_ADDR_REGION">
+						<Label text="{i18n>history.address.region}" />
+						<t:template>
+							<Text text="{scvExplorerModel>STD_ADDR_REGION}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="STD_ADDR_COUNTRY_NAME"
+						autoResizable="true"
+						filterProperty="STD_ADDR_COUNTRY_NAME">
+						<Label text="{i18n>history.address.country}" />
+						<t:template>
+							<Text text="{scvExplorerModel>STD_ADDR_COUNTRY_NAME}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="S_VALID_FROM"
+						autoResizable="true"
+						filterProperty="S_VALID_FROM"
+						width="10%">
+						<Label text="{i18n>history.address.valid_from}" />
+						<t:template>
+							<Text text="{path:'scvExplorerModel>S_VALID_FROM', formatter:'.Formatters.formatDateObjectToString'}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column
+						sortProperty="S_VALID_TO"
+						autoResizable="true"
+						filterProperty="S_VALID_TO"
+						width="10%">
+						<Label text="{i18n>history.address.valid_to}" />
+						<t:template>
+							<Text text="{path:'scvExplorerModel>S_VALID_TO', formatter:'.Formatters.formatDateObjectToString'}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+
+				</t:columns>
+
+			</t:Table>
+
+
+
+</core:FragmentDefinition>

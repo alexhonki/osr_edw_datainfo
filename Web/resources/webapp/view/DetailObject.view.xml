@@ -14,7 +14,6 @@
         showNavButton="false"
         navButtonPress="onNavBack">
     <headerContent>
-      <!-- <core:Fragment fragmentName="osr.scv.org.explorer.view.fragment.HeaderContent" type="XML" /> -->
     </headerContent>
     <content>
       <IconTabBar id="scv-tabbar"
@@ -23,7 +22,7 @@
                   select="onSelectTab"
                   expand="onExpandTab"
                   expandable="false"
-                  stretchContentHeight="true">
+                  stretchContentHeight="false">
 
         <items>
           <IconTabFilter id="scv-current"
@@ -32,6 +31,43 @@
                          text="{i18n>dataInput.creation}"
                          key="current-tab-key">
             <content>
+              <f:SimpleForm id="form-abn"
+                            editable="true"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="4"
+                            labelSpanL="4"
+                            labelSpanM="4"
+                            labelSpanS="4"
+                            adjustLabelSpan="true"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="2"
+                            columnsM="2"
+                            singleContainerFullSize="false"
+                            class="osrSelect">
+                <f:content>
+
+                  <Label vAlign="Middle"
+                         text="Select your source" />
+                  <Select id="abn-select"
+                          forceSelection="false"
+                          selectedKey=""
+                          change="onAbnSelectChange"
+                          items="{
+                                  path: 'orgModel>/ABN'
+                                }">
+                    <core:Item key="{orgModel>}"
+                               text="{orgModel>}" />
+                  </Select>
+
+
+                </f:content>
+              </f:SimpleForm>
+              <core:Fragment fragmentName="osr.edw.data.info.view.fragment.SourceTable"
+                             type="XML" />
 
               <f:SimpleForm id="form-data-info"
                             editable="true"
@@ -53,7 +89,7 @@
 
                   <Label vAlign="Middle"
                          text="{i18n>dataInput.source}" />
-                  <Select id="abn-select"
+                  <Select id="source-select"
                           forceSelection="false"
                           selectedKey=""
                           change="onAbnSelectChange"
