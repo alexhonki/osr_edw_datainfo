@@ -158,6 +158,16 @@
         </t:template>
       </t:Column>
 
+		<t:Column autoResizable="true" >
+	        <Label text="" />
+	        <t:template>
+	          <Button text="Edit"
+                          press="onEditEntry"
+                          icon="sap-icon://add"
+                          ariaDescribedBy="addNewSourceButton" />
+	        </t:template>
+	      </t:Column>
+      
     </t:columns>
 
   </t:Table>

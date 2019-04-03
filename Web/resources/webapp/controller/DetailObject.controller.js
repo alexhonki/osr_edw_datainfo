@@ -102,10 +102,10 @@ sap.ui.define([
 				},
 				success: function (data) {
 
-					let oSources = {};
-					oSources.Sources = data;
+				//	let oSources = {};
+				//	oSources.Sources = data;
 					//set data from database
-					oController.getModel("metaData").setData(oSources, false);
+					oController.getModel("metaData").setData(data, false);
 				},
 				error: function (error) {
 					//check for http error and serve accordingly.
