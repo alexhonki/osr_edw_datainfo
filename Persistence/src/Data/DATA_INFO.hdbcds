@@ -22,21 +22,21 @@ context DATA_INFO {
         key METADATA_ID        : Binary(32)  not null;
             CREATED_AT         : UTCDateTime;
             CREATED_BY         : String(200);
-            META_FILE_NAME          : String(200) not null;
+            META_FILE_NAME     : String(200) not null;
             TIMESTAMP          : UTCDateTime not null;
             SOURCE             : String(200);
-            TYPE         : String(200);
-            RAF_TABLE_NAME          : String(200);
-            RAF_FILE         : String(200);
-            SOURCE_FIELD_VALUE          : String(200);
-            EDW_FILE_NAME         : String(200);
-            FREQUENCY : String(200);
+            TYPE               : String(200);
+            RAF_TABLE_NAME     : String(200);
+            RAF_FILE_NAME      : String(200);
+            SOURCE_FIELD_VALUE : String(200);
+            EDW_FILE_NAME      : String(200);
+            FREQUENCY          : String(200);
             ROW_COUNTS         : String(200);
-            YEAR_TYPE           : String(200);
+            YEAR_TYPE          : String(200);
             FILE_RECEIVED      : String(200);
-            FROM_DATE         : UTCDateTime;
-            TO_DATE      : UTCDateTime;
-            ERRORS      : String(200);
+            FROM_DATE          : UTCDateTime;
+            TO_DATE            : UTCDateTime;
+            ERRORS             : String(200);
             DATA_SET_TYPE      : String(200);
     }
     technical configuration {
