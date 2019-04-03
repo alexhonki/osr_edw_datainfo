@@ -26,20 +26,12 @@ module.exports = function () {
 
 	});
 
-	// //get latest contact information base on specific
-	// //sort arrangement as per PPT of Explorer Org.
-	// app.get("/getContact", function(req, res) {
-	//
-	// 	searchHelper.getContact(req, res);
-	//
-	// });
-	//
-	// //to get the different list of ACN and ABR
-	// app.get("/helper", function(req, res) {
-	//
-	// 	searchHelper.executeHelper(req, res);
-	//
-	// });
+	//for execution of search
+	app.get("/getMetadata", function (req, res) {
+
+		searchHelper.getMetadata(req, res);
+
+	});
 
 	return app;
 };

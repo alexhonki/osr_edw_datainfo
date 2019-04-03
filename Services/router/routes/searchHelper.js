@@ -131,6 +131,57 @@ module.exports = {
 			console.log(err);
 		});
 
+	},
+
+	/**
+	 * Grab current contact details of a particular org for current tab
+	 * @param  {[type]} oRequest  [description]
+	 * @param  {[type]} oResponse [description]
+	 * @return {[type]}           [description]
+	 */
+	getMetadata: function (oRequest, oResponse) {
+		let oQuery = oRequest.query;
+		let sFinalSearchString =
+			"SELECT TO_VARCHAR(METADATA_ID) AS METADATA_ID,CREATED_AT,CREATED_BY,META_FILE_NAME,TIMESTAMP,SOURCE,TYPE, " +
+			"RAF_TABLE_NAME,RAF_FILE_NAME,SOURCE_FIELD_VALUE," +
+			"EDW_FILE_NAME,FREQUENCY,ROW_COUNTS,YEAR_TYPE,FILE_RECEIVED,FROM_DATE,TO_DATE,ERRORS,"+
+			"DATA_SET_TYPE " +
+			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\" ";
+
+		let client = oRequest.db;
+		let oController = this;
+		async.waterfall([
+
+			function prepare(callback) {
+				client.prepare(
+					sFinalSearchString,
+					function (err, statement) {
+						callback(null, err, statement);
+					});
+			},
+
+			function execute(err, statement, callback) {
+				statement.exec([], function (execErr, results) {
+					callback(null, execErr, results);
+				});
+			},
+			function response(err, results, callback) {
+				if (err) {
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					let result = JSON.stringify({
+						Total: results.length,
+						Results: results
+					});
+					oResponse.type("application/json").status(200).send(result);
+				}
+				callback(null, results);
+			}
+		], function (err, result) {
+			console.log(err);
+		});
+
 	}
 
 };
