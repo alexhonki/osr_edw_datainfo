@@ -68,6 +68,13 @@
 		"resources": {
 			"css": [{
 				"uri": "css/style.css"
+			}],
+			"js": [{
+				"uri": "asset/lib/moment-with-locales.js"
+			}, {
+				"uri": "asset/lib/moment-business-days.js"
+			}, {
+				"uri": "asset/lib/bluebird.min.js"
 			}]
 		},
 		"config": {
