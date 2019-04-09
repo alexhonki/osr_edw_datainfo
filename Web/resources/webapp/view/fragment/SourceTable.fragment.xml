@@ -164,10 +164,11 @@
 	          <Button text="Edit"
                           press="onEditEntry"
                           icon="sap-icon://add"
-                          ariaDescribedBy="addNewSourceButton" />
+                          ariaDescribedBy="addNewSourceButton"
+                          app:sWhichLink="{path:'metaData>METADATA_ID'}" />
 	        </t:template>
 	      </t:Column>
-      
+
     </t:columns>
 
   </t:Table>

@@ -58,15 +58,17 @@
                           change="onAbnSelectChange"
                           items="{
                                   path: 'viewHolder>/Sources/Results'
-                                }">
+                                }"
+                          visible="{= ${viewHolder>/showSourceDropdown} === true}">
                     <core:Item key="{viewHolder>SOURCE_NAME}"
                                text="{viewHolder>SOURCE_NAME}" />
                   </Select>
 
                   <Button text="Add new source"
-                          press="onAddSource"
+                          press="addNewSourceButton"
                           icon="sap-icon://add"
-                          ariaDescribedBy="addNewSourceButton" />
+                          ariaDescribedBy="addNewSourceButton"
+                          visible="{= ${viewHolder>/showSourceDropdown} === true}" />
 
                 </f:content>
               </f:SimpleForm>
