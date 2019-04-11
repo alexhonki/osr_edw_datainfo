@@ -1,0 +1,33 @@
+
+{
+
+  "Frequency": [
+  	{
+      "VALUE": "DAILY",
+      "TEXT":"Daily"
+    },
+  	{
+      "VALUE": "Weekly"
+    },
+  	{
+      "VALUE": "Fortnightly"
+    },
+  	{
+      "VALUE": "Monthly"
+    },
+    {
+      "VALUE": "Quarterly"
+    },
+    {
+      "VALUE": "Yearly"
+    }
+  ], 
+  "DataSetType": [
+    {
+      "VALUE": "Full History"
+    },
+    {
+      "VALUE": "Half History"
+    }
+  ]
+}

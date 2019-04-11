@@ -1,12 +1,13 @@
 /*eslint no-console: 0, no-unused-vars: 0*/
 "use strict";
 module.exports = {
-	initExpress: function() {
+	initExpress: function () {
 		var xsenv = require("@sap/xsenv");
 		var passport = require("passport");
 		var xssec = require("@sap/xssec");
 		var xsHDBConn = require("@sap/hdbext");
 		var express = require("express");
+		var bodyParser = require("body-parser");
 
 		//logging
 		var logging = require("@sap/logging");
@@ -36,10 +37,15 @@ module.exports = {
 			}),
 			xsHDBConn.middleware(hanaOptions.hana)
 		);
+
+		app.use(bodyParser.json()); // to support JSON-encoded bodies
+		app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
+			extended: true
+		}));
 		return app;
 	},
 
-	initXSJS: function(app) {
+	initXSJS: function (app) {
 		//	process.env.XS_APP_LOG_LEVEL='debug';
 		var xsjs = require("@sap/xsjs");
 		var xsenv = require("@sap/xsenv");
@@ -76,8 +82,8 @@ module.exports = {
 
 		// start server
 		var xsjsApp = xsjs(options);
-		
+
 		//need to match with what is given in xs-app 
-		app.use("/org/srv/xs", xsjsApp); 
+		app.use("/org/srv/xs", xsjsApp);
 	}
 };

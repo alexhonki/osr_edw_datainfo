@@ -1,3 +1,5 @@
 $.response.contentType = "text/plain";
 
-$.response.setBody("Instantiation of Services from XSJS Land Okay!  -Stef");
+//$.response.setBody("Instantiation of Services from XSJS Land Okay!  -Stef");
+
+$.response.setBody($.session.getUsername());

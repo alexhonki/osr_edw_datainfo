@@ -12,6 +12,13 @@
 		"sourceTemplate": {
 			"id": "hanatemplates.basicSAPUI5ApplicationProject",
 			"version": "0.0.0"
+		},
+		"dataSources": {
+			"dropdownJSON": {
+				"uri": "model/dropdownModel.json",
+				"type": "JSON",
+				"setting": {}
+			}
 		}
 	},
 
@@ -63,6 +70,9 @@
 				"settings": {
 					"bundleName": "osr.edw.data.info.i18n.i18n"
 				}
+			}, 
+			"dropdownModel":{
+				"dataSource":"dropdownJSON"
 			}
 		},
 		"resources": {
