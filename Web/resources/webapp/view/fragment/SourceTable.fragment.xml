@@ -165,7 +165,7 @@
                           press="onEditEntry"
                           icon="sap-icon://add"
                           ariaDescribedBy="addNewSourceButton"
-                          app:sWhichLink="{path:'metaData>METADATA_ID'}" />
+                          app:metadataId="{path:'metaData>METADATA_ID'}" />
 	        </t:template>
 	      </t:Column>
 
