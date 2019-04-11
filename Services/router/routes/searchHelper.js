@@ -2,6 +2,7 @@
 "use strict";
 const express = require("express");
 const async = require("async");
+const hanaClient = require("@sap/hana-client");
 
 module.exports = {
 
@@ -133,6 +134,79 @@ module.exports = {
 
 	},
 
+	getCurrentUser: function (oRequest, oResponse) {
+		let oQuery = oRequest.query;
+		let sGetUsername =
+			"SELECT DISTINCT VALUE FROM \"PUBLIC\".\"M_SESSION_CONTEXT\" WHERE KEY='APPLICATIONUSER'";
+
+		let client = oRequest.db;
+		client.setAutoCommit(false);
+		let oController = this;
+		async.waterfall([
+
+			function getUsername(callback) {
+				client.prepare(
+					sGetUsername,
+					function (err, statement) {
+						callback(null, err, statement);
+					});
+			},
+
+			function executeGetUsername(err, statement, callback) {
+
+				if (err) {
+					client.rollback();
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					statement.exec([], function (execErr, results) {
+						callback(null, execErr, results);
+					});
+				}
+
+			},
+			function prepareInsertionToSourceTable(execErr, results, callback) {
+
+				let sInsertToSource = "INSERT INTO \"osr.edw.source.data.info.db.data::DATA_INFO.SOURCES\" " +
+					"(SOURCE_ID, CREATED_AT, CREATED_BY, SOURCE_NAME)" +
+					"VALUES(SYSUUID,CURRENT_TIMESTAMP,'" + results[0].VALUE.toUpperCase() + "','" + oRequest.body.sSource.toUpperCase() + "')";
+
+				client.prepare(
+					sInsertToSource,
+					function (err, statement) {
+						callback(null, err, statement);
+					});
+			},
+			function executeInsert(err, statement, callback) {
+
+				if (err) {
+					client.rollback();
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					statement.exec([], function (execErr, results) {
+						callback(null, execErr, results);
+					});
+				}
+
+			},
+			function finalResponse(err, results, callback) {
+				if (err) {
+					client.rollback();
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					//let sApplicationUserName = results[0].VALUE;
+					client.commit();
+					oResponse.status(201).send("Record created successfully!");
+				}
+				callback(null, results);
+			}
+		], function (err, result) {
+			console.log(err);
+		});
+	},
+
 	/**
 	 * Grab current contact details of a particular org for current tab
 	 * @param  {[type]} oRequest  [description]
@@ -144,7 +218,7 @@ module.exports = {
 		let sFinalSearchString =
 			"SELECT TO_VARCHAR(METADATA_ID) AS METADATA_ID,CREATED_AT,CREATED_BY,META_FILE_NAME,TIMESTAMP,SOURCE,TYPE, " +
 			"RAF_TABLE_NAME,RAF_FILE_NAME,SOURCE_FIELD_VALUE," +
-			"EDW_FILE_NAME,FREQUENCY,ROW_COUNTS,YEAR_TYPE,FILE_RECEIVED,FROM_DATE,TO_DATE,ERRORS,"+
+			"EDW_FILE_NAME,FREQUENCY,ROW_COUNTS,YEAR_TYPE,FILE_RECEIVED,FROM_DATE,TO_DATE,ERRORS," +
 			"DATA_SET_TYPE " +
 			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\" ";
 
