@@ -4,6 +4,7 @@
 		"source": "/osr/edw/source/data/(.*)",
 		"destination": "Services_url",
 		"csrfProtection": true,
+		"scope": "$XSAPPNAME.DATA_INFO",
 		"authenticationType": "xsuaa"
 	},{
 		"source": "/api/static(.*)",
