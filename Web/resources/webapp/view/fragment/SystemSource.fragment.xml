@@ -38,17 +38,6 @@
                                text="{viewHolder>SOURCE_NAME}" />
                   </Select>
                   
-                  <Select id="abn2-select"
-                          forceSelection="false"
-                          selectedKey=""
-                          change="onAbnSelectChange"
-                          items="{
-                                  path: 'dropdownModel>/Frequency'
-                                }"
-                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
-                    <core:Item key="{dropdownModel>VALUE}"
-                               text="{dropdownModel>VALUE}" />
-                  </Select>
 
                   <Button text="Add new source"
                           press="addNewSourceButton"

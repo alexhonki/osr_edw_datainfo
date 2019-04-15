@@ -1,0 +1,122 @@
+<core:FragmentDefinition xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+                         xmlns:core="sap.ui.core"
+                         xmlns:l="sap.ui.layout"
+                         xmlns:f="sap.ui.layout.form"
+                         xmlns:mvc="sap.ui.core.mvc"
+                         xmlns="sap.m">
+
+                         <f:SimpleForm id="form-data-info"
+                                      editable="true"
+                                      layout="ResponsiveGridLayout"
+                                      labelSpanXL="3"
+                                      labelSpanL="3"
+                                      labelSpanM="3"
+                                      labelSpanS="12"
+                                      adjustLabelSpan="false"
+                                      emptySpanXL="4"
+                                      emptySpanL="4"
+                                      emptySpanM="4"
+                                      emptySpanS="0"
+                                      columnsXL="1"
+                                      columnsL="1"
+                                      columnsM="1"
+                                      singleContainerFullSize="false"
+                                      visible="{= (${viewHolder>/showForm} === true)}">
+                          <f:content>
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.source}" />
+                            <Select id="new-recourd-source"
+			                          forceSelection="false"
+			                          selectedKey=""
+			                          change="onAbnSelectChange"
+			                          items="{
+			                                  path: 'viewHolder>/Sources/Results'
+			                                }"
+			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+			                    <core:Item key="{viewHolder>SOURCE_NAME}"
+			                               text="{viewHolder>SOURCE_NAME}" />
+			                  </Select>
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.generated_file_name}" />
+                            <Text text="TEST" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.table_name}" />
+                            <Input value="{searchParameters>/table_name}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.timestamp}" />
+                            <Input value="{searchParameters>/timestamp}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.source_field_value}" />
+                            <Input value="{searchParameters>/source_field_value}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.frequency}" />
+                                      <Select id="abn2-select"
+				                          forceSelection="false"
+				                          selectedKey=""
+				                          change="onAbnSelectChange"
+				                          items="{
+				                                  path: 'dropdownModel>/Frequency'
+				                                }"
+				                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+				                    <core:Item key="{dropdownModel>VALUE}"
+				                               text="{dropdownModel>VALUE}" />
+				                  </Select>
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.row_counts}" />
+                            <Input value="{searchParameters>/row_counts}"
+                                   autocomplete="false" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.year_type}" />
+                            <Input value="{searchParameters>/year_type}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.file_received_date}" />
+                            <Input value="{searchParameters>/file_received_date}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.period_key}" />
+                            <Input value="{searchParameters>/period_key}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.from_date}" />
+                            <Input value="{searchParameters>/from_date}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.to_date}" />
+                            <Input value="{searchParameters>/to_date}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.data_set_type}" />
+                            <Input value="{searchParameters>/data_set_type}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.data_input}" />
+                            <Input value="{searchParameters>/data_input}" />
+
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.raw_file_name}" />
+                            <Input value="{searchParameters>/raw_file_name}" />
+
+                          </f:content>
+						
+                        </f:SimpleForm>
+						<OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
+			                
+			                <Button id="dialog-back"
+			                        press="onClearPressed"
+			                        text="{i18n>dataInput.clearForm}" />
+			
+			                <Button id="dialog-next"
+			                        press="onCreatePressed"
+			                        text="{i18n>dataInput.createInfo}" />
+			
+			              </OverflowToolbar>
+</core:FragmentDefinition>

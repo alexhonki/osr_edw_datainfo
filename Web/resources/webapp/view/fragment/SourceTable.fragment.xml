@@ -25,7 +25,7 @@
            enableSelectAll="false"
            enableBusyIndicator="true"
            ariaLabelledBy="title"
-           visible="{= ${viewModel>/SHOW_HISTORY_TABLE} === true}">
+           visible="{= ${viewHolder>/showTable} === true}">
 
     <t:columns>
       <t:Column sortProperty="META_FILE_NAME"

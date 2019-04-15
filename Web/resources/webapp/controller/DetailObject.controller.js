@@ -130,6 +130,7 @@ sap.ui.define([
 			//reset all JSON model that the view dependent on.
 
 			oController._bSetShowSourceDropdown(true);
+			oController._bShowMainTable(true);
 		},
 
 		_onLoadMetadata: function () {
@@ -167,6 +168,14 @@ sap.ui.define([
 			});
 		},
 
+		onAddNewRecord: function (oEvent) {
+			//hide the main table 
+			//show the form 
+			let oController = this;
+			oController._bShowMainTable(false);
+			oController._bShowForm(true);
+		},
+
 		/**
 		 * [description]
 		 * @param  {[type]} oEvent [description]
@@ -193,6 +202,16 @@ sap.ui.define([
 			//reset all JSON model that the view dependent on.
 			oController.getModel("viewHolder").setData({
 				showTable: bShow
+			}, true);
+
+		},
+
+		_bShowForm: function (bShow) {
+
+			let oController = this;
+			//reset all JSON model that the view dependent on.
+			oController.getModel("viewHolder").setData({
+				showForm: bShow
 			}, true);
 
 		},
