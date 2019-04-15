@@ -30,6 +30,7 @@ context DATA_INFO {
             RAF_FILE_NAME      : String(200);
             SOURCE_FIELD_VALUE : String(200);
             EDW_FILE_NAME      : String(200);
+            HAS_LOADED_IN_EDW  : String(1);
             FREQUENCY          : String(200);
             ROW_COUNTS         : String(200);
             YEAR_TYPE          : String(200);
