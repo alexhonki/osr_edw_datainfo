@@ -24,7 +24,7 @@ sap.ui.define([
 			//some are binded straight away
 			this.setModel(new JSONModel(), "viewHolder");
 			this.setModel(new JSONModel(), "metaData");
-			this.setModel(new JSONModel(), "formValue");
+			this.setModel(new JSONModel(), "formPayloadValue"); //model to carry payload
 
 			this.getRouter().getRoute("homepage").attachPatternMatched(this._onRouteMatched, this);
 
@@ -47,9 +47,20 @@ sap.ui.define([
 			oController._onLoadSources();
 			oController._onLoadMetadata();
 			oController._fetchCSRFToken();
+			oController._clearFormPayload();
 			//when it hit this route, disable busy indicator if there's any.
 			oController.showBusyIndicator(false);
 
+		},
+
+		_clearFormPayload: function () {
+			let oController = this;
+			//clear the JSON model for payload
+			oController.getModel("formPayloadValue").setData({}, false);
+		},
+		
+		onNewRecordSourceChange: function(oEvent){
+		 let temp = 1;	
 		},
 
 		_fetchCSRFToken: function () {
@@ -176,6 +187,13 @@ sap.ui.define([
 			oController._bShowForm(true);
 		},
 
+		onSourceSelectChange: function (oEvent) {
+			let oController = this;
+			let sSelectedKey = oEvent.getSource().getSelectedKey();
+			//clear the JSON model for payload
+			oController.getModel("formPayloadValue").setData({SOURCE:sSelectedKey}, false);
+		},
+
 		/**
 		 * [description]
 		 * @param  {[type]} oEvent [description]
@@ -258,6 +276,12 @@ sap.ui.define([
 				}
 			});
 
+		},
+		
+		onCancelCreation: function(oEvent){
+			let oController = this;
+			oController.getView().byId("new-source-input").setValue(""); //reset the value
+			oController._bSetShowSourceDropdown(true);
 		},
 
 		_setDropdownSource: function (sKeySelected) {

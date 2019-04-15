@@ -7,16 +7,6 @@
                          xmlns:timeline="sap.suite.ui.commons"
                          xmlns="sap.m">
 
-  <Toolbar design="Transparent"
-           ariaLabelledBy="headerToolbar"
-           class="osrRegistrationBar">
-    <Title level="H3"
-           text="{i18n>headercontent.history} {viewModel>/STD_NAME_ORG1} {viewModel>/STD_NAME_ORG2} {viewModel>/STD_NAME_ORG3} {viewModel>/STD_NAME_ORG4}" />
-    <ToolbarSpacer />
-    <Title level="H3"
-           text="{i18n>headercontent.scvid} {viewModel>/SCV_ID}" />
-  </Toolbar>
-
   <t:Table id="history-address-table"
            selectionMode="None"
            rows="{metaData>/Results}"
@@ -133,7 +123,7 @@
                 filterProperty="FROM_DATE">
         <Label text="{i18n>source.from_date}" />
         <t:template>
-          <Text text="{path:'metaData>FROM_DATE', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>FROM_DATE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -143,7 +133,7 @@
                 filterProperty="TO_DATE">
         <Label text="{i18n>source.to_date}" />
         <t:template>
-          <Text text="{path:'metaData>TO_DATE', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>TO_DATE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -153,7 +143,7 @@
                 filterProperty="DATA_SET_TYPE">
         <Label text="{i18n>source.data_set_type}" />
         <t:template>
-          <Text text="{path:'metaData>DATA_SET_TYPE', formatter:'.Formatters.formatDateObjectToString'}"
+          <Text text="{path:'metaData>DATA_SET_TYPE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
