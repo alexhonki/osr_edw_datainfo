@@ -40,7 +40,12 @@
                           icon="sap-icon://add"
                           ariaDescribedBy="addNewRecord"
                           visible="{= (${viewHolder>/showSourceDropdown} === true)}" />
-                             
+             <Button text="Cancel"
+                          press="onCancelNewRecord"
+                          icon="sap-icon://add"
+                          ariaDescribedBy="onCancelNewRecord"
+                          visible="{= (${viewHolder>/showSourceDropdown} === true)}" />
+                          
               <core:Fragment fragmentName="osr.edw.data.info.view.fragment.SourceTable"
                              type="XML" />
 				<core:Fragment fragmentName="osr.edw.data.info.view.fragment.RecordForm"

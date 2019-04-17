@@ -283,6 +283,12 @@ sap.ui.define([
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
 			oController._bSetShowSourceDropdown(true);
 		},
+		
+		onCancelNewRecord: function(oEvent){
+			let oController = this;
+			oController._bShowMainTable(true);
+			oController._bShowForm(false);
+		},
 
 		_setDropdownSource: function (sKeySelected) {
 			this.getView().byId("abn-select").setSelectedKey(sKeySelected);
