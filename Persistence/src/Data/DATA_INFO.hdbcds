@@ -39,6 +39,7 @@ context DATA_INFO {
             TO_DATE            : UTCDateTime;
             ERRORS             : String(200);
             DATA_SET_TYPE      : String(200);
+            CHANGE_DATATYPE	   : String(200);
     }
     technical configuration {
         column store;
