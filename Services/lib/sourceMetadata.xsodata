@@ -1,0 +1,19 @@
+/*
+ * OSR EDW Source Data Info - Service to serve data for OSR EDW External Sources
+ * April 2019
+ */
+
+service {
+
+	"osr.edw.source.data.info.db.Views::CV_MetadataRecords" as "metadataRecords"
+	with( "METADATA_ID","SOURCE","TIMESTAMP","CREATED_AT","CREATED_BY","FREQUENCY","ROW_COUNTS",
+		 "YEAR_TYPE","DATA_SET_TYPE","META_FILE_NAME","TYPE","RAF_TABLE_NAME",
+		 "SOURCE_FIELD_VALUE","EDW_FILE_NAME","FILE_RECEIVED","FROM_DATE","TO_DATE",
+		 "ERRORS","RAF_FILE_NAME","HAS_LOADED_IN_EDW","CHANGE_DATATYPE")
+	keys generate local "UNIQUE_ID"
+	parameters via entity
+	create forbidden
+	update forbidden
+	delete forbidden;
+
+}
