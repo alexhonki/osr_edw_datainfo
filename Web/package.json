@@ -1,7 +1,7 @@
 {
 	"name": "osr.edw.data.info-approuter",
 	"engines": {
-		"node": ">=4.0.0 <9.0.0"
+		"node": "8.x"
 	},
 	"dependencies": {
 		"@sap/approuter": "5.6.4"
