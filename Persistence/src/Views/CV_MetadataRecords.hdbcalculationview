@@ -22,9 +22,6 @@
       <viewAttribute id="METADATA_ID_B">
         <descriptions defaultDescription="METADATA_ID"/>
       </viewAttribute>
-      <viewAttribute id="SOURCE">
-        <descriptions defaultDescription="SOURCE"/>
-      </viewAttribute>
       <viewAttribute id="TIMESTAMP">
         <descriptions defaultDescription="TIMESTAMP"/>
       </viewAttribute>
@@ -39,9 +36,6 @@
       </viewAttribute>
       <viewAttribute id="ROW_COUNTS">
         <descriptions defaultDescription="ROW_COUNTS"/>
-      </viewAttribute>
-      <viewAttribute id="YEAR_TYPE">
-        <descriptions defaultDescription="YEAR_TYPE"/>
       </viewAttribute>
       <viewAttribute id="DATA_SET_TYPE">
         <descriptions defaultDescription="DATA_SET_TYPE"/>
@@ -61,9 +55,6 @@
       <viewAttribute id="EDW_FILE_NAME">
         <descriptions defaultDescription="EDW_FILE_NAME"/>
       </viewAttribute>
-      <viewAttribute id="FILE_RECEIVED">
-        <descriptions defaultDescription="FILE_RECEIVED"/>
-      </viewAttribute>
       <viewAttribute id="FROM_DATE">
         <descriptions defaultDescription="FROM_DATE"/>
       </viewAttribute>
@@ -82,6 +73,16 @@
       <viewAttribute id="CHANGE_DATATYPE">
         <descriptions defaultDescription="CHANGE_DATATYPE"/>
       </viewAttribute>
+    
+      <viewAttribute id="FILE_RECEIVED_DATE">
+        <descriptions defaultDescription="FILE_RECEIVED_DATE"/>
+      </viewAttribute>
+      <viewAttribute id="YEAR_TYPE">
+        <descriptions defaultDescription="YEAR_TYPE"/>
+      </viewAttribute>
+      <viewAttribute id="SOURCE">
+        <descriptions defaultDescription="SOURCE"/>
+      </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="METADATA_ID" datatype="VARCHAR" length="32" expressionLanguage="SQL">
@@ -91,115 +92,117 @@
     <restrictedViewAttributes/>
     <input node="osr.edw.source.data.info.db.data::DATA_INFO.METADATA">
       <mapping xsi:type="Calculation:AttributeMapping" target="METADATA_ID_B" source="METADATA_ID"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE" source="SOURCE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TIMESTAMP" source="TIMESTAMP"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CREATED_AT" source="CREATED_AT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CREATED_BY" source="CREATED_BY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="FREQUENCY" source="FREQUENCY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ROW_COUNTS" source="ROW_COUNTS"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_TYPE" source="YEAR_TYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DATA_SET_TYPE" source="DATA_SET_TYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="META_FILE_NAME" source="META_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="RAF_TABLE_NAME" source="RAF_TABLE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE_FIELD_VALUE" source="SOURCE_FIELD_VALUE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="EDW_FILE_NAME" source="EDW_FILE_NAME"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="FILE_RECEIVED" source="FILE_RECEIVED"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="FROM_DATE" source="FROM_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="TO_DATE" source="TO_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ERRORS" source="ERRORS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="RAF_FILE_NAME" source="RAF_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HAS_LOADED_IN_EDW" source="HAS_LOADED_IN_EDW"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_DATATYPE" source="CHANGE_DATATYPE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="FILE_RECEIVED_DATE" source="FILE_RECEIVED_DATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_TYPE" source="YEAR_TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE" source="SOURCE"/>
     </input>
     <filter>(&quot;SOURCE&quot; = '$$IP_SOURCE$$')</filter>
   </calculationView>
 </calculationViews>
 <logicalModel id="AllRecordsBySource">
   <attributes>
-    <attribute id="SOURCE" order="1" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="SOURCE"/>
-      <keyMapping columnObjectName="AllRecordsBySource" columnName="SOURCE"/>
-    </attribute>
-    <attribute id="TIMESTAMP" order="2" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="TIMESTAMP" order="1" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="TIMESTAMP"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="TIMESTAMP"/>
     </attribute>
-    <attribute id="CREATED_AT" order="3" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CREATED_AT" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CREATED_AT"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="CREATED_AT"/>
     </attribute>
-    <attribute id="CREATED_BY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CREATED_BY" order="3" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CREATED_BY"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="CREATED_BY"/>
     </attribute>
-    <attribute id="FREQUENCY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="FREQUENCY" order="4" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FREQUENCY"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="FREQUENCY"/>
     </attribute>
-    <attribute id="ROW_COUNTS" order="6" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ROW_COUNTS" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ROW_COUNTS"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="ROW_COUNTS"/>
     </attribute>
-    <attribute id="YEAR_TYPE" order="7" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="YEAR_TYPE"/>
-      <keyMapping columnObjectName="AllRecordsBySource" columnName="YEAR_TYPE"/>
-    </attribute>
-    <attribute id="DATA_SET_TYPE" order="8" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="DATA_SET_TYPE" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="DATA_SET_TYPE"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="DATA_SET_TYPE"/>
     </attribute>
-    <attribute id="META_FILE_NAME" order="9" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="META_FILE_NAME" order="7" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="META_FILE_NAME"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="META_FILE_NAME"/>
     </attribute>
-    <attribute id="TYPE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="TYPE" order="8" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="TYPE"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="TYPE"/>
     </attribute>
-    <attribute id="RAF_TABLE_NAME" order="11" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="RAF_TABLE_NAME" order="9" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RAF_TABLE_NAME"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="RAF_TABLE_NAME"/>
     </attribute>
-    <attribute id="SOURCE_FIELD_VALUE" order="12" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SOURCE_FIELD_VALUE" order="10" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SOURCE_FIELD_VALUE"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="SOURCE_FIELD_VALUE"/>
     </attribute>
-    <attribute id="EDW_FILE_NAME" order="13" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="EDW_FILE_NAME" order="11" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="EDW_FILE_NAME"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="EDW_FILE_NAME"/>
     </attribute>
-    <attribute id="FILE_RECEIVED" order="14" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="FILE_RECEIVED"/>
-      <keyMapping columnObjectName="AllRecordsBySource" columnName="FILE_RECEIVED"/>
-    </attribute>
-    <attribute id="FROM_DATE" order="15" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="FROM_DATE" order="12" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FROM_DATE"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="FROM_DATE"/>
     </attribute>
-    <attribute id="TO_DATE" order="16" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="TO_DATE" order="13" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="TO_DATE"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="TO_DATE"/>
     </attribute>
-    <attribute id="ERRORS" order="17" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ERRORS" order="14" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ERRORS"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="ERRORS"/>
     </attribute>
-    <attribute id="RAF_FILE_NAME" order="18" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="RAF_FILE_NAME" order="15" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RAF_FILE_NAME"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="RAF_FILE_NAME"/>
     </attribute>
-    <attribute id="HAS_LOADED_IN_EDW" order="19" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="HAS_LOADED_IN_EDW" order="16" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="HAS_LOADED_IN_EDW"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="HAS_LOADED_IN_EDW"/>
     </attribute>
-    <attribute id="CHANGE_DATATYPE" order="20" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CHANGE_DATATYPE" order="17" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CHANGE_DATATYPE"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="CHANGE_DATATYPE"/>
     </attribute>
-    <attribute id="METADATA_ID" order="21" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="METADATA_ID" order="18" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="METADATA_ID"/>
       <keyMapping columnObjectName="AllRecordsBySource" columnName="METADATA_ID"/>
+    </attribute>
+  
+    <attribute id="FILE_RECEIVED_DATE" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FILE_RECEIVED_DATE"/>
+      <keyMapping columnObjectName="AllRecordsBySource" columnName="FILE_RECEIVED_DATE"/>
+    </attribute>
+    <attribute id="YEAR_TYPE" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR_TYPE"/>
+      <keyMapping columnObjectName="AllRecordsBySource" columnName="YEAR_TYPE"/>
+    </attribute>
+    <attribute id="SOURCE" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SOURCE"/>
+      <keyMapping columnObjectName="AllRecordsBySource" columnName="SOURCE"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
