@@ -34,7 +34,7 @@ context DATA_INFO {
             FREQUENCY          : String(200);
             ROW_COUNTS         : String(200);
             YEAR_TYPE          : String(200);
-            FILE_RECEIVED      : String(200);
+            FILE_RECEIVED_DATE : UTCDateTime;
             FROM_DATE          : UTCDateTime;
             TO_DATE            : UTCDateTime;
             ERRORS             : String(200);
