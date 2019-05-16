@@ -18,6 +18,13 @@
 				"uri": "model/dropdownModel.json",
 				"type": "JSON",
 				"setting": {}
+			},
+			"metadataRemote": {
+				"uri": "/org/srv/xs/sourceMetadata.xsodata",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
 			}
 		}
 	},
@@ -70,9 +77,12 @@
 				"settings": {
 					"bundleName": "osr.edw.data.info.i18n.i18n"
 				}
-			}, 
-			"dropdownModel":{
-				"dataSource":"dropdownJSON"
+			},
+			"dropdownModel": {
+				"dataSource": "dropdownJSON"
+			},
+			"metadataModel": {
+				"dataSource": "metadataRemote"
 			}
 		},
 		"resources": {

@@ -39,7 +39,7 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.generated_file_name}" />
-                            <Text text="{formPayloadValue>/GENERATED_FILE_NAME}" />
+                            <Text text="{formPayloadValue>/META_FILE_NAME}" />
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.table_name}" />

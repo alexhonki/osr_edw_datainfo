@@ -45,7 +45,7 @@ sap.ui.define([
 			oController.getView().byId("scv-tabbar").setSelectedKey("current-tab-key");
 			oController._setModels();
 			oController._onLoadSources();
-			oController._onLoadMetadata();
+			//oController._onLoadMetadata();
 			oController._fetchCSRFToken();
 			oController._clearFormPayload();
 			//when it hit this route, disable busy indicator if there's any.
@@ -58,9 +58,9 @@ sap.ui.define([
 			//clear the JSON model for payload
 			oController.getModel("formPayloadValue").setData({}, false);
 		},
-		
-		onNewRecordSourceChange: function(oEvent){
-		 let temp = 1;	
+
+		onNewRecordSourceChange: function (oEvent) {
+
 		},
 
 		_fetchCSRFToken: function () {
@@ -179,6 +179,36 @@ sap.ui.define([
 			});
 		},
 
+		readMetadataBySource: function (sSource) {
+			let oController = this;
+			//for api call search
+			// oController.getModel("metadataModel").read("/metadataRecordsParameters(IP_SOURCE='" + sScvId + "')/Results", {
+			// 	//both url to filter and order the result set.
+			// 	urlParameters: {
+			// 		"$orderby": "",
+			// 		"$filter": ""
+			// 	},
+			// 	success: function(data) {
+
+			// 		// grab the very top one for the current person. 
+			// 		if (data.results.length > 0) {
+			// 			//set the data for for the entire view information. 
+
+			// 			oController.getModel("metaData").setData(data, false);
+			// 		}
+
+			// 	},
+			// 	error: function(oMessage) {
+			// 		console.log(oMessage);
+			// 	}
+			// });
+
+			//bind automatically from the model for all the valid address
+			oController.getView().byId("metadata-records-table").bindRows("metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +
+				"')/Results");
+
+		},
+
 		onAddNewRecord: function (oEvent) {
 			//hide the main table 
 			//show the form 
@@ -191,7 +221,11 @@ sap.ui.define([
 			let oController = this;
 			let sSelectedKey = oEvent.getSource().getSelectedKey();
 			//clear the JSON model for payload
-			oController.getModel("formPayloadValue").setData({SOURCE:sSelectedKey}, false);
+			oController.getModel("formPayloadValue").setData({
+				SOURCE: sSelectedKey
+			}, false);
+
+			oController.readMetadataBySource(sSelectedKey);
 		},
 
 		/**
@@ -207,7 +241,24 @@ sap.ui.define([
 
 		// to edit the the particular entry for each line
 		onEditEntry: function (oEvent) {
+			let oController = this;
 			let sMetadataId = oEvent.getSource().data().metadataId;
+			let sSource = oEvent.getSource().data().source;
+
+			oController.getModel("metadataModel").read("/metadataRecords(IP_SOURCE='" + sSource + "',METADATA_ID='" + sMetadataId + "')", {
+
+				success: function (data) {
+
+					//set the data for for the entire view information. 
+
+					oController.getModel("formPayloadValue").setData(data, false);
+					oController._bShowMainTable(false);
+					oController._bShowForm(true);
+				},
+				error: function (oMessage) {
+					console.log(oMessage);
+				}
+			});
 
 			//hide the table from the main page 
 			//load the data into the form 
@@ -277,14 +328,14 @@ sap.ui.define([
 			});
 
 		},
-		
-		onCancelCreation: function(oEvent){
+
+		onCancelCreation: function (oEvent) {
 			let oController = this;
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
 			oController._bSetShowSourceDropdown(true);
 		},
-		
-		onCancelNewRecord: function(oEvent){
+
+		onCancelNewRecord: function (oEvent) {
 			let oController = this;
 			oController._bShowMainTable(true);
 			oController._bShowForm(false);

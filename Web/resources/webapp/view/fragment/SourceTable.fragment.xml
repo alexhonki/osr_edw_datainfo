@@ -7,9 +7,8 @@
                          xmlns:timeline="sap.suite.ui.commons"
                          xmlns="sap.m">
 
-  <t:Table id="history-address-table"
+  <t:Table id="metadata-records-table"
            selectionMode="None"
-           rows="{metaData>/Results}"
            visibleRowCount="15"
            enableCellFilter="true"
            enableSelectAll="false"
@@ -23,7 +22,7 @@
                 filterProperty="META_FILE_NAME">
         <Label text="{i18n>source.file_name}" />
         <t:template>
-          <Text text="{path:'metaData>META_FILE_NAME', formatter:'.Formatters.formatAddressKind'}"
+          <Text text="{path:'metadataModel>META_FILE_NAME', formatter:'.Formatters.formatAddressKind'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -33,7 +32,7 @@
                 filterProperty="TIMESTAMP">
         <Label text="{i18n>source.timestamp}" />
         <t:template>
-          <Text text="{metaData>TIMESTAMP}"
+          <Text text="{metadataModel>TIMESTAMP}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -43,7 +42,7 @@
                 filterProperty="SOURCE">
         <Label text="{i18n>source.provider}" />
         <t:template>
-          <Text text="{metaData>SOURCE}"
+          <Text text="{metadataModel>SOURCE}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -53,7 +52,7 @@
                 filterProperty="RAF_TABLE_NAME">
         <Label text="{i18n>source.table_name}" />
         <t:template>
-          <Text text="{metaData>RAF_TABLE_NAME}"
+          <Text text="{metadataModel>RAF_TABLE_NAME}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -63,7 +62,7 @@
                 filterProperty="RAF_FILE_NAME">
         <Label text="{i18n>source.file_name}" />
         <t:template>
-          <Text text="{metaData>RAF_FILE_NAME}"
+          <Text text="{metadataModel>RAF_FILE_NAME}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -73,7 +72,7 @@
                 filterProperty="SOURCE_FIELD_VALUE">
         <Label text="{i18n>source.source_field_value}" />
         <t:template>
-          <Text text="{metaData>SOURCE_FIELD_VALUE}"
+          <Text text="{metadataModel>SOURCE_FIELD_VALUE}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -83,7 +82,7 @@
                 filterProperty="FREQUENCY">
         <Label text="{i18n>source.frequency}" />
         <t:template>
-          <Text text="{path:'metaData>FREQUENCY'}"
+          <Text text="{path:'metadataModel>FREQUENCY'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -93,7 +92,7 @@
                 filterProperty="ROW_COUNTS">
         <Label text="{i18n>source.row_counts}" />
         <t:template>
-          <Text text="{path:'metaData>ROW_COUNTS'}"
+          <Text text="{path:'metadataModel>ROW_COUNTS'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -103,7 +102,7 @@
                 filterProperty="YEAR_TYPE">
         <Label text="{i18n>source.year_type}" />
         <t:template>
-          <Text text="{path:'metaData>YEAR_TYPE'}"
+          <Text text="{path:'metadataModel>YEAR_TYPE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -113,7 +112,7 @@
                 filterProperty="FILE_RECEIVED">
         <Label text="{i18n>source.file_received}" />
         <t:template>
-          <Text text="{path:'metaData>FILE_RECEIVED'}"
+          <Text text="{path:'metadataModel>FILE_RECEIVED'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -123,7 +122,7 @@
                 filterProperty="FROM_DATE">
         <Label text="{i18n>source.from_date}" />
         <t:template>
-          <Text text="{path:'metaData>FROM_DATE'}"
+          <Text text="{path:'metadataModel>FROM_DATE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -133,7 +132,7 @@
                 filterProperty="TO_DATE">
         <Label text="{i18n>source.to_date}" />
         <t:template>
-          <Text text="{path:'metaData>TO_DATE'}"
+          <Text text="{path:'metadataModel>TO_DATE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -143,7 +142,7 @@
                 filterProperty="DATA_SET_TYPE">
         <Label text="{i18n>source.data_set_type}" />
         <t:template>
-          <Text text="{path:'metaData>DATA_SET_TYPE'}"
+          <Text text="{path:'metadataModel>DATA_SET_TYPE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -154,8 +153,9 @@
 	          <Button text="Edit"
                           press="onEditEntry"
                           icon="sap-icon://add"
-                          ariaDescribedBy="addNewSourceButton"
-                          app:metadataId="{path:'metaData>METADATA_ID'}" />
+                          ariaDescribedBy="onEditExistingRecord"
+                          app:metadataId="{path:'metadataModel>METADATA_ID'}"
+                          app:source="{path:'metadataModel>SOURCE'}"/>
 	        </t:template>
 	      </t:Column>
 
