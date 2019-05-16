@@ -210,11 +210,37 @@ sap.ui.define([
 		},
 
 		onAddNewRecord: function (oEvent) {
-			//hide the main table 
-			//show the form 
+
 			let oController = this;
 			oController._bShowMainTable(false);
 			oController._bShowForm(true);
+			oController._clearFormPayload();
+			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
+
+			oController.getModel("viewHolder").setData({
+				generatedFileName: moment().format("YYYYMMDD") + "_" + sSelectedSource
+			}, true);
+
+			oController.getModel("formPayloadValue").setData({
+				SOURCE: sSelectedSource,
+				META_FILE_NAME: moment().format("YYYYMMDD") + "_" + sSelectedSource + "_"
+			}, false);
+
+		},
+
+		onGenerationMetaFileName: function (oEvent) {
+			let oController = this;
+			let sValue = oEvent.getSource().getValue();
+			let sSourceInput = oEvent.getSource().data().sourceInput;
+			let sCurrentFileName = moment().format("YYYYMMDD") + "_" + oController.getView().byId("source-select").getSelectedKey() + "_";
+			if (sSourceInput === "table_name") {
+				sCurrentFileName += sValue.toUpperCase();
+
+				oController.getModel("formPayloadValue").setData({
+					META_FILE_NAME: sCurrentFileName
+				}, true);
+			}
+
 		},
 
 		onSourceSelectChange: function (oEvent) {

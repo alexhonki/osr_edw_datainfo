@@ -43,7 +43,9 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.table_name}" />
-                            <Input value="{formPayloadValue>/TABLE_NAME}" />
+                            <Input value="{formPayloadValue>/TABLE_NAME}"
+                            		liveChange="onGenerationMetaFileName"
+                            		app:sourceInput="table_name"/>
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.timestamp}" />
