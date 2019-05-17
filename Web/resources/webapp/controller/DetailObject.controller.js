@@ -223,7 +223,8 @@ sap.ui.define([
 
 			oController.getModel("formPayloadValue").setData({
 				SOURCE: sSelectedSource,
-				META_FILE_NAME: moment().format("YYYYMMDD") + "_" + sSelectedSource + "_"
+				META_FILE_NAME: moment().format("YYYYMMDD") + "_" + sSelectedSource + "_",
+				TIMESTAMP: moment()
 			}, false);
 
 		},
@@ -318,13 +319,13 @@ sap.ui.define([
 			//reload the sources from the server
 			//unhide the dropdown of the sources 
 			let oController = this;
-
+			
 			//input form value and transform to uppercase and trim
 			let sNewSource = oController.getView().byId("new-source-input").getValue().toUpperCase().trim();
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
-			$.ajax(sApiUrl + "getCurrentUser", {
+			$.ajax(sApiUrl + "createNewSource", {
 				data: {
 					sSource: sNewSource
 				},
@@ -354,6 +355,53 @@ sap.ui.define([
 			});
 
 		},
+
+		onCreatePressed: function (oEvent) {
+			let oController = this;
+			let temp = 1;
+			
+			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
+
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			$.ajax(sApiUrl + "createNewRecord", {
+				data: oPayload,
+				type: "POST",
+				beforeSend: function () {
+					//loading effect start if needed
+				},
+				complete: function () {
+					//loading effect end if needed
+				},
+				success: function (data) {
+					oController._onLoadSources();
+					oController._bSetShowSourceDropdown(true);
+					oController._setDropdownSource(sNewSource);
+				},
+				error: function (error) {
+					//check for http error and serve accordingly.
+					if (error.status === 403) {
+						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.responseText === "No Data") {
+						return;
+					} else {
+						oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+					}
+
+				}
+			});
+		},
+		
+		_processPayload: function(oPayload){
+			
+			let oController = this; 
+			 
+			oController.getModel("formPayloadValue").getData().TIMESTAMP._d
+			
+			let oFinalPayload = oPayload;
+			oFinalPayload.TIMESTAMP = oController.getModel("formPayloadValue").getData().TIMESTAMP._d;
+			return oFinalPayload;
+			
+		}, 
 
 		onCancelCreation: function (oEvent) {
 			let oController = this;

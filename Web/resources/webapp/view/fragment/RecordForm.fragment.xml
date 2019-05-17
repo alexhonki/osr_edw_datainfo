@@ -49,7 +49,7 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.timestamp}" />
-                            <Text value="{formPayloadValue>/TIMESTAMP}" />
+                            <Text text="{formPayloadValue>/TIMESTAMP}" />
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.source_field_value}" />
@@ -73,6 +73,11 @@
                                    text="{i18n>dataInput.row_counts}" />
                             <Input value="{formPayloadValue>/ROW_COUNTS}"
                                    autocomplete="false" />
+                                   
+                             <Label vAlign="Middle"
+                                   text="{i18n>dataInput.has_loaded_in_edw}" />
+                            <CheckBox selected="{formPayloadValue>/HAS_LOADED_IN_EDW}" />
+                                   
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.year_type}" />
@@ -92,28 +97,24 @@
                             <DatePicker
 								placeholder="From Date"
 								change="handleChange"
-								dateValue="{formPayloadValue>/FILE_RECEIVED_DATE}"
+								busyIndicatorDelay="5"
+								value="{formPayloadValue>/FILE_RECEIVED_DATE}"
+								valueFormat="YYYY-MM-dd"
 								displayFormat="dd-MM-YYYY"/>
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.period_key}" />
-                            <Select id="period-key"
-			                          forceSelection="false"
-			                          selectedKey="{formPayloadValue>/PERIOD_KEY}"
-			                          items="{
-			                                  path: 'viewHolder>/Sources/Results'
-			                                }"
-			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
-			                    <core:Item key="{viewHolder>SOURCE_NAME}"
-			                               text="{viewHolder>SOURCE_NAME}" />
-			                  </Select>
+                            <Input value="{formPayloadValue>/PERIOD_KEY}"
+                                   autocomplete="false" />
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.from_date}" />
 							<DatePicker
 								placeholder="From Date"
 								change="handleChange"
-								dateValue="{formPayloadValue>/FROM_DATE}"
+								busyIndicatorDelay="5"
+								value="{formPayloadValue>/FROM_DATE}"
+								valueFormat="YYYY-MM-dd"
 								displayFormat="dd-MM-YYYY"/>
 								
                             <Label vAlign="Middle"
@@ -121,12 +122,19 @@
                             <DatePicker
 								placeholder="To Date"
 								change="handleChange"
-								dateValue="{formPayloadValue>/TO_DATE}"
+								busyIndicatorDelay="5"
+								value="{formPayloadValue>/TO_DATE}"
+								valueFormat="YYYY-MM-dd"
 								displayFormat="dd-MM-YYYY"/>
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.data_set_type}" />
                             <Input value="{formPayloadValue>/DATA_SET_TYPE}" />
+                            
+                            <Label vAlign="Middle"
+                                   text="{i18n>dataInput.change_datetype}" />
+                            <Input value="{formPayloadValue>/CHANGE_DATATYPE}" />
+                            
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.data_input}" />
