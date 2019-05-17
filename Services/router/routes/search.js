@@ -38,10 +38,17 @@ module.exports = function () {
 	});
 	
 	
-	//for execution of search
-	app.post("/getCurrentUser", function (req, res) {
+	//for creation of a new source entry
+	app.post("/createNewSource", function (req, res) {
 
-		searchHelper.getCurrentUser(req, res);
+		searchHelper.createNewSource(req, res);
+
+	});
+	
+	//for creation of a new record base on a entry
+	app.post("/createNewRecord", function (req, res) {
+
+		searchHelper.createNewRecord(req, res);
 
 	});
 

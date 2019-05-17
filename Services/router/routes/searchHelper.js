@@ -134,7 +134,7 @@ module.exports = {
 
 	},
 
-	getCurrentUser: function (oRequest, oResponse) {
+	createNewSource: function (oRequest, oResponse) {
 		let oQuery = oRequest.query;
 		let sGetUsername =
 			"SELECT DISTINCT VALUE FROM \"PUBLIC\".\"M_SESSION_CONTEXT\" WHERE KEY='APPLICATIONUSER'";
@@ -197,6 +197,53 @@ module.exports = {
 					return;
 				} else {
 					//let sApplicationUserName = results[0].VALUE;
+					client.commit();
+					oResponse.status(201).send("Record created successfully!");
+				}
+				callback(null, results);
+			}
+		], function (err, result) {
+			console.log(err);
+		});
+	},
+
+	createNewRecord: function (oRequest, oResponse) {
+		let oQuery = oRequest.query;
+		let sGetUsername =
+			"SELECT DISTINCT VALUE FROM \"PUBLIC\".\"M_SESSION_CONTEXT\" WHERE KEY='APPLICATIONUSER'";
+
+		let client = oRequest.db;
+		client.setAutoCommit(false);
+		let oController = this;
+		async.waterfall([
+
+			function getUsername(callback) {
+				client.prepare(
+					sGetUsername,
+					function (err, statement) {
+						callback(null, err, statement);
+					});
+			},
+
+			function executeGetUsername(err, statement, callback) {
+
+				if (err) {
+					client.rollback();
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					statement.exec([], function (execErr, results) {
+						callback(null, execErr, results);
+					});
+				}
+
+			},
+			function finalResponse(err, results, callback) {
+				if (err) {
+					client.rollback();
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
 					client.commit();
 					oResponse.status(201).send("Record created successfully!");
 				}
