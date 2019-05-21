@@ -80,7 +80,10 @@ module.exports = {
 				callback(null, results);
 			}
 		], function (err, result) {
-			let temp = 1;
+			if (err) {
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+			}     
 		});
 
 	},
@@ -196,7 +199,6 @@ module.exports = {
 					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
 					return;
 				} else {
-					//let sApplicationUserName = results[0].VALUE;
 					client.commit();
 					oResponse.status(201).send("Record created successfully!");
 				}
@@ -211,10 +213,31 @@ module.exports = {
 		let oQuery = oRequest.query;
 		let sGetUsername =
 			"SELECT DISTINCT VALUE FROM \"PUBLIC\".\"M_SESSION_CONTEXT\" WHERE KEY='APPLICATIONUSER'";
-
+		
+		//grab all the body payload, all parameters as folow. 
+		//CHANGE_DATATYPE
+		//DATA_INPUT
+		//DATA_SET_TYPE
+		//FILE_RECEIVED_DATE
+		//FREQUENCY
+		//FROM_DATE
+		//HAS_LOADED_IN_EDW
+		//META_FILE_NAME
+		//PERIOD_KEY
+		//RAW_FILE_NAME
+		//ROW_COUNTS
+		//SOURCE
+		//SOURCE_FIELD_VALUE
+		//TABLE_NAME
+		//TIMESTAMP
+		//TO_DATE
+		//YEAR_TYPE
+		 
+		let oPayload = oRequest.body; 
+		
 		let client = oRequest.db;
 		client.setAutoCommit(false);
-		let oController = this;
+		const oController = this;
 		async.waterfall([
 
 			function getUsername(callback) {
@@ -238,6 +261,41 @@ module.exports = {
 				}
 
 			},
+			
+			function prepareInsertionRecord(execErr, results, callback) {
+				
+				let oFinalPayload = oController.sanitisePayload(oRequest.body);
+				
+				let sInsertToMetadata = "INSERT INTO \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\"  " +
+					"(METADATA_ID, SOURCE, TIMESTAMP, CREATED_AT, CREATED_BY, FREQUENCY, ROW_COUNTS, YEAR_TYPE, DATA_SET_TYPE," +
+					"META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE," +
+					"ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, CHANGE_DATATYPE, FILE_RECEIVED_DATE)" +
+					
+					"VALUES(SYSUUID,'SOURCE',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '"+ results[0].VALUE.toUpperCase() + "', 'FREQUENCY', 'ROW_COUNTS', 'YEAR_TYPE', " +
+					" 'DATA_SET_TYPE', 'META_FILE_NAME', 'TYPE', 'RAF_TABLE_NAME', 'SOURCE_FIELD_VALUE', 'EDW_FILE_NAME', '1999-12-31', '9999-12-31', " +
+					" 'ERRORS', 'RAF_FILE_NAME', 'Y', 'CHANGE_DATATYPE', '2019-05-21')";
+
+				client.prepare(
+					sInsertToMetadata,
+					function (err, statement) {
+						callback(null, err, statement);
+					});
+			},
+			
+			function executeInsert(err, statement, callback) {
+
+				if (err) {
+					client.rollback();
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					statement.exec([], function (execErr, results) {
+						callback(null, execErr, results);
+					});
+				}
+
+			},
+			
 			function finalResponse(err, results, callback) {
 				if (err) {
 					client.rollback();
@@ -252,6 +310,17 @@ module.exports = {
 		], function (err, result) {
 			console.log(err);
 		});
+	},
+	
+	sanitisePayload: function(oPayload){
+		
+		//convert everything to uppercase. 
+		for (let sProperty in oPayload) {
+		    if (object.hasOwnProperty(property)) {
+		        // do stuff
+		    }
+		}
+		return oFinalPayload; 
 	},
 
 	/**
