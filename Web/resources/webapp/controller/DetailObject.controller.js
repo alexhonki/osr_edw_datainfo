@@ -181,28 +181,7 @@ sap.ui.define([
 
 		readMetadataBySource: function (sSource) {
 			let oController = this;
-			//for api call search
-			// oController.getModel("metadataModel").read("/metadataRecordsParameters(IP_SOURCE='" + sScvId + "')/Results", {
-			// 	//both url to filter and order the result set.
-			// 	urlParameters: {
-			// 		"$orderby": "",
-			// 		"$filter": ""
-			// 	},
-			// 	success: function(data) {
-
-			// 		// grab the very top one for the current person. 
-			// 		if (data.results.length > 0) {
-			// 			//set the data for for the entire view information. 
-
-			// 			oController.getModel("metaData").setData(data, false);
-			// 		}
-
-			// 	},
-			// 	error: function(oMessage) {
-			// 		console.log(oMessage);
-			// 	}
-			// });
-
+			
 			//bind automatically from the model for all the valid address
 			oController.getView().byId("metadata-records-table").bindRows("metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +
 				"')/Results");
@@ -224,7 +203,8 @@ sap.ui.define([
 			oController.getModel("formPayloadValue").setData({
 				SOURCE: sSelectedSource,
 				META_FILE_NAME: moment().format("YYYYMMDD") + "_" + sSelectedSource + "_",
-				TIMESTAMP: moment()
+				TIMESTAMP: moment(), 
+				HAS_LOADED_IN_EDW: false
 			}, false);
 
 		},
@@ -358,8 +338,7 @@ sap.ui.define([
 
 		onCreatePressed: function (oEvent) {
 			let oController = this;
-			let temp = 1;
-			
+	
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
@@ -375,7 +354,10 @@ sap.ui.define([
 				success: function (data) {
 					oController._onLoadSources();
 					oController._bSetShowSourceDropdown(true);
-					oController._setDropdownSource(sNewSource);
+					oController._bShowMainTable(true);
+					oController._bShowForm(false);
+					let sSelectedKey = oEvent.getSource().getSelectedKey();
+					oController.readMetadataBySource(sSelectedKey);
 				},
 				error: function (error) {
 					//check for http error and serve accordingly.
