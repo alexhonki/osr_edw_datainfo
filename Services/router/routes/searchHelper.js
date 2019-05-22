@@ -271,9 +271,11 @@ module.exports = {
 					"META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE," +
 					"ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, CHANGE_DATATYPE, FILE_RECEIVED_DATE)" +
 					
-					"VALUES(SYSUUID,'SOURCE',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '"+ results[0].VALUE.toUpperCase() + "', 'FREQUENCY', 'ROW_COUNTS', 'YEAR_TYPE', " +
-					" 'DATA_SET_TYPE', 'META_FILE_NAME', 'TYPE', 'RAF_TABLE_NAME', 'SOURCE_FIELD_VALUE', 'EDW_FILE_NAME', '1999-12-31', '9999-12-31', " +
-					" 'ERRORS', 'RAF_FILE_NAME', 'Y', 'CHANGE_DATATYPE', '2019-05-21')";
+					"VALUES(SYSUUID,'"+oFinalPayload.SOURCE+"',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '"+ results[0].VALUE.toUpperCase() + "', '"+oFinalPayload.FREQUENCY+"'," + 
+					" '"+oFinalPayload.ROW_COUNTS+"', '"+oFinalPayload.YEAR_TYPE+"', " +
+					" '"+oFinalPayload.DATA_SET_TYPE+"', '"+oFinalPayload.META_FILE_NAME+"', 'TYPE', 'RAF_TABLE_NAME', '"+oFinalPayload.SOURCE_FIELD_VALUE+"'," +
+					" '"+oFinalPayload.META_FILE_NAME+"', '"+oFinalPayload.FROM_DATE+"', '"+oFinalPayload.TO_DATE+"', " +
+					" 'ERRORS', '"+oFinalPayload.RAW_FILE_NAME+"', '"+oFinalPayload.HAS_LOADED_IN_EDW+"', '"+oFinalPayload.CHANGE_DATATYPE+"', '"+oFinalPayload.FILE_RECEIVED_DATE+"')";
 
 				client.prepare(
 					sInsertToMetadata,
@@ -314,10 +316,22 @@ module.exports = {
 	
 	sanitisePayload: function(oPayload){
 		
+		let oFinalPayload = {};
+		
 		//convert everything to uppercase. 
 		for (let sProperty in oPayload) {
-		    if (object.hasOwnProperty(property)) {
-		        // do stuff
+		    if (oPayload.hasOwnProperty(sProperty)) {
+		    	
+		    	oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
+		    	
+		    	if(sProperty === "HAS_LOADED_IN_EDW" ){
+		    		if(oPayload[sProperty] === true){
+		    			oFinalPayload[sProperty] = 'Y';
+		    		}else{
+		    			oFinalPayload[sProperty] = 'N';
+		    		}
+		    	}
+		        
 		    }
 		}
 		return oFinalPayload; 
