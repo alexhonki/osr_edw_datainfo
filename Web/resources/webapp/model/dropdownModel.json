@@ -3,23 +3,28 @@
 
   "Frequency": [
   	{
-      "VALUE": "Daily",
+      "VALUE": "DAILY",
       "TEXT":"Daily"
     },
   	{
-      "VALUE": "Weekly"
+      "VALUE": "WEEKLY",
+      "TEXT":"Weekly"
     },
   	{
-      "VALUE": "Fortnightly"
+      "VALUE": "FORTNIGHTLY",
+      "TEXT":"Fortnightly"
     },
   	{
-      "VALUE": "Monthly"
+      "VALUE": "MONTHLY",
+      "TEXT":"Monthly"
     },
     {
-      "VALUE": "Quarterly"
+      "VALUE": "QUARTERLY",
+      "TEXT":"Quarterly"
     },
     {
-      "VALUE": "Yearly"
+      "VALUE": "YEARLY",
+      "TEXT":"Yearly"
     }
   ], 
   "DataSetType": [

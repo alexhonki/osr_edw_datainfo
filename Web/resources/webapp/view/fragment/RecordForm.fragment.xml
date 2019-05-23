@@ -66,7 +66,7 @@
 				                                }"
 				                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
 				                    <core:Item key="{dropdownModel>VALUE}"
-				                               text="{dropdownModel>VALUE}" />
+				                               text="{dropdownModel>TEXT}" />
 				                  </Select>
 
                             <Label vAlign="Middle"
@@ -142,20 +142,24 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.raw_file_name}" />
-                            <Input value="{formPayloadValue>/RAW_FILE_NAME}" />
+                            <Input value="{formPayloadValue>/RAF_FILE_NAME}" />
 
                           </f:content>
 						
                         </f:SimpleForm>
 						<OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
 			                
-			                <Button id="dialog-back"
+			                <Button id="form-clear"
 			                        press="onClearPressed"
 			                        text="{i18n>dataInput.clearForm}" />
 			
-			                <Button id="dialog-next"
+			                <Button id="form-next"
 			                        press="onCreatePressed"
 			                        text="{i18n>dataInput.createInfo}" />
+			                
+			                <Button id="form-update"
+			                        press="onUpdateRecord"
+			                        text="{i18n>dataInput.updateRecord}" />        
 			
 			              </OverflowToolbar>
 </core:FragmentDefinition>
