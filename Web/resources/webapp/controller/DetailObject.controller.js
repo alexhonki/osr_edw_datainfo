@@ -255,9 +255,14 @@ sap.ui.define([
 			oController.getModel("metadataModel").read("/metadataRecords(IP_SOURCE='" + sSource + "',METADATA_ID='" + sMetadataId + "')", {
 
 				success: function (data) {
-
-					//set the data for for the entire view information. 
-
+					
+					//check boolean value for has_loaded_in_edw, and change accordingly. 
+					if(data.HAS_LOADED_IN_EDW === "N"){
+						data.HAS_LOADED_IN_EDW = false;
+					}else if(data.HAS_LOADED_IN_EDW === "Y"){
+						data.HAS_LOADED_IN_EDW = true;
+					}
+					//set the data for for the entire view information.
 					oController.getModel("formPayloadValue").setData(data, false);
 					oController._bShowMainTable(false);
 					oController._bShowForm(true);
@@ -345,6 +350,43 @@ sap.ui.define([
 			$.ajax(sApiUrl + "createNewRecord", {
 				data: oPayload,
 				type: "POST",
+				beforeSend: function () {
+					//loading effect start if needed
+				},
+				complete: function () {
+					//loading effect end if needed
+				},
+				success: function (data) {
+					oController._onLoadSources();
+					oController._bSetShowSourceDropdown(true);
+					oController._bShowMainTable(true);
+					oController._bShowForm(false);
+					let sSelectedKey = oEvent.getSource().getSelectedKey();
+					oController.readMetadataBySource(sSelectedKey);
+				},
+				error: function (error) {
+					//check for http error and serve accordingly.
+					if (error.status === 403) {
+						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.responseText === "No Data") {
+						return;
+					} else {
+						oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+					}
+
+				}
+			});
+		},
+		
+		onUpdateRecord: function(oEvent){
+			let oController = this;
+	
+			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
+
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			$.ajax(sApiUrl + "updateMetadataRecord", {
+				data: oPayload,
+				type: "PUT",
 				beforeSend: function () {
 					//loading effect start if needed
 				},

@@ -51,6 +51,15 @@ module.exports = function () {
 		searchHelper.createNewRecord(req, res);
 
 	});
+	
+	
+	//for creation of a new record base on a entry
+	app.put("/updateMetadataRecord", function (req, res) {
+
+		searchHelper.updateMetadataRecord(req, res);
+
+	});
+	
 
 	return app;
 };
