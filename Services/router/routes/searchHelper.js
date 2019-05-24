@@ -277,7 +277,7 @@ module.exports = {
 					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', 'RAF_TABLE_NAME', '" + oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
 					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
-					" 'ERRORS', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
+					" '" + oFinalPayload.ERRORS +"', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
 					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "')";
 
 				client.prepare(

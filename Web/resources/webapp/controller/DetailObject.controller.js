@@ -428,7 +428,8 @@ sap.ui.define([
 					oController._bSetShowSourceDropdown(true);
 					oController._bShowMainTable(true);
 					oController._bShowForm(false);
-					let sSelectedKey = oEvent.getSource().getSelectedKey();
+					
+					let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 					oController.readMetadataBySource(sSelectedKey);
 				},
 				error: function (error) {

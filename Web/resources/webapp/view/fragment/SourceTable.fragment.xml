@@ -148,7 +148,18 @@
 	          editable="false"/>
 	        </t:template>
 	      </t:Column>
-      
+	      
+  	<t:Column sortProperty="ERRORS"
+	                autoResizable="true"
+	                filterProperty="ERRORS">
+	        <Label text="{i18n>source.errors}" />
+	        <t:template>
+	          <Text text="{path:'metadataModel>ERRORS'}"
+                wrapping="false" />
+	        </t:template>
+	      </t:Column>   
+	      
+	      
 		<t:Column autoResizable="true" >
 	        <Label text="" />
 	        <t:template>
