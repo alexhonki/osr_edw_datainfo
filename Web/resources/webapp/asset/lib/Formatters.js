@@ -16,6 +16,14 @@ sap.ui.define(['jquery.sap.global'], function () {
 			}
 
 		},
+		
+		formatStringToBoolean: function(sStatus){
+			if (sStatus === "Y") {
+				return true;
+			} else{
+				return false;
+			}
+		},
 
 		/**
 		 * Format postal information depending on whether there is text or not

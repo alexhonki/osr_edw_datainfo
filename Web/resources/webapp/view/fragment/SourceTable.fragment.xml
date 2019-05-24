@@ -138,6 +138,17 @@
         </t:template>
       </t:Column>
 
+	<t:Column sortProperty="HAS_LOADED_IN_EDW"
+	                autoResizable="true"
+	                filterProperty="HAS_LOADED_IN_EDW">
+	        <Label text="{i18n>source.has_loaded_in_edw}" />
+	        <t:template>
+	          <CheckBox selected="{path:'metadataModel>HAS_LOADED_IN_EDW', formatter:'.Formatters.formatStringToBoolean'}"
+	          displayOnly="true"
+	          editable="false"/>
+	        </t:template>
+	      </t:Column>
+      
 		<t:Column autoResizable="true" >
 	        <Label text="" />
 	        <t:template>
