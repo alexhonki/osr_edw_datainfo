@@ -22,20 +22,11 @@
                 filterProperty="META_FILE_NAME">
         <Label text="{i18n>source.file_name}" />
         <t:template>
-          <Text text="{path:'metadataModel>META_FILE_NAME', formatter:'.Formatters.formatAddressKind'}"
+          <Text text="{path:'metadataModel>META_FILE_NAME'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
 
-      <t:Column sortProperty="TIMESTAMP"
-                autoResizable="true"
-                filterProperty="TIMESTAMP">
-        <Label text="{i18n>source.timestamp}" />
-        <t:template>
-          <Text text="{metadataModel>TIMESTAMP}"
-                wrapping="false" />
-        </t:template>
-      </t:Column>
 
       <t:Column sortProperty="SOURCE"
                 autoResizable="true"
@@ -107,12 +98,12 @@
         </t:template>
       </t:Column>
 
-      <t:Column sortProperty="FILE_RECEIVED"
+      <t:Column sortProperty="FILE_RECEIVED_DATE"
                 autoResizable="true"
-                filterProperty="FILE_RECEIVED">
-        <Label text="{i18n>source.file_received}" />
+                filterProperty="FILE_RECEIVED_DATE">
+        <Label text="{i18n>source.file_received_date}" />
         <t:template>
-          <Text text="{path:'metadataModel>FILE_RECEIVED'}"
+          <Text text="{path:'metadataModel>FILE_RECEIVED_DATE', formatter:'.Formatters.formatDateObjectToString'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -122,7 +113,7 @@
                 filterProperty="FROM_DATE">
         <Label text="{i18n>source.from_date}" />
         <t:template>
-          <Text text="{path:'metadataModel>FROM_DATE'}"
+          <Text text="{path:'metadataModel>FROM_DATE', formatter:'.Formatters.formatDateObjectToString'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -132,7 +123,7 @@
                 filterProperty="TO_DATE">
         <Label text="{i18n>source.to_date}" />
         <t:template>
-          <Text text="{path:'metadataModel>TO_DATE'}"
+          <Text text="{path:'metadataModel>TO_DATE', formatter:'.Formatters.formatDateObjectToString'}"
                 wrapping="false" />
         </t:template>
       </t:Column>

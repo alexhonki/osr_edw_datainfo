@@ -48,10 +48,6 @@
                             		app:sourceInput="table_name"/>
 
                             <Label vAlign="Middle"
-                                   text="{i18n>dataInput.timestamp}" />
-                            <Text text="{formPayloadValue>/TIMESTAMP}" />
-
-                            <Label vAlign="Middle"
                                    text="{i18n>dataInput.source_field_value}" />
                             <Input value="{formPayloadValue>/SOURCE_FIELD_VALUE}" />
 
