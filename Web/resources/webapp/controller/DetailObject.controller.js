@@ -181,7 +181,7 @@ sap.ui.define([
 
 		readMetadataBySource: function (sSource) {
 			let oController = this;
-			
+
 			//bind automatically from the model for all the valid address
 			oController.getView().byId("metadata-records-table").bindRows("metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +
 				"')/Results");
@@ -203,7 +203,7 @@ sap.ui.define([
 			oController.getModel("formPayloadValue").setData({
 				SOURCE: sSelectedSource,
 				META_FILE_NAME: moment().format("YYYYMMDD") + "_" + sSelectedSource + "_",
-				TIMESTAMP: moment(), 
+				TIMESTAMP: moment(),
 				HAS_LOADED_IN_EDW: false
 			}, false);
 
@@ -255,15 +255,12 @@ sap.ui.define([
 			oController.getModel("metadataModel").read("/metadataRecords(IP_SOURCE='" + sSource + "',METADATA_ID='" + sMetadataId + "')", {
 
 				success: function (data) {
-					
+
 					//check boolean value for has_loaded_in_edw, and change accordingly. 
-					if(data.HAS_LOADED_IN_EDW === "N"){
-						data.HAS_LOADED_IN_EDW = false;
-					}else if(data.HAS_LOADED_IN_EDW === "Y"){
-						data.HAS_LOADED_IN_EDW = true;
-					}
+					//transform received data
+					let oTransformedResult = oController._transformMetadataRecord(data);
 					//set the data for for the entire view information.
-					oController.getModel("formPayloadValue").setData(data, false);
+					oController.getModel("formPayloadValue").setData(oTransformedResult, false);
 					oController._bShowMainTable(false);
 					oController._bShowForm(true);
 				},
@@ -275,6 +272,40 @@ sap.ui.define([
 			//hide the table from the main page 
 			//load the data into the form 
 
+		},
+
+		_transformMetadataRecord: function (oDataReceived) {
+
+			let oTransformedResult = oDataReceived;
+			let oController = this;
+
+			if (oTransformedResult.HAS_LOADED_IN_EDW === "N") {
+				oTransformedResult.HAS_LOADED_IN_EDW = false;
+			} else if (oTransformedResult.HAS_LOADED_IN_EDW === "Y") {
+				oTransformedResult.HAS_LOADED_IN_EDW = true;
+			}
+
+			if (oTransformedResult.CREATED_AT) {
+				oTransformedResult.CREATED_AT = moment(oTransformedResult.CREATED_AT).format("YYYY-MM-DD");
+			}
+
+			if (oTransformedResult.TIMESTAMP) {
+				oTransformedResult.TIMESTAMP = moment(oTransformedResult.TIMESTAMP).format("YYYY-MM-DD");
+			}
+
+			if (oTransformedResult.TO_DATE) {
+				oTransformedResult.TO_DATE = moment(oTransformedResult.TO_DATE).format("YYYY-MM-DD");
+			}
+
+			if (oTransformedResult.FROM_DATE) {
+				oTransformedResult.FROM_DATE = moment(oTransformedResult.FROM_DATE).format("YYYY-MM-DD");
+			}
+
+			if (oTransformedResult.FILE_RECEIVED_DATE) {
+				oTransformedResult.FILE_RECEIVED_DATE = moment(oTransformedResult.FILE_RECEIVED_DATE).format("YYYY-MM-DD");
+			}
+
+			return oTransformedResult;
 		},
 
 		_bShowMainTable: function (bShow) {
@@ -304,7 +335,7 @@ sap.ui.define([
 			//reload the sources from the server
 			//unhide the dropdown of the sources 
 			let oController = this;
-			
+
 			//input form value and transform to uppercase and trim
 			let sNewSource = oController.getView().byId("new-source-input").getValue().toUpperCase().trim();
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
@@ -343,7 +374,7 @@ sap.ui.define([
 
 		onCreatePressed: function (oEvent) {
 			let oController = this;
-	
+
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
@@ -377,10 +408,10 @@ sap.ui.define([
 				}
 			});
 		},
-		
-		onUpdateRecord: function(oEvent){
+
+		onUpdateRecord: function (oEvent) {
 			let oController = this;
-	
+
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
@@ -394,12 +425,12 @@ sap.ui.define([
 					//loading effect end if needed
 				},
 				success: function (data) {
-					oController._onLoadSources();
-					oController._bSetShowSourceDropdown(true);
-					oController._bShowMainTable(true);
-					oController._bShowForm(false);
-					let sSelectedKey = oEvent.getSource().getSelectedKey();
-					oController.readMetadataBySource(sSelectedKey);
+					// oController._onLoadSources();
+					// oController._bSetShowSourceDropdown(true);
+					// oController._bShowMainTable(true);
+					// oController._bShowForm(false);
+					// let sSelectedKey = oEvent.getSource().getSelectedKey();
+					// oController.readMetadataBySource(sSelectedKey);
 				},
 				error: function (error) {
 					//check for http error and serve accordingly.
@@ -414,18 +445,18 @@ sap.ui.define([
 				}
 			});
 		},
-		
-		_processPayload: function(oPayload){
-			
-			let oController = this; 
-			 
+
+		_processPayload: function (oPayload) {
+
+			let oController = this;
+
 			oController.getModel("formPayloadValue").getData().TIMESTAMP._d
-			
+
 			let oFinalPayload = oPayload;
 			oFinalPayload.TIMESTAMP = oController.getModel("formPayloadValue").getData().TIMESTAMP._d;
 			return oFinalPayload;
-			
-		}, 
+
+		},
 
 		onCancelCreation: function (oEvent) {
 			let oController = this;
