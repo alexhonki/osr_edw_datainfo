@@ -222,7 +222,7 @@ sap.ui.define([
 			oController._bShowForm(true);
 			oController._bSetShowCancelNewRecordBtn(true);
 			oController._bSetShowUpdateRecordBtn(false);
-			oController._bSetShowAddNewRecordBtn(false);
+			oController._bSetShowAddNewRecordBtn(true);
 			
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
@@ -466,6 +466,7 @@ sap.ui.define([
 					oController._bShowMainTable(true);
 					oController._bShowForm(false);
 					oController._bSetShowCancelNewRecordBtn(false);
+					oController._bSetShowAddNewRecordBtn(true);
 					
 					let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 					oController.readMetadataBySource(sSelectedKey);
@@ -496,7 +497,7 @@ sap.ui.define([
 
 		},
 
-		onCancelCreation: function (oEvent) {
+		onCancelNewSource: function (oEvent) {
 			let oController = this;
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
 			oController._bSetShowSourceDropdown(true);

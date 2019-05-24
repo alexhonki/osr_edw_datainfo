@@ -58,7 +58,7 @@
                           visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
                   
                   <Button text="Cancel"
-                          press="onCancelCreation"
+                          press="onCancelNewSource"
                           icon="sap-icon://add"
                           ariaDescribedBy="onCancelCreation"
                           visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
