@@ -135,13 +135,40 @@ sap.ui.define([
 				showSourceDropdown: bShow
 			}, true);
 		},
+		
+		_bSetShowCancelNewRecordBtn: function (bShow) {
+			let oController = this;
+			//reset all JSON model that the view dependent on.
+			oController.getModel("viewHolder").setData({
+				showCancelNewBtn: bShow
+			}, true);
+		},
+		
+		_bSetShowAddNewRecordBtn: function (bShow) {
+			let oController = this;
+			//reset all JSON model that the view dependent on.
+			oController.getModel("viewHolder").setData({
+				showAddRecordNewBtn: bShow
+			}, true);
+		},
 
+		_bSetShowUpdateRecordBtn: function (bShow) {
+			let oController = this;
+			//reset all JSON model that the view dependent on.
+			oController.getModel("viewHolder").setData({
+				showUpdateRecord: bShow
+			}, true);
+		},
+		
 		_setModels: function () {
 			let oController = this;
 			//reset all JSON model that the view dependent on.
 
 			oController._bSetShowSourceDropdown(true);
 			oController._bShowMainTable(true);
+			oController._bSetShowCancelNewRecordBtn(false);
+			oController._bSetShowAddNewRecordBtn(true);
+			oController._bSetShowUpdateRecordBtn(false);
 		},
 
 		_onLoadMetadata: function () {
@@ -193,6 +220,10 @@ sap.ui.define([
 			let oController = this;
 			oController._bShowMainTable(false);
 			oController._bShowForm(true);
+			oController._bSetShowCancelNewRecordBtn(true);
+			oController._bSetShowUpdateRecordBtn(false);
+			oController._bSetShowAddNewRecordBtn(false);
+			
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
 
@@ -249,6 +280,11 @@ sap.ui.define([
 		// to edit the the particular entry for each line
 		onEditEntry: function (oEvent) {
 			let oController = this;
+			
+			oController._bSetShowUpdateRecordBtn(true);
+			oController._bSetShowCancelNewRecordBtn(true);
+			oController._bSetShowAddNewRecordBtn(false);
+			
 			let sMetadataId = oEvent.getSource().data().metadataId;
 			let sSource = oEvent.getSource().data().source;
 
@@ -468,6 +504,8 @@ sap.ui.define([
 			let oController = this;
 			oController._bShowMainTable(true);
 			oController._bShowForm(false);
+			oController._bSetShowCancelNewRecordBtn(false);
+			oController._bSetShowAddNewRecordBtn(true);
 		},
 
 		_setDropdownSource: function (sKeySelected) {

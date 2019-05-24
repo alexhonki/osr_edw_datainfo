@@ -145,17 +145,20 @@
                         </f:SimpleForm>
 						<OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
 			                
-			                <Button id="form-clear"
-			                        press="onClearPressed"
-			                        text="{i18n>dataInput.clearForm}" />
+			                <!--<Button id="form-clear"-->
+			                <!--        press="onClearPressed"-->
+			                <!--        text="{i18n>dataInput.clearForm}"-->
+			                <!--        visible="{= (${viewHolder>/showSourceDropdown} === true) &amp;&amp; (${viewHolder>/showAddRecordNewBtn} === true)}"/>-->
 			
 			                <Button id="form-next"
 			                        press="onCreatePressed"
-			                        text="{i18n>dataInput.createInfo}" />
+			                        text="{i18n>dataInput.createInfo}"
+			                        visible="{= (${viewHolder>/showSourceDropdown} === true) &amp;&amp; (${viewHolder>/showAddRecordNewBtn} === true)}"/>
 			                
 			                <Button id="form-update"
 			                        press="onUpdateRecord"
-			                        text="{i18n>dataInput.updateRecord}" />        
+			                        text="{i18n>dataInput.updateRecord}"
+			                        visible="{= (${viewHolder>/showUpdateRecord} === true)}"/>        
 			
 			              </OverflowToolbar>
 </core:FragmentDefinition>
