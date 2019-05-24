@@ -224,7 +224,7 @@ module.exports = {
 		//HAS_LOADED_IN_EDW
 		//META_FILE_NAME
 		//PERIOD_KEY
-		//RAW_FILE_NAME
+		//RAF_FILE_NAME
 		//ROW_COUNTS
 		//SOURCE
 		//SOURCE_FIELD_VALUE
@@ -277,7 +277,7 @@ module.exports = {
 					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', 'RAF_TABLE_NAME', '" + oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
 					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
-					" 'ERRORS', '" + oFinalPayload.RAW_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
+					" 'ERRORS', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
 					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "')";
 
 				client.prepare(
@@ -397,7 +397,7 @@ module.exports = {
 					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', 'RAF_TABLE_NAME', '" + oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
 					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
-					" 'ERRORS', '" + oFinalPayload.RAW_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
+					" 'ERRORS', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
 					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "')";
 
 				client.prepare(
