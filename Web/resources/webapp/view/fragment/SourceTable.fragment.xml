@@ -154,7 +154,7 @@
 	        <t:template>
 	          <Button text="Edit"
                           press="onEditEntry"
-                          icon="sap-icon://add"
+                          icon="sap-icon://edit"
                           ariaDescribedBy="onEditExistingRecord"
                           app:metadataId="{path:'metadataModel>METADATA_ID'}"
                           app:source="{path:'metadataModel>SOURCE'}"/>

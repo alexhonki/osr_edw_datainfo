@@ -332,7 +332,7 @@ module.exports = {
 				oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
 
 				if (sProperty === "HAS_LOADED_IN_EDW") {
-					if (oPayload[sProperty] === true) {
+					if (oPayload[sProperty] === "true") {
 						oFinalPayload[sProperty] = 'Y';
 					} else {
 						oFinalPayload[sProperty] = 'N';
@@ -348,93 +348,7 @@ module.exports = {
 
 		//get current record 
 		//create a new record 
-
-		let oPayload = oRequest.body;
-
-		let client = oRequest.db;
-		client.setAutoCommit(false);
-		const oController = this;
-
-		let sGetUsername =
-			"SELECT DISTINCT VALUE FROM \"PUBLIC\".\"M_SESSION_CONTEXT\" WHERE KEY='APPLICATIONUSER'";
-
-		async.waterfall([
-
-			function getUsername(callback) {
-				client.prepare(
-					sGetUsername,
-					function (err, statement) {
-						callback(null, err, statement);
-					});
-			},
-
-			function executeGetUsername(err, statement, callback) {
-
-				if (err) {
-					client.rollback();
-					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
-					return;
-				} else {
-					statement.exec([], function (execErr, results) {
-						callback(null, execErr, results);
-					});
-				}
-
-			},
-
-			function prepareInsertionRecord(execErr, results, callback) {
-
-				let oFinalPayload = oController.sanitisePayload(oRequest.body);
-
-				let sInsertToMetadata = "INSERT INTO \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\"  " +
-					"(METADATA_ID, SOURCE, TIMESTAMP, CREATED_AT, CREATED_BY, FREQUENCY, ROW_COUNTS, YEAR_TYPE, DATA_SET_TYPE," +
-					"META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE," +
-					"ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, CHANGE_DATATYPE, FILE_RECEIVED_DATE)" +
-
-					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
-					oFinalPayload.FREQUENCY + "'," +
-					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', 'RAF_TABLE_NAME', '" + oFinalPayload.SOURCE_FIELD_VALUE +
-					"'," +
-					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
-					" 'ERRORS', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
-					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "')";
-
-				client.prepare(
-					sInsertToMetadata,
-					function (err, statement) {
-						callback(null, err, statement);
-					});
-			},
-
-			function executeInsert(err, statement, callback) {
-
-				if (err) {
-					client.rollback();
-					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
-					return;
-				} else {
-					statement.exec([], function (execErr, results) {
-						callback(null, execErr, results);
-					});
-				}
-
-			},
-
-			function finalResponse(err, results, callback) {
-				if (err) {
-					client.rollback();
-					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
-					return;
-				} else {
-					client.commit();
-					oResponse.status(201).send("Record created successfully!");
-				}
-				callback(null, results);
-			}
-		], function (err, result) {
-			console.log(err);
-		});
+		this.createNewRecord(oRequest, oResponse);
 
 	},
 
