@@ -39,7 +39,7 @@ sap.ui.define([
 			let oController = this;
 
 			oController.sViewName = "objectdetail";
-
+			oController.oPayloadHolder = {};
 			//set the icontab bar to select the first tab everytime.
 			//setting the key in the view.
 			oController.getView().byId("scv-tabbar").setSelectedKey("current-tab-key");
@@ -60,7 +60,12 @@ sap.ui.define([
 		},
 
 		onNewRecordSourceChange: function (oEvent) {
-
+			let oController = this; 
+			//update the table name. 
+			oController.oPayloadHolder.SOURCE = oEvent.getSource().getSelectedKey();
+			oController.getView().byId("source-select").setSelectedKey(oController.oPayloadHolder.SOURCE);
+			oController.readMetadataBySource(oController.oPayloadHolder.SOURCE);
+			oController._updateMetaFileName();
 		},
 
 		_fetchCSRFToken: function () {
@@ -167,8 +172,17 @@ sap.ui.define([
 			oController._bSetShowSourceDropdown(true);
 			oController._bShowMainTable(true);
 			oController._bSetShowCancelNewRecordBtn(false);
-			oController._bSetShowAddNewRecordBtn(true);
+			oController._bSetShowAddNewRecordBtn(false);
 			oController._bSetShowUpdateRecordBtn(false);
+			oController._bShowEntireSourceForm(true);
+		},
+		
+		_bShowEntireSourceForm: function(bShow){
+			let oController = this;
+			//reset all JSON model that the view dependent on.
+			oController.getModel("viewHolder").setData({
+				showEntireSourceForm: bShow
+			}, true);
 		},
 
 		_onLoadMetadata: function () {
@@ -223,30 +237,39 @@ sap.ui.define([
 			oController._bSetShowCancelNewRecordBtn(true);
 			oController._bSetShowUpdateRecordBtn(false);
 			oController._bSetShowAddNewRecordBtn(true);
-			
+			oController._bShowEntireSourceForm(false);
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
-
-			oController.getModel("viewHolder").setData({
-				generatedFileName: moment().format("YYYYMMDD") + "_" + sSelectedSource
-			}, true);
-
+			
+			oController.oPayloadHolder.TIMESTAMP = moment().format("YYYYMMDD");
+			oController.oPayloadHolder.SOURCE = sSelectedSource;
+			
 			oController.getModel("formPayloadValue").setData({
 				SOURCE: sSelectedSource,
-				META_FILE_NAME: moment().format("YYYYMMDD") + "_" + sSelectedSource + "_",
+				META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_",
 				TIMESTAMP: moment(),
 				HAS_LOADED_IN_EDW: false
 			}, false);
 
 		},
+		
+		_updateMetaFileName: function(){
+			let oController = this; 
+			if(typeof oController.oPayloadHolder.SVALUE === "undefined"){
+				oController.oPayloadHolder.SVALUE = "";
+			}
+			oController.getModel("formPayloadValue").setData({
+					META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder.SVALUE.toUpperCase()
+			}, true);
+		},
 
 		onGenerationMetaFileName: function (oEvent) {
 			let oController = this;
-			let sValue = oEvent.getSource().getValue();
+			oController.oPayloadHolder.SVALUE = oEvent.getSource().getValue();
 			let sSourceInput = oEvent.getSource().data().sourceInput;
-			let sCurrentFileName = moment().format("YYYYMMDD") + "_" + oController.getView().byId("source-select").getSelectedKey() + "_";
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_";
 			if (sSourceInput === "table_name") {
-				sCurrentFileName += sValue.toUpperCase();
+				sCurrentFileName += oController.oPayloadHolder.SVALUE.toUpperCase();
 
 				oController.getModel("formPayloadValue").setData({
 					META_FILE_NAME: sCurrentFileName
@@ -254,9 +277,11 @@ sap.ui.define([
 			}
 
 		},
+		
 
 		onSourceSelectChange: function (oEvent) {
 			let oController = this;
+			oController._bSetShowAddNewRecordBtn(true);
 			let sSelectedKey = oEvent.getSource().getSelectedKey();
 			//clear the JSON model for payload
 			oController.getModel("formPayloadValue").setData({
@@ -510,6 +535,7 @@ sap.ui.define([
 			oController._bShowForm(false);
 			oController._bSetShowCancelNewRecordBtn(false);
 			oController._bSetShowAddNewRecordBtn(true);
+			oController._bShowEntireSourceForm(true);
 		},
 
 		_setDropdownSource: function (sKeySelected) {

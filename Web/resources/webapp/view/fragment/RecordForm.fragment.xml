@@ -26,9 +26,10 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.source}" />
-                            <Select id="new-recourd-source"
+                            <Select id="new-record-source"
 			                          forceSelection="false"
 			                          selectedKey="{formPayloadValue>/SOURCE}"
+			                          change="onNewRecordSourceChange"
 			                          items="{
 			                                  path: 'viewHolder>/Sources/Results'
 			                                }"
@@ -56,7 +57,6 @@
                                       <Select id="abn2-select"
 				                          forceSelection="false"
 				                          selectedKey="{formPayloadValue>/FREQUENCY}"
-				                          change="onNewRecordSourceChange"
 				                          items="{
 				                                  path: 'dropdownModel>/Frequency'
 				                                }"

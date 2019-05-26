@@ -21,7 +21,8 @@
                             columnsL="2"
                             columnsM="2"
                             singleContainerFullSize="false"
-                            class="osrSelect">
+                            class="osrSelect"
+                            visible="{= (${viewHolder>/showEntireSourceForm} === true) }">
                 <f:content>
 
                   <Label vAlign="Middle"
@@ -33,7 +34,7 @@
                           items="{
                                   path: 'viewHolder>/Sources/Results'
                                 }"
-                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+                          visible="{= (${viewHolder>/showSourceDropdown} === true) }">
                     <core:Item key="{viewHolder>SOURCE_NAME}"
                                text="{viewHolder>SOURCE_NAME}" />
                   </Select>
