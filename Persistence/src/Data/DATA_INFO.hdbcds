@@ -11,6 +11,7 @@ context DATA_INFO {
             CREATED_AT  : UTCDateTime;
             CREATED_BY  : String(200);
             SOURCE_NAME : String(200);
+            INACTIVE	: String(1);
     }
     technical configuration {
         column store;
@@ -40,6 +41,7 @@ context DATA_INFO {
             ERRORS             : String(200);
             DATA_SET_TYPE      : String(200);
             CHANGE_DATATYPE	   : String(200);
+            INACTIVE		   : String(1);
     }
     technical configuration {
         column store;
