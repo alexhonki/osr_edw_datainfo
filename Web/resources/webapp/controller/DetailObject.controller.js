@@ -175,6 +175,7 @@ sap.ui.define([
 			oController._bSetShowAddNewRecordBtn(false);
 			oController._bSetShowUpdateRecordBtn(false);
 			oController._bShowEntireSourceForm(true);
+			oController._bUpdateMode(false);
 		},
 		
 		_bShowEntireSourceForm: function(bShow){
@@ -238,6 +239,7 @@ sap.ui.define([
 			oController._bSetShowUpdateRecordBtn(false);
 			oController._bSetShowAddNewRecordBtn(true);
 			oController._bShowEntireSourceForm(false);
+			oController._bUpdateMode(false);
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
 			
@@ -309,6 +311,7 @@ sap.ui.define([
 			oController._bSetShowUpdateRecordBtn(true);
 			oController._bSetShowCancelNewRecordBtn(true);
 			oController._bSetShowAddNewRecordBtn(false);
+			oController._bUpdateMode(true);
 			
 			let sMetadataId = oEvent.getSource().data().metadataId;
 			let sSource = oEvent.getSource().data().source;
@@ -329,10 +332,7 @@ sap.ui.define([
 					console.log(oMessage);
 				}
 			});
-
-			//hide the table from the main page 
-			//load the data into the form 
-
+			
 		},
 
 		_transformMetadataRecord: function (oDataReceived) {
@@ -367,6 +367,16 @@ sap.ui.define([
 			}
 
 			return oTransformedResult;
+		},
+		
+		_bUpdateMode: function (bShow) {
+
+			let oController = this;
+			//reset all JSON model that the view dependent on.
+			oController.getModel("viewHolder").setData({
+				updateMode: bShow
+			}, true);
+
 		},
 
 		_bShowMainTable: function (bShow) {

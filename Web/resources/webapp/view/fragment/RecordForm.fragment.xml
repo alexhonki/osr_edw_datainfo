@@ -33,7 +33,7 @@
 			                          items="{
 			                                  path: 'viewHolder>/Sources/Results'
 			                                }"
-			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+			                          visible="{= (${viewHolder>/updateMode} === false)}">
 			                    <core:Item key="{viewHolder>SOURCE_NAME}"
 			                               text="{viewHolder>SOURCE_NAME}" />
 			                  </Select>
@@ -46,7 +46,8 @@
                                    text="{i18n>dataInput.table_name}" />
                             <Input value="{formPayloadValue>/TABLE_NAME}"
                             		liveChange="onGenerationMetaFileName"
-                            		app:sourceInput="table_name"/>
+                            		app:sourceInput="table_name"
+                            		visible="{= (${viewHolder>/updateMode} === false)}"/>
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.source_field_value}" />
