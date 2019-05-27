@@ -16,11 +16,22 @@ sap.ui.define(['jquery.sap.global'], function () {
 			}
 
 		},
-		
-		formatStringToBoolean: function(sStatus){
+
+		capitaliseFirstLetterAndRmvUnderscore: function (sString) {
+
+			if (sString) {
+				let sFinalString = sString.toLowerCase();
+				sFinalString = sFinalString.charAt(0).toUpperCase() + sFinalString.slice(1);
+				sFinalString = sFinalString.replace(/_/g, " ");
+				return sFinalString;
+			}
+
+		},
+
+		formatStringToBoolean: function (sStatus) {
 			if (sStatus === "Y") {
 				return true;
-			} else{
+			} else {
 				return false;
 			}
 		},
@@ -54,7 +65,7 @@ sap.ui.define(['jquery.sap.global'], function () {
 		},
 
 		formatActiveFlag: function (sInactive, sNameOrg1, sNameOrg2, sNameOrg3, sEntTypCd) {
-			
+
 			if (sInactive === "X") {
 				this.addStyleClass("identificationTableInactive");
 			} else {
@@ -67,7 +78,7 @@ sap.ui.define(['jquery.sap.global'], function () {
 				return sNameOrg1;
 			}
 		},
-		
+
 		akaNamesFormatter: function (sNameOrg1, sNameOrg2, sNameOrg3, sNameTrdg, sSourceType, sEntTypCd) {
 			if (sSourceType === "TRADING") {
 				return sNameTrdg;

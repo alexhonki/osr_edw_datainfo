@@ -81,11 +81,11 @@
 			                          forceSelection="false"
 			                          selectedKey="{formPayloadValue>/YEAR_TYPE}"
 			                          items="{
-			                                  path: 'viewHolder>/Sources/Results'
+			                                  path: 'dropdownModel>/YearType'
 			                                }"
 			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
-			                    <core:Item key="{viewHolder>SOURCE_NAME}"
-			                               text="{viewHolder>SOURCE_NAME}" />
+			                    <core:Item key="{dropdownModel>VALUE}"
+			                               text="{dropdownModel>TEXT}" />
 			                  </Select>
 
                             <Label vAlign="Middle"
@@ -125,7 +125,16 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.data_set_type}" />
-                            <Input value="{formPayloadValue>/DATA_SET_TYPE}" />
+                            <Select id="data-set-type"
+			                          forceSelection="false"
+			                          selectedKey="{formPayloadValue>/DATA_SET_TYPE}"
+			                          items="{
+			                                  path: 'dropdownModel>/DataSetType'
+			                                }"
+			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+			                    <core:Item key="{dropdownModel>VALUE}"
+			                               text="{dropdownModel>TEXT}" />
+			                  </Select>
                             
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.change_datetype}" />

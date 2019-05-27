@@ -63,7 +63,7 @@
                 filterProperty="SOURCE_FIELD_VALUE">
         <Label text="{i18n>source.source_field_value}" />
         <t:template>
-          <Text text="{metadataModel>SOURCE_FIELD_VALUE}"
+          <Text text="{path:'metadataModel>SOURCE_FIELD_VALUE', formatter:'.Formatters.capitaliseFirstLetterAndRmvUnderscore'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -73,7 +73,7 @@
                 filterProperty="FREQUENCY">
         <Label text="{i18n>source.frequency}" />
         <t:template>
-          <Text text="{path:'metadataModel>FREQUENCY'}"
+          <Text text="{path:'metadataModel>FREQUENCY', formatter:'.Formatters.capitaliseFirstLetterAndRmvUnderscore'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -93,7 +93,7 @@
                 filterProperty="YEAR_TYPE">
         <Label text="{i18n>source.year_type}" />
         <t:template>
-          <Text text="{path:'metadataModel>YEAR_TYPE'}"
+          <Text text="{path:'metadataModel>YEAR_TYPE', formatter:'.Formatters.capitaliseFirstLetterAndRmvUnderscore'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
@@ -133,7 +133,7 @@
                 filterProperty="DATA_SET_TYPE">
         <Label text="{i18n>source.data_set_type}" />
         <t:template>
-          <Text text="{path:'metadataModel>DATA_SET_TYPE'}"
+          <Text text="{path:'metadataModel>DATA_SET_TYPE', formatter:'.Formatters.capitaliseFirstLetterAndRmvUnderscore'}"
                 wrapping="false" />
         </t:template>
       </t:Column>

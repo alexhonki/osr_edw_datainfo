@@ -274,7 +274,7 @@ module.exports = {
 					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
 					oFinalPayload.FREQUENCY + "'," +
 					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', 'RAF_TABLE_NAME', '" + oFinalPayload.SOURCE_FIELD_VALUE +
+					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', '"+oFinalPayload.TABLE_NAME+"', '" + oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
 					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
 					" '" + oFinalPayload.ERRORS +"', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
@@ -330,7 +330,7 @@ module.exports = {
 			if (oPayload.hasOwnProperty(sProperty)) {
 
 				oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
-
+				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g,"_");
 				if (sProperty === "HAS_LOADED_IN_EDW") {
 					if (oPayload[sProperty] === "true") {
 						oFinalPayload[sProperty] = 'Y';

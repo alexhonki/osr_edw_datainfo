@@ -29,10 +29,38 @@
   ], 
   "DataSetType": [
     {
-      "VALUE": "Full History"
+      "VALUE": "FULL_HISTORY",
+      "TEXT":"Full History"
     },
     {
-      "VALUE": "Half History"
+      "VALUE": "POINT_IN_TIME",
+      "TEXT":"Point in Time"
+    },
+    {
+      "VALUE": "SPECIFIC_PERIOD",
+      "TEXT":"Specific Period"
+    },
+    {
+      "VALUE": "REPLACEMENT",
+      "TEXT":"Replacement"
+    },
+    {
+      "VALUE": "OTHER",
+      "TEXT":"Other"
+    }
+  ], 
+  "YearType": [
+    {
+      "VALUE": "CALENDAR",
+      "TEXT":"Calendar"
+    },
+    {
+      "VALUE": "FISCAL",
+      "TEXT":"Fiscal"
+    },
+    {
+      "VALUE": "OTHER",
+      "TEXT":"Other"
     }
   ]
 }
