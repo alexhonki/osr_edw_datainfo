@@ -68,7 +68,8 @@
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.row_counts}" />
-                            <Input value="{formPayloadValue>/ROW_COUNTS}"
+                            <Input type="Number"
+                            		value="{formPayloadValue>/ROW_COUNTS}"
                                    autocomplete="false" />
                                    
                              <Label vAlign="Middle"
@@ -143,7 +144,8 @@
                             
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.errors}" />
-                            <Input value="{formPayloadValue>/ERRORS}" />
+                            <Input type="Number"
+                            		value="{formPayloadValue>/ERRORS}" />
 
                             <Label vAlign="Middle"
                                    text="{i18n>dataInput.data_input}" />
