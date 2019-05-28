@@ -7,8 +7,8 @@
       "TEXT":"Yearly"
     },
     {
-      "VALUE": "HALF_YEARLY",
-      "TEXT":"Half-Yearly"
+      "VALUE": "SIX_MONTHLY",
+      "TEXT":"Six Monthly"
     },
     {
       "VALUE": "QUARTERLY",
