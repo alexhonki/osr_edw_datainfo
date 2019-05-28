@@ -12,7 +12,7 @@
 		"csrfProtection": true,
 		"authenticationType": "xsuaa"
 	}, {
-		"source": "/org/srv/xs(.*)",
+		"source": "/metadata/srv/xs(.*)",
 		"destination": "Services_url",
 		"csrfProtection": true,
 		"authenticationType": "xsuaa"

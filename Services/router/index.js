@@ -19,6 +19,6 @@ module.exports = function(app) {
 	app.use("/osr/edw/source/data/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 	// For search api
-	app.use("/osr/edw/source/data/search", require("./routes/search")());
+	app.use("/osr/edw/source/data/metadata", require("./routes/metadata")());
 
 };

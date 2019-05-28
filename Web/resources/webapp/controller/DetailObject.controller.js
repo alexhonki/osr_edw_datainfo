@@ -61,7 +61,7 @@ sap.ui.define([
 
 		onNewRecordSourceChange: function (oEvent) {
 			let oController = this;
-			//update the table name. 
+			//update the table name.
 			oController.oPayloadHolder.SOURCE = oEvent.getSource().getSelectedKey();
 			oController.getView().byId("source-select").setSelectedKey(oController.oPayloadHolder.SOURCE);
 			oController.readMetadataBySource(oController.oPayloadHolder.SOURCE);
@@ -320,7 +320,7 @@ sap.ui.define([
 
 				success: function (data) {
 
-					//check boolean value for has_loaded_in_edw, and change accordingly. 
+					//check boolean value for has_loaded_in_edw, and change accordingly.
 					//transform received data
 					let oTransformedResult = oController._transformMetadataRecord(data);
 					//set the data for for the entire view information.
@@ -402,9 +402,9 @@ sap.ui.define([
 		onCreateNewSource: function (oEvent) {
 			//grab the source from the input
 			//transform all to capital letter
-			//initiate the create api call 
+			//initiate the create api call
 			//reload the sources from the server
-			//unhide the dropdown of the sources 
+			//unhide the dropdown of the sources
 			let oController = this;
 
 			//input form value and transform to uppercase and trim
@@ -505,7 +505,7 @@ sap.ui.define([
 				}
 			});
 			//do a check whether record with the give meta file name exist
-			//if yes reject it. 
+			//if yes reject it.
 
 		},
 
@@ -577,6 +577,11 @@ sap.ui.define([
 			oController._bShowEntireSourceForm(true);
 		},
 
+		/**
+		 * Helper function to set the main dropdown depending on the given key 
+		 * @param  {[type]} sKeySelected [description]
+		 * @return {[type]}              [description]
+		 */
 		_setDropdownSource: function (sKeySelected) {
 			this.getView().byId("abn-select").setSelectedKey(sKeySelected);
 		},

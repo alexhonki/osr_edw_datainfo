@@ -83,7 +83,7 @@ module.exports = {
 		// start server
 		var xsjsApp = xsjs(options);
 
-		//need to match with what is given in xs-app 
-		app.use("/org/srv/xs", xsjsApp);
+		//need to match with what is given in xs-app
+		app.use("/metadata/srv/xs", xsjsApp);
 	}
 };

@@ -1,3 +1,3 @@
-This is a placeholder README file for metadata info
+Welcome to OSR_EDW_SOURCE_DATA_INFO
 
-Will be updated soon.
+This is a README file for this project. 
