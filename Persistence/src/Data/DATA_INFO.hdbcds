@@ -47,35 +47,6 @@ context DATA_INFO {
         column store;
     };
 
-    /*@@layout{"layoutInfo":{}}*/
-    entity Search {
-        SCV_ID                  : Integer;
-        SOURCE_ID               : String(20);
-        SOURCE                  : String(20);
-        SEARCH_STRING           : String(1024);
-        SEARCH_STRING_CLEANSED  : String(1024);
-        ORG_NAMES_ONLY          : String(1024);
-        ORG_NAMES_ONLY_CLEANSED : String(1024);
-    }
-    technical configuration {
-        column store;
-        fulltext index i_SEARCH_STRING           on (SEARCH_STRING)
-            token separators '|'
-            text mining off
-            search only on;
-        fulltext index i_SEARCH_STRING_CLEANSED  on (SEARCH_STRING_CLEANSED)
-            token separators '|'
-            text mining off
-            search only on;
-        fulltext index i_ORG_NAMES_ONLY          on (ORG_NAMES_ONLY)
-            token separators '|'
-            text mining off
-            search only on;
-        fulltext index i_ORG_NAMES_ONLY_CLEANSED on (ORG_NAMES_ONLY_CLEANSED)
-            token separators '|'
-            text mining off
-            search only on;
-    };
 
 /*@@layout{"layoutInfo":{"x":281,"y":-485.5}}*/
 };
