@@ -20,7 +20,7 @@
 				"setting": {}
 			},
 			"metadataRemote": {
-				"uri": "/org/srv/xs/sourceMetadata.xsodata",
+				"uri": "/metadata/srv/xs/sourceMetadata.xsodata",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"
@@ -98,7 +98,7 @@
 			}]
 		},
 		"config": {
-			"searchHelper": "/osr/edw/source/data/search/"
+			"metadataHelper": "/osr/edw/source/data/metadata/"
 		},
 		"routing": {
 			"config": {

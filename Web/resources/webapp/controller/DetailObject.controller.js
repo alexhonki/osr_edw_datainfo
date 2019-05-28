@@ -69,7 +69,7 @@ sap.ui.define([
 		},
 
 		_fetchCSRFToken: function () {
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 			$.ajax({
 
 				type: "GET",
@@ -101,7 +101,7 @@ sap.ui.define([
 		_onLoadSources: function () {
 			let oController = this;
 			//for api call search
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 
 			$.ajax(sApiUrl + "getSources", {
 				data: '',
@@ -189,7 +189,7 @@ sap.ui.define([
 		_onLoadMetadata: function () {
 			let oController = this;
 			//for api call search
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 
 			$.ajax(sApiUrl + "getMetadata", {
 				data: '',
@@ -411,7 +411,7 @@ sap.ui.define([
 			let sNewSource = oController.getView().byId("new-source-input").getValue().toUpperCase().trim();
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
 
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 			$.ajax(sApiUrl + "createNewSource", {
 				data: {
 					sSource: sNewSource
@@ -448,7 +448,7 @@ sap.ui.define([
 
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 
 			$.ajax(sApiUrl + "checkUniqueness", {
 				data: {
@@ -514,7 +514,7 @@ sap.ui.define([
 
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
+			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 			$.ajax(sApiUrl + "updateMetadataRecord", {
 				data: oPayload,
 				type: "PUT",

@@ -1,7 +1,7 @@
 {
 	"authenticationMethod": "route",
 	"routes": [{
-		"source": "/osr/edw/source/data/(.*)",
+		"source": "/osr/edw/source/data/metadata/(.*)",
 		"destination": "Services_url",
 		"csrfProtection": true,
 		"scope": "$XSAPPNAME.DATA_INFO",
