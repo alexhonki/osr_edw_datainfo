@@ -60,7 +60,7 @@ sap.ui.define([
 		},
 
 		onNewRecordSourceChange: function (oEvent) {
-			let oController = this; 
+			let oController = this;
 			//update the table name. 
 			oController.oPayloadHolder.SOURCE = oEvent.getSource().getSelectedKey();
 			oController.getView().byId("source-select").setSelectedKey(oController.oPayloadHolder.SOURCE);
@@ -140,7 +140,7 @@ sap.ui.define([
 				showSourceDropdown: bShow
 			}, true);
 		},
-		
+
 		_bSetShowCancelNewRecordBtn: function (bShow) {
 			let oController = this;
 			//reset all JSON model that the view dependent on.
@@ -148,7 +148,7 @@ sap.ui.define([
 				showCancelNewBtn: bShow
 			}, true);
 		},
-		
+
 		_bSetShowAddNewRecordBtn: function (bShow) {
 			let oController = this;
 			//reset all JSON model that the view dependent on.
@@ -164,7 +164,7 @@ sap.ui.define([
 				showUpdateRecord: bShow
 			}, true);
 		},
-		
+
 		_setModels: function () {
 			let oController = this;
 			//reset all JSON model that the view dependent on.
@@ -177,8 +177,8 @@ sap.ui.define([
 			oController._bShowEntireSourceForm(true);
 			oController._bUpdateMode(false);
 		},
-		
-		_bShowEntireSourceForm: function(bShow){
+
+		_bShowEntireSourceForm: function (bShow) {
 			let oController = this;
 			//reset all JSON model that the view dependent on.
 			oController.getModel("viewHolder").setData({
@@ -242,10 +242,10 @@ sap.ui.define([
 			oController._bUpdateMode(false);
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
-			
+
 			oController.oPayloadHolder.TIMESTAMP = moment().format("YYYYMMDD");
 			oController.oPayloadHolder.SOURCE = sSelectedSource;
-			
+
 			oController.getModel("formPayloadValue").setData({
 				SOURCE: sSelectedSource,
 				META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_",
@@ -254,14 +254,15 @@ sap.ui.define([
 			}, false);
 
 		},
-		
-		_updateMetaFileName: function(){
-			let oController = this; 
-			if(typeof oController.oPayloadHolder.SVALUE === "undefined"){
+
+		_updateMetaFileName: function () {
+			let oController = this;
+			if (typeof oController.oPayloadHolder.SVALUE === "undefined") {
 				oController.oPayloadHolder.SVALUE = "";
 			}
 			oController.getModel("formPayloadValue").setData({
-					META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder.SVALUE.toUpperCase()
+				META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder
+					.SVALUE.toUpperCase()
 			}, true);
 		},
 
@@ -279,7 +280,6 @@ sap.ui.define([
 			}
 
 		},
-		
 
 		onSourceSelectChange: function (oEvent) {
 			let oController = this;
@@ -307,12 +307,12 @@ sap.ui.define([
 		// to edit the the particular entry for each line
 		onEditEntry: function (oEvent) {
 			let oController = this;
-			
+
 			oController._bSetShowUpdateRecordBtn(true);
 			oController._bSetShowCancelNewRecordBtn(true);
 			oController._bSetShowAddNewRecordBtn(false);
 			oController._bUpdateMode(true);
-			
+
 			let sMetadataId = oEvent.getSource().data().metadataId;
 			let sSource = oEvent.getSource().data().source;
 
@@ -332,7 +332,7 @@ sap.ui.define([
 					console.log(oMessage);
 				}
 			});
-			
+
 		},
 
 		_transformMetadataRecord: function (oDataReceived) {
@@ -368,7 +368,7 @@ sap.ui.define([
 
 			return oTransformedResult;
 		},
-		
+
 		_bUpdateMode: function (bShow) {
 
 			let oController = this;
@@ -449,23 +449,48 @@ sap.ui.define([
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("searchHelper");
-			$.ajax(sApiUrl + "createNewRecord", {
-				data: oPayload,
+
+			$.ajax(sApiUrl + "checkUniqueness", {
+				data: {
+					META_FILE_NAME: oPayload.META_FILE_NAME
+				},
 				type: "POST",
-				beforeSend: function () {
-					//loading effect start if needed
-				},
-				complete: function () {
-					//loading effect end if needed
-				},
 				success: function (data) {
-					oController._onLoadSources();
-					oController._bSetShowSourceDropdown(true);
-					oController._bShowMainTable(true);
-					oController._bShowForm(false);
-					
-					let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
-					oController.readMetadataBySource(sSelectedKey);
+
+					if (data.Results.length > 0) {
+							oController.sendMessageToast("File with this name already exist! Please double check.");
+					} else {
+						$.ajax(sApiUrl + "createNewRecord", {
+							data: oPayload,
+							type: "POST",
+							beforeSend: function () {
+								//loading effect start if needed
+							},
+							complete: function () {
+								//loading effect end if needed
+							},
+							success: function (data) {
+								oController._onLoadSources();
+								oController._bSetShowSourceDropdown(true);
+								oController._bShowMainTable(true);
+								oController._bShowForm(false);
+
+								let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
+								oController.readMetadataBySource(sSelectedKey);
+							},
+							error: function (error) {
+								//check for http error and serve accordingly.
+								if (error.status === 403) {
+									oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+								} else if (error.responseText === "No Data") {
+									return;
+								} else {
+									oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+								}
+
+							}
+						});
+					}
 				},
 				error: function (error) {
 					//check for http error and serve accordingly.
@@ -479,6 +504,9 @@ sap.ui.define([
 
 				}
 			});
+			//do a check whether record with the give meta file name exist
+			//if yes reject it. 
+
 		},
 
 		onUpdateRecord: function (oEvent) {
@@ -497,13 +525,13 @@ sap.ui.define([
 					//loading effect end if needed
 				},
 				success: function (data) {
-					
+
 					oController._bSetShowSourceDropdown(true);
 					oController._bShowMainTable(true);
 					oController._bShowForm(false);
 					oController._bSetShowCancelNewRecordBtn(false);
 					oController._bSetShowAddNewRecordBtn(true);
-					
+
 					let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 					oController.readMetadataBySource(sSelectedKey);
 				},
@@ -525,10 +553,11 @@ sap.ui.define([
 
 			let oController = this;
 
-			oController.getModel("formPayloadValue").getData().TIMESTAMP._d
-
 			let oFinalPayload = oPayload;
-			oFinalPayload.TIMESTAMP = oController.getModel("formPayloadValue").getData().TIMESTAMP._d;
+			if (oController.getModel("formPayloadValue").getData().TIMESTAMP._d) {
+				oFinalPayload.TIMESTAMP = oController.getModel("formPayloadValue").getData().TIMESTAMP._d;
+			}
+
 			return oFinalPayload;
 
 		},
