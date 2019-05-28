@@ -274,10 +274,12 @@ module.exports = {
 					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
 					oFinalPayload.FREQUENCY + "'," +
 					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', '"+oFinalPayload.TABLE_NAME+"', '" + oFinalPayload.SOURCE_FIELD_VALUE +
+					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', '" + oFinalPayload.RAF_TABLE_NAME + "', '" +
+					oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
 					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
-					" '" + oFinalPayload.ERRORS +"', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" + oFinalPayload.CHANGE_DATATYPE +
+					" '" + oFinalPayload.ERRORS + "', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" +
+					oFinalPayload.CHANGE_DATATYPE +
 					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "')";
 
 				client.prepare(
@@ -329,8 +331,8 @@ module.exports = {
 		for (let sProperty in oPayload) {
 			if (oPayload.hasOwnProperty(sProperty)) {
 
-				oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
-				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g,"_");
+				oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase().trim();
+				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g, "_");
 				if (sProperty === "HAS_LOADED_IN_EDW") {
 					if (oPayload[sProperty] === "true") {
 						oFinalPayload[sProperty] = 'Y';
@@ -346,10 +348,52 @@ module.exports = {
 
 	updateMetadataRecord: function (oRequest, oResponse) {
 
-		//get current record 
-		//create a new record 
+		//this update is really just creating a new record 
+		//since we are keeping everything to preserve history
+		//base on the timestamp / created at
 		this.createNewRecord(oRequest, oResponse);
 
+	},
+
+	checkUniqueness: function (oRequest, oResponse) {
+		let sMetaFileName = oRequest.body.META_FILE_NAME;
+		let sFinalSearchString =
+			"SELECT DISTINCT(\"META_FILE_NAME\") AS \"META_FILE_NAME\" " +
+			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\" WHERE META_FILE_NAME='" + sMetaFileName + "'";
+
+		let client = oRequest.db;
+		let oController = this;
+		async.waterfall([
+
+			function prepare(callback) {
+				client.prepare(
+					sFinalSearchString,
+					function (err, statement) {
+						callback(null, err, statement);
+					});
+			},
+
+			function execute(err, statement, callback) {
+				statement.exec([], function (execErr, results) {
+					callback(null, execErr, results);
+				});
+			},
+			function response(err, results, callback) {
+				if (err) {
+					oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
+					return;
+				} else {
+					let result = JSON.stringify({
+						Total: results.length,
+						Results: results
+					});
+					oResponse.type("application/json").status(200).send(result);
+				}
+				callback(null, results);
+			}
+		], function (err, result) {
+			console.log(err);
+		});
 	},
 
 	/**

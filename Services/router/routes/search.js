@@ -52,6 +52,14 @@ module.exports = function () {
 
 	});
 	
+	//for checking whether a particular record is unique
+	//or not. 
+	app.post("/checkUniqueness", function (req, res) {
+
+		searchHelper.checkUniqueness(req, res);
+
+	});
+	
 	
 	//for creation of a new record base on a entry
 	app.put("/updateMetadataRecord", function (req, res) {
