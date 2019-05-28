@@ -2,7 +2,7 @@
 "use strict";
 const express = require("express");
 const async = require("async");
-const searchHelper = require("./searchHelper");
+const metadataHelper = require("./metadataHelper");
 
 module.exports = function () {
 	let app = express.Router();
@@ -21,21 +21,21 @@ module.exports = function () {
 	//for execution of search
 	app.get("/execute", function (req, res) {
 
-		searchHelper.executeSearch(req, res);
+		metadataHelper.executeSearch(req, res);
 
 	});
 
 	//for execution of search
 	app.get("/getSources", function (req, res) {
 
-		searchHelper.getSources(req, res);
+		metadataHelper.getSources(req, res);
 
 	});
 
 	//for execution of search
 	app.get("/getMetadata", function (req, res) {
 
-		searchHelper.getMetadata(req, res);
+		metadataHelper.getMetadata(req, res);
 
 	});
 
@@ -43,14 +43,14 @@ module.exports = function () {
 	//for creation of a new source entry
 	app.post("/createNewSource", function (req, res) {
 
-		searchHelper.createNewSource(req, res);
+		metadataHelper.createNewSource(req, res);
 
 	});
 
 	//for creation of a new record base on a entry
 	app.post("/createNewRecord", function (req, res) {
 
-		searchHelper.createNewRecord(req, res);
+		metadataHelper.createNewRecord(req, res);
 
 	});
 
@@ -58,7 +58,7 @@ module.exports = function () {
 	//or not.
 	app.post("/checkUniqueness", function (req, res) {
 
-		searchHelper.checkUniqueness(req, res);
+		metadataHelper.checkUniqueness(req, res);
 
 	});
 
@@ -66,7 +66,7 @@ module.exports = function () {
 	//for creation of a new record base on a entry
 	app.put("/updateMetadataRecord", function (req, res) {
 
-		searchHelper.updateMetadataRecord(req, res);
+		metadataHelper.updateMetadataRecord(req, res);
 
 	});
 
