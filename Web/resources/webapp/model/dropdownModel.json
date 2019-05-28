@@ -3,28 +3,36 @@
 
   "Frequency": [
   	{
-      "VALUE": "DAILY",
-      "TEXT":"Daily"
+      "VALUE": "YEARLY",
+      "TEXT":"Yearly"
     },
-  	{
-      "VALUE": "WEEKLY",
-      "TEXT":"Weekly"
-    },
-  	{
-      "VALUE": "FORTNIGHTLY",
-      "TEXT":"Fortnightly"
-    },
-  	{
-      "VALUE": "MONTHLY",
-      "TEXT":"Monthly"
+    {
+      "VALUE": "HALF_YEARLY",
+      "TEXT":"Half-Yearly"
     },
     {
       "VALUE": "QUARTERLY",
       "TEXT":"Quarterly"
     },
     {
-      "VALUE": "YEARLY",
-      "TEXT":"Yearly"
+      "VALUE": "MONTHLY",
+      "TEXT":"Monthly"
+    },
+    {
+      "VALUE": "FORTNIGHTLY",
+      "TEXT":"Fortnightly"
+    },
+    {
+      "VALUE": "WEEKLY",
+      "TEXT":"Weekly"
+    },
+  	{
+      "VALUE": "DAILY",
+      "TEXT":"Daily"
+    },
+    {
+      "VALUE": "OTHER",
+      "TEXT":"Other"
     }
   ], 
   "DataSetType": [
