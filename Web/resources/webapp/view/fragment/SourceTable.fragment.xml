@@ -138,39 +138,39 @@
         </t:template>
       </t:Column>
 
-	<t:Column sortProperty="HAS_LOADED_IN_EDW"
-	                autoResizable="true"
-	                filterProperty="HAS_LOADED_IN_EDW">
-	        <Label text="{i18n>source.has_loaded_in_edw}" />
-	        <t:template>
-	          <CheckBox selected="{path:'metadataModel>HAS_LOADED_IN_EDW', formatter:'.Formatters.formatStringToBoolean'}"
-	          displayOnly="true"
-	          editable="false"/>
-	        </t:template>
-	      </t:Column>
-	      
-  	<t:Column sortProperty="ERRORS"
-	                autoResizable="true"
-	                filterProperty="ERRORS">
-	        <Label text="{i18n>source.errors}" />
-	        <t:template>
-	          <Text text="{path:'metadataModel>ERRORS'}"
+      <t:Column sortProperty="HAS_LOADED_IN_EDW"
+                autoResizable="true"
+                filterProperty="HAS_LOADED_IN_EDW">
+        <Label text="{i18n>source.has_loaded_in_edw}" />
+        <t:template>
+          <CheckBox selected="{path:'metadataModel>HAS_LOADED_IN_EDW', formatter:'.Formatters.formatStringToBoolean'}"
+                    displayOnly="true"
+                    editable="false" />
+        </t:template>
+      </t:Column>
+
+      <t:Column sortProperty="ERRORS"
+                autoResizable="true"
+                filterProperty="ERRORS">
+        <Label text="{i18n>source.errors}" />
+        <t:template>
+          <Text text="{path:'metadataModel>ERRORS'}"
                 wrapping="false" />
-	        </t:template>
-	      </t:Column>   
-	      
-	      
-		<t:Column autoResizable="true" >
-	        <Label text="" />
-	        <t:template>
-	          <Button text="Edit"
-                          press="onEditEntry"
-                          icon="sap-icon://edit"
-                          ariaDescribedBy="onEditExistingRecord"
-                          app:metadataId="{path:'metadataModel>METADATA_ID'}"
-                          app:source="{path:'metadataModel>SOURCE'}"/>
-	        </t:template>
-	      </t:Column>
+        </t:template>
+      </t:Column>
+
+
+      <t:Column autoResizable="true">
+        <Label text="" />
+        <t:template>
+          <Button text="Edit"
+                  press="onEditEntry"
+                  icon="sap-icon://edit"
+                  ariaDescribedBy="onEditExistingRecord"
+                  app:metadataId="{path:'metadataModel>METADATA_ID'}"
+                  app:source="{path:'metadataModel>SOURCE'}" />
+        </t:template>
+      </t:Column>
 
     </t:columns>
 

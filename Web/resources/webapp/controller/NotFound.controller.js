@@ -12,7 +12,7 @@ sap.ui.define([
   let NotFoundController = SuperController.extend("osr.edw.data.info.controller.NotFound", {
 
     /**
-     * On initialize
+     * On initialize, this get hooked
      * @param  {[type]} oEvent [description]
      * @return {[type]}        [description]
      */

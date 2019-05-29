@@ -5,175 +5,167 @@
                          xmlns:mvc="sap.ui.core.mvc"
                          xmlns="sap.m">
 
-                         <f:SimpleForm id="form-data-info"
-                                      editable="true"
-                                      layout="ResponsiveGridLayout"
-                                      labelSpanXL="3"
-                                      labelSpanL="3"
-                                      labelSpanM="3"
-                                      labelSpanS="12"
-                                      adjustLabelSpan="false"
-                                      emptySpanXL="4"
-                                      emptySpanL="4"
-                                      emptySpanM="4"
-                                      emptySpanS="0"
-                                      columnsXL="2"
-                                      columnsL="2"
-                                      columnsM="2"
-                                      singleContainerFullSize="false"
-                                      visible="{= (${viewHolder>/showForm} === true)}">
-                          <f:content>
+  <f:SimpleForm id="form-data-info"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+                visible="{= (${viewHolder>/showForm} === true)}">
+    <f:content>
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.source}" />
-                            <Select id="new-record-source"
-			                          forceSelection="false"
-			                          selectedKey="{formPayloadValue>/SOURCE}"
-			                          change="onNewRecordSourceChange"
-			                          items="{
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.source}" />
+      <Select id="new-record-source"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/SOURCE}"
+              change="onNewRecordSourceChange"
+              items="{
 			                                  path: 'viewHolder>/Sources/Results'
 			                                }"
-			                          visible="{= (${viewHolder>/updateMode} === false)}">
-			                    <core:Item key="{viewHolder>SOURCE_NAME}"
-			                               text="{viewHolder>SOURCE_NAME}" />
-			                  </Select>
+              visible="{= (${viewHolder>/updateMode} === false)}">
+        <core:Item key="{viewHolder>SOURCE_NAME}"
+                   text="{viewHolder>SOURCE_NAME}" />
+      </Select>
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.generated_file_name}" />
-                            <Text text="{formPayloadValue>/META_FILE_NAME}" />
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.generated_file_name}" />
+      <Text text="{formPayloadValue>/META_FILE_NAME}" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.table_name}" />
-                            <Input value="{formPayloadValue>/RAF_TABLE_NAME}"
-                            		liveChange="onGenerationMetaFileName"
-                            		app:sourceInput="table_name"
-                            		visible="{= (${viewHolder>/updateMode} === false)}"/>
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.table_name}" />
+      <Input value="{formPayloadValue>/RAF_TABLE_NAME}"
+             liveChange="onGenerationMetaFileName"
+             app:sourceInput="table_name"
+             visible="{= (${viewHolder>/updateMode} === false)}" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.source_field_value}" />
-                            <Input value="{formPayloadValue>/SOURCE_FIELD_VALUE}" />
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.source_field_value}" />
+      <Input value="{formPayloadValue>/SOURCE_FIELD_VALUE}" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.frequency}" />
-                                      <Select id="abn2-select"
-				                          forceSelection="false"
-				                          selectedKey="{formPayloadValue>/FREQUENCY}"
-				                          items="{
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.frequency}" />
+      <Select id="abn2-select"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/FREQUENCY}"
+              items="{
 				                                  path: 'dropdownModel>/Frequency'
 				                                }"
-				                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
-				                    <core:Item key="{dropdownModel>VALUE}"
-				                               text="{dropdownModel>TEXT}" />
-				                  </Select>
+              visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+        <core:Item key="{dropdownModel>VALUE}"
+                   text="{dropdownModel>TEXT}" />
+      </Select>
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.row_counts}" />
-                            <Input type="Number"
-                            		value="{formPayloadValue>/ROW_COUNTS}"
-                                   autocomplete="false" />
-                                   
-                             <Label vAlign="Middle"
-                                   text="{i18n>dataInput.has_loaded_in_edw}" />
-                            <CheckBox selected="{formPayloadValue>/HAS_LOADED_IN_EDW}" />
-                                   
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.row_counts}" />
+      <Input type="Number"
+             value="{formPayloadValue>/ROW_COUNTS}"
+             autocomplete="false" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.year_type}" />
-                           <Select id="year-type"
-			                          forceSelection="false"
-			                          selectedKey="{formPayloadValue>/YEAR_TYPE}"
-			                          items="{
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.has_loaded_in_edw}" />
+      <CheckBox selected="{formPayloadValue>/HAS_LOADED_IN_EDW}" />
+
+
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.year_type}" />
+      <Select id="year-type"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/YEAR_TYPE}"
+              items="{
 			                                  path: 'dropdownModel>/YearType'
 			                                }"
-			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
-			                    <core:Item key="{dropdownModel>VALUE}"
-			                               text="{dropdownModel>TEXT}" />
-			                  </Select>
+              visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+        <core:Item key="{dropdownModel>VALUE}"
+                   text="{dropdownModel>TEXT}" />
+      </Select>
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.file_received_date}" />
-                            <DatePicker
-								placeholder="From Date"
-								change="handleChange"
-								busyIndicatorDelay="5"
-								value="{formPayloadValue>/FILE_RECEIVED_DATE}"
-								valueFormat="YYYY-MM-dd"
-								displayFormat="dd-MM-YYYY"/>
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.file_received_date}" />
+      <DatePicker placeholder="From Date"
+                  change="handleChange"
+                  busyIndicatorDelay="5"
+                  value="{formPayloadValue>/FILE_RECEIVED_DATE}"
+                  valueFormat="YYYY-MM-dd"
+                  displayFormat="dd-MM-YYYY" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.period_key}" />
-                            <Input value="{formPayloadValue>/PERIOD_KEY}"
-                                   autocomplete="false" />
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.period_key}" />
+      <Input value="{formPayloadValue>/PERIOD_KEY}"
+             autocomplete="false" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.from_date}" />
-							<DatePicker
-								placeholder="From Date"
-								change="handleChange"
-								busyIndicatorDelay="5"
-								value="{formPayloadValue>/FROM_DATE}"
-								valueFormat="YYYY-MM-dd"
-								displayFormat="dd-MM-YYYY"/>
-								
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.to_date}" />
-                            <DatePicker
-								placeholder="To Date"
-								change="handleChange"
-								busyIndicatorDelay="5"
-								value="{formPayloadValue>/TO_DATE}"
-								valueFormat="YYYY-MM-dd"
-								displayFormat="dd-MM-YYYY"/>
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.from_date}" />
+      <DatePicker placeholder="From Date"
+                  change="handleChange"
+                  busyIndicatorDelay="5"
+                  value="{formPayloadValue>/FROM_DATE}"
+                  valueFormat="YYYY-MM-dd"
+                  displayFormat="dd-MM-YYYY" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.data_set_type}" />
-                            <Select id="data-set-type"
-			                          forceSelection="false"
-			                          selectedKey="{formPayloadValue>/DATA_SET_TYPE}"
-			                          items="{
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.to_date}" />
+      <DatePicker placeholder="To Date"
+                  change="handleChange"
+                  busyIndicatorDelay="5"
+                  value="{formPayloadValue>/TO_DATE}"
+                  valueFormat="YYYY-MM-dd"
+                  displayFormat="dd-MM-YYYY" />
+
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.data_set_type}" />
+      <Select id="data-set-type"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/DATA_SET_TYPE}"
+              items="{
 			                                  path: 'dropdownModel>/DataSetType'
 			                                }"
-			                          visible="{= (${viewHolder>/showSourceDropdown} === true)}">
-			                    <core:Item key="{dropdownModel>VALUE}"
-			                               text="{dropdownModel>TEXT}" />
-			                  </Select>
-                            
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.change_datetype}" />
-                            <Input value="{formPayloadValue>/CHANGE_DATATYPE}" />
-                            
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.errors}" />
-                            <Input type="Number"
-                            		value="{formPayloadValue>/ERRORS}" />
+              visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+        <core:Item key="{dropdownModel>VALUE}"
+                   text="{dropdownModel>TEXT}" />
+      </Select>
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.data_input}" />
-                            <Input value="{formPayloadValue>/DATA_INPUT}" />
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.change_datetype}" />
+      <Input value="{formPayloadValue>/CHANGE_DATATYPE}" />
 
-                            <Label vAlign="Middle"
-                                   text="{i18n>dataInput.raw_file_name}" />
-                            <Input value="{formPayloadValue>/RAF_FILE_NAME}" />
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.errors}" />
+      <Input type="Number"
+             value="{formPayloadValue>/ERRORS}" />
 
-                          </f:content>
-						
-                        </f:SimpleForm>
-						<OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
-			                
-			                <!--<Button id="form-clear"-->
-			                <!--        press="onClearPressed"-->
-			                <!--        text="{i18n>dataInput.clearForm}"-->
-			                <!--        visible="{= (${viewHolder>/showSourceDropdown} === true) &amp;&amp; (${viewHolder>/showAddRecordNewBtn} === true)}"/>-->
-			
-			                <Button id="form-next"
-			                        press="onCreatePressed"
-			                        text="{i18n>dataInput.createInfo}"
-			                        visible="{= (${viewHolder>/showSourceDropdown} === true) &amp;&amp; (${viewHolder>/showAddRecordNewBtn} === true)}"/>
-			                
-			                <Button id="form-update"
-			                        press="onUpdateRecord"
-			                        text="{i18n>dataInput.updateRecord}"
-			                        visible="{= (${viewHolder>/showUpdateRecord} === true)}"/>        
-			
-			              </OverflowToolbar>
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.data_input}" />
+      <Input value="{formPayloadValue>/DATA_INPUT}" />
+
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.raw_file_name}" />
+      <Input value="{formPayloadValue>/RAF_FILE_NAME}" />
+
+    </f:content>
+
+  </f:SimpleForm>
+  <OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
+
+    <Button id="form-next"
+            press="onCreatePressed"
+            text="{i18n>dataInput.createInfo}"
+            visible="{= (${viewHolder>/showSourceDropdown} === true) &amp;&amp; (${viewHolder>/showAddRecordNewBtn} === true)}" />
+
+    <Button id="form-update"
+            press="onUpdateRecord"
+            text="{i18n>dataInput.updateRecord}"
+            visible="{= (${viewHolder>/showUpdateRecord} === true)}" />
+
+  </OverflowToolbar>
 </core:FragmentDefinition>

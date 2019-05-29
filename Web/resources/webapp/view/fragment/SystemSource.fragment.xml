@@ -5,66 +5,65 @@
                          xmlns:mvc="sap.ui.core.mvc"
                          xmlns="sap.m">
 
-               <f:SimpleForm id="form-abn"
-                            editable="true"
-                            layout="ResponsiveGridLayout"
-                            labelSpanXL="4"
-                            labelSpanL="4"
-                            labelSpanM="4"
-                            labelSpanS="4"
-                            adjustLabelSpan="true"
-                            emptySpanXL="0"
-                            emptySpanL="0"
-                            emptySpanM="0"
-                            emptySpanS="0"
-                            columnsXL="2"
-                            columnsL="2"
-                            columnsM="2"
-                            singleContainerFullSize="false"
-                            class="osrSelect"
-                            visible="{= (${viewHolder>/showEntireSourceForm} === true) }">
-                <f:content>
+  <f:SimpleForm id="form-abn"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="4"
+                labelSpanS="4"
+                adjustLabelSpan="true"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="2"
+                singleContainerFullSize="false"
+                class="osrSelect"
+                visible="{= (${viewHolder>/showEntireSourceForm} === true) }">
+    <f:content>
 
-                  <Label vAlign="Middle"
-                         text="Select your source" />
-                  <Select id="source-select"
-                          forceSelection="false"
-                          selectedKey=""
-                          change="onSourceSelectChange"
-                          items="{
+      <Label vAlign="Middle"
+             text="Select your source" />
+      <Select id="source-select"
+              forceSelection="false"
+              selectedKey=""
+              change="onSourceSelectChange"
+              items="{
                                   path: 'viewHolder>/Sources/Results'
                                 }"
-                          visible="{= (${viewHolder>/showSourceDropdown} === true) }">
-                    <core:Item key="{viewHolder>SOURCE_NAME}"
-                               text="{viewHolder>SOURCE_NAME}" />
-                  </Select>
-                  
+              visible="{= (${viewHolder>/showSourceDropdown} === true) }">
+        <core:Item key="{viewHolder>SOURCE_NAME}"
+                   text="{viewHolder>SOURCE_NAME}" />
+      </Select>
 
-                  <Button text="Add new source"
-                          press="addNewSourceButton"
-                          icon="sap-icon://add"
-                          ariaDescribedBy="addNewSourceButton"
-                          visible="{= (${viewHolder>/showSourceDropdown} === true)}" />
-                          
-                   <Label vAlign="Middle"
-                         text="{i18n>dataInput.create_new_source}" />
-                  <Input 
-                  id="new-source-input"
-                  visible="{= (${viewHolder>/showSourceDropdown} === false)}"/>   
-                  
-                  <Button text="Create"
-                          press="onCreateNewSource"
-                          icon="sap-icon://add"
-                          ariaDescribedBy="onCreateNewSource"
-                          visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
-                  
-                  <Button text="Cancel"
-                          press="onCancelNewSource"
-                          icon="sap-icon://add"
-                          ariaDescribedBy="onCancelCreation"
-                          visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
 
-                </f:content>
-              </f:SimpleForm>
+      <Button text="Add new source"
+              press="addNewSourceButton"
+              icon="sap-icon://add"
+              ariaDescribedBy="addNewSourceButton"
+              visible="{= (${viewHolder>/showSourceDropdown} === true)}" />
+
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.create_new_source}" />
+      <Input id="new-source-input"
+             visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
+
+      <Button text="Create"
+              press="onCreateNewSource"
+              icon="sap-icon://add"
+              ariaDescribedBy="onCreateNewSource"
+              visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
+
+      <Button text="Cancel"
+              press="onCancelNewSource"
+              icon="sap-icon://add"
+              ariaDescribedBy="onCancelCreation"
+              visible="{= (${viewHolder>/showSourceDropdown} === false)}" />
+
+    </f:content>
+  </f:SimpleForm>
 
 </core:FragmentDefinition>
