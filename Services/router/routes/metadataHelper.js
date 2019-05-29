@@ -6,24 +6,6 @@ const hanaClient = require("@sap/hana-client");
 
 module.exports = {
 
-  //show response from the query within URL
-  executeSearch: function(oRequest, oResponse) {
-
-    let oFinalQuery = this._checkRequest(oRequest, oResponse, oRequest.query);
-
-    return oFinalQuery;
-  },
-
-  /**
-   * Reverse the string of DOB for the SCV.
-   * Split base on the '-'
-   * reverse the array with reverse
-   * join it back with seperator of '/'
-   */
-  _reverseStringDOB: function(str) {
-    return str.split("-").reverse().join("/");
-  },
-
   /**
    * Function helper to determine whether a string contain number
    * @param  {[String]} sString [a string]
@@ -33,60 +15,6 @@ module.exports = {
     return /\d/.test(sString);
   },
 
-  /**
-   * Grab current contact details of a particular org for current tab
-   * @param  {[type]} oRequest  [description]
-   * @param  {[type]} oResponse [description]
-   * @return {[type]}           [description]
-   */
-  getContact: function(oRequest, oResponse) {
-    let oQuery = oRequest.query;
-    let sFinalSearchString =
-      "SELECT \"SOURCE\", \"SCV_ID\", \"TELEPHONE\", \"MOBILE\", \"STD_EMAIL\" " +
-      "FROM \"osr.scv.org.foundation.db.views.Explorer::CV_ContactByScvId\" " +
-      "(PLACEHOLDER.\"$$IP_SCV_ID$$\"=>'" + oQuery.scvId + "'," +
-      "PLACEHOLDER.\"$$IP_YEAR$$\"=>'" + oQuery.year + "')" +
-      "ORDER BY (CASE WHEN SOURCE LIKE '%TMR%' THEN 0 WHEN SOURCE LIKE '%ATO%' THEN 1 WHEN SOURCE LIKE '%ABR%' THEN 2 ELSE 3 END)ASC";
-
-    let client = oRequest.db;
-    let oController = this;
-    async.waterfall([
-
-      function prepare(callback) {
-        client.prepare(
-          sFinalSearchString,
-          function(err, statement) {
-            callback(null, err, statement);
-          });
-      },
-
-      function execute(err, statement, callback) {
-        statement.exec([], function(execErr, results) {
-          callback(null, execErr, results);
-        });
-      },
-      function response(err, results, callback) {
-        if (err) {
-          oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
-          return;
-        } else {
-          let oFinalResult = oController.transformContactResults(results);
-          let result = JSON.stringify({
-            Total: results.length,
-            Results: oFinalResult
-          });
-          oResponse.type("application/json").status(200).send(result);
-        }
-        callback(null, results);
-      }
-    ], function(err, result) {
-      if (err) {
-        oResponse.type("text/plain").status(500).send("ERROR: " + err.toString());
-        return;
-      }
-    });
-
-  },
 
   /**
    * Grab current contact details of a particular org for current tab

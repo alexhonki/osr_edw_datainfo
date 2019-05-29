@@ -13,19 +13,12 @@ module.exports = function () {
 	});
 
 	//blank entry points to get csrf token to allow
-	//other http methods to be executed. 
+	//other http methods to be executed.
 	app.get("/getToken", function (req, res) {
 		res.send("Token sent!");
 	});
 
-	//for execution of search
-	app.get("/execute", function (req, res) {
-
-		metadataHelper.executeSearch(req, res);
-
-	});
-
-	//for execution of search
+	//get sources for the dropdown
 	app.get("/getSources", function (req, res) {
 
 		metadataHelper.getSources(req, res);
