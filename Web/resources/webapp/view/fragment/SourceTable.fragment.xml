@@ -51,7 +51,7 @@
       <t:Column sortProperty="RAF_FILE_NAME"
                 autoResizable="true"
                 filterProperty="RAF_FILE_NAME">
-        <Label text="{i18n>source.file_name}" />
+        <Label text="{i18n>source.external_file_name}" />
         <t:template>
           <Text text="{metadataModel>RAF_FILE_NAME}"
                 wrapping="false" />
