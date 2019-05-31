@@ -273,7 +273,7 @@ sap.ui.define([
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
 
-			oController.oPayloadHolder.TIMESTAMP = moment().format("YYYYMMDD");
+			oController.oPayloadHolder.TIMESTAMP = moment().format("YYYYMMDDHHMM");
 			oController.oPayloadHolder.SOURCE = sSelectedSource;
 
 			oController.getModel("formPayloadValue").setData({
@@ -704,11 +704,11 @@ sap.ui.define([
 
 		/**
 		 * Helper function to set the main dropdown depending on the given key
-		 * @param  {[type]} sKeySelected [description]
+		 * @param  {[type]} sKeySelected [as described]
 		 * @return {[type]}              [description]
 		 */
 		_setDropdownSource: function (sKeySelected) {
-			this.getView().byId("abn-select").setSelectedKey(sKeySelected);
+			this.getView().byId("source-select").setSelectedKey(sKeySelected);
 		},
 
 		/**
