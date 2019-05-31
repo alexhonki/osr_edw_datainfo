@@ -55,6 +55,12 @@ module.exports = function () {
 
 	});
 
+	//check uniqueness of a source
+	app.post("/checkSourceUniqueness", function (req, res) {
+
+		metadataHelper.checkSourceUniqueness(req, res);
+
+	});
 
 	//for creation of a new record base on a entry
 	app.put("/updateMetadataRecord", function (req, res) {
