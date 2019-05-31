@@ -504,24 +504,52 @@ sap.ui.define([
 
 			//input form value and transform to uppercase and trim
 			let sNewSource = oController.getView().byId("new-source-input").getValue().toUpperCase().trim();
-			oController.getView().byId("new-source-input").setValue(""); //reset the value
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
-			$.ajax(sApiUrl + "createNewSource", {
+
+			$.ajax(sApiUrl + "checkSourceUniqueness", {
 				data: {
-					sSource: sNewSource
+					SOURCE_NAME: sNewSource
 				},
 				type: "POST",
-				beforeSend: function () {
-					//loading effect start if needed
-				},
-				complete: function () {
-					//loading effect end if needed
-				},
 				success: function (data) {
-					oController._onLoadSources();
-					oController._bSetShowSourceDropdown(true);
-					oController._setDropdownSource(sNewSource);
+
+					if (data.Results.length > 0) {
+						oController.sendMessageToast("Source with this name already exist! Please double check.");
+					} else {
+						$.ajax(sApiUrl + "createNewSource", {
+							data: {
+								sSource: sNewSource
+							},
+							type: "POST",
+							beforeSend: function () {
+								//loading effect start if needed
+							},
+							complete: function () {
+								//loading effect end if needed
+							},
+							success: function (data) {
+								oController._onLoadSources();
+								oController._bSetShowSourceDropdown(true);
+								oController._bSetShowAddNewRecordBtn(true);
+								oController._setDropdownSource(sNewSource);
+								oController.getView().byId("new-source-input").setValue(""); //reset the value
+								oController.sendMessageToast("New source created succesfully!");
+							},
+							error: function (error) {
+								//check for http error and serve accordingly.
+								if (error.status === 403) {
+									oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+								} else if (error.responseText === "No Data") {
+									return;
+								} else {
+									oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+								}
+
+							}
+						});
+					}
+
 				},
 				error: function (error) {
 					//check for http error and serve accordingly.
@@ -576,7 +604,7 @@ sap.ui.define([
 								oController._bShowMainTable(true);
 								oController._bShowForm(false);
 								oController._bShowCreateMetadataBtn(false);
-								
+
 								let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 								oController.readMetadataBySource(sSelectedKey);
 							},
@@ -684,6 +712,10 @@ sap.ui.define([
 			let oController = this;
 			oController.getView().byId("new-source-input").setValue(""); //reset the value
 			oController._bSetShowSourceDropdown(true);
+			if (oController.getView().byId("source-select").getSelectedKey() !== "") {
+				oController._bSetShowAddNewRecordBtn(true);
+			}
+
 		},
 
 		/**
