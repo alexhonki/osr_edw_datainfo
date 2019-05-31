@@ -113,6 +113,11 @@ sap.ui.define([
 
 		},
 
+		_reloadWindow: function () {
+			//reload within 1.5 secs at least. 
+			setTimeout(location.reload(), 3000);
+		},
+
 		/**
 		 * Get all the different system sources when the page hit
 		 * @return {[type]} []
@@ -142,6 +147,10 @@ sap.ui.define([
 					//check for http error and serve accordingly.
 					if (error.status === 403) {
 						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.status === 401) {
+						oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+						oController._reloadWindow(); //refresh page.
+
 					} else if (error.responseText === "No Data") {
 						return;
 					} else {
@@ -540,6 +549,10 @@ sap.ui.define([
 								//check for http error and serve accordingly.
 								if (error.status === 403) {
 									oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+								} else if (error.status === 401) {
+									oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+									oController._reloadWindow(); //refresh page.
+
 								} else if (error.responseText === "No Data") {
 									return;
 								} else {
@@ -555,6 +568,9 @@ sap.ui.define([
 					//check for http error and serve accordingly.
 					if (error.status === 403) {
 						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.status === 401) {
+						oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+						oController._reloadWindow(); //refresh page.
 					} else if (error.responseText === "No Data") {
 						return;
 					} else {
@@ -612,6 +628,9 @@ sap.ui.define([
 								//check for http error and serve accordingly.
 								if (error.status === 403) {
 									oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+								} else if (error.status === 401) {
+									oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+									oController._reloadWindow(); //refresh page.
 								} else if (error.responseText === "No Data") {
 									return;
 								} else {
@@ -626,6 +645,8 @@ sap.ui.define([
 					//check for http error and serve accordingly.
 					if (error.status === 403) {
 						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.status === 401) {
+						location.reload(); //refresh page.
 					} else if (error.responseText === "No Data") {
 						return;
 					} else {
@@ -673,6 +694,10 @@ sap.ui.define([
 					//check for http error and serve accordingly.
 					if (error.status === 403) {
 						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+					} else if (error.status === 401) {
+						oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+						oController._reloadWindow();//refresh page.
+						
 					} else if (error.responseText === "No Data") {
 						return;
 					} else {
