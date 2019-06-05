@@ -15,5 +15,13 @@ service {
 	create forbidden
 	update forbidden
 	delete forbidden;
+	
+	"osr.edw.source.data.info.db.Views::CV_TableNameBySource" as "tableNameBySource"
+	with( "TABLE_ID", "SOURCE", "TABLE_NAME")
+	keys ("TABLE_ID")
+	parameters via key and entity
+	create forbidden
+	update forbidden
+	delete forbidden;
 
 }
