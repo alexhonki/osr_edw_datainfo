@@ -132,7 +132,7 @@
       </Select>
 
       <Label vAlign="Middle"
-             text="{i18n>dataInput.change_datetype}" />
+             text="{i18n>dataInput.change_datatype}" />
       <Input value="{formPayloadValue>/CHANGE_DATATYPE}" />
 
       <Label vAlign="Middle"
