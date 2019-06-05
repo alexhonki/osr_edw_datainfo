@@ -70,5 +70,15 @@
       "VALUE": "OTHER",
       "TEXT":"Other"
     }
+  ], 
+  "FileExtension": [
+    {
+      "VALUE": ".csv",
+      "TEXT":".csv"
+    },
+    {
+      "VALUE": ".txt",
+      "TEXT":".txt"
+    }
   ]
 }

@@ -42,10 +42,28 @@
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.table_name}" />
-      <Input value="{formPayloadValue>/RAF_TABLE_NAME}"
-             liveChange="onGenerationMetaFileName"
-             app:sourceInput="table_name"
-             visible="{= (${viewHolder>/updateMode} === false)}" />
+      <!--<Input value="{formPayloadValue>/RAF_TABLE_NAME}"-->
+      <!--       liveChange="onGenerationMetaFileName"-->
+      <!--       app:sourceInput="table_name"-->
+      <!--       visible="{= (${viewHolder>/updateMode} === false)}" />-->
+             
+     <Select id="table-name-select"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/RAF_TABLE_NAME}"
+              items="{path: 'dropdownModel>/Frequency'}"
+              visible="{= (${viewHolder>/updateMode} === false)}">
+        <core:Item key="{dropdownModel>VALUE}"
+                   text="{dropdownModel>TEXT}" />
+      </Select>
+      
+      <Select id="extension-select"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/FILE_EXTENSION}"
+              items="{path: 'dropdownModel>/FileExtension'}"
+              visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+        <core:Item key="{dropdownModel>VALUE}"
+                   text="{dropdownModel>TEXT}" />
+      </Select>
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.source_field_value}" />
@@ -53,7 +71,7 @@
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.frequency}" />
-      <Select id="abn2-select"
+      <Select id="frequency-select"
               forceSelection="false"
               selectedKey="{formPayloadValue>/FREQUENCY}"
               items="{path: 'dropdownModel>/Frequency'}"
