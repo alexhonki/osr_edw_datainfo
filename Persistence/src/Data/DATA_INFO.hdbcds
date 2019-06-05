@@ -36,8 +36,8 @@ context DATA_INFO {
             ROW_COUNTS         : String(200);
             YEAR_TYPE          : String(200);
             FILE_RECEIVED_DATE : UTCDateTime;
-            FROM_DATE          : UTCDateTime;
-            TO_DATE            : UTCDateTime;
+            FROM_DATE          : LocalDate;
+            TO_DATE            : LocalDate;
             ERRORS             : String(200);
             DATA_SET_TYPE      : String(200);
             CHANGE_DATATYPE	   : String(200);
@@ -46,6 +46,23 @@ context DATA_INFO {
     technical configuration {
         column store;
     };
+    
+    /*@@layout{"layoutInfo":{}}*/
+
+    entity TABLE_DICTIONARY {
+        key TABLE_ID           : Binary(32)  not null;
+            CREATED_AT         : UTCDateTime;
+            CREATED_BY         : String(200);
+            SOURCE             : String(200);
+            TABLE_NAME         : String(200);
+			FROM_DATE          : LocalDate;
+            TO_DATE            : LocalDate;
+            INACTIVE		   : String(1);
+    }
+    technical configuration {
+        column store;
+    };
+
 
 
 /*@@layout{"layoutInfo":{"x":281,"y":-485.5}}*/
