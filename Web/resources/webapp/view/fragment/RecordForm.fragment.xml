@@ -50,10 +50,10 @@
      <Select id="table-name-select"
               forceSelection="false"
               selectedKey="{formPayloadValue>/RAF_TABLE_NAME}"
-              items="{path: 'dropdownModel>/Frequency'}"
+              items="{path: 'metaDataInfoHolder>/'}"
               visible="{= (${viewHolder>/updateMode} === false)}">
-        <core:Item key="{dropdownModel>VALUE}"
-                   text="{dropdownModel>TEXT}" />
+        <core:Item key="{metaDataInfoHolder>TABLE_NAME}"
+                   text="{metaDataInfoHolder>TABLE_NAME}" />
       </Select>
       
       <Select id="extension-select"

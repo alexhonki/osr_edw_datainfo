@@ -23,7 +23,7 @@ sap.ui.define([
 			//setting up of all models to serve if needed.
 			//some are binded straight away
 			this.setModel(new JSONModel(), "viewHolder");
-			this.setModel(new JSONModel(), "metaData");
+			this.setModel(new JSONModel(), "metaDataInfoHolder");
 			this.setModel(new JSONModel(), "formPayloadValue"); //model to carry payload
 
 			this.getRouter().getRoute("homepage").attachPatternMatched(this._onRouteMatched, this);
@@ -75,6 +75,7 @@ sap.ui.define([
 			oController.oPayloadHolder.SOURCE = oEvent.getSource().getSelectedKey();
 			oController.getView().byId("source-select").setSelectedKey(oController.oPayloadHolder.SOURCE);
 			oController.readMetadataBySource(oController.oPayloadHolder.SOURCE);
+			oController.readTableNameBySource(oController.oPayloadHolder.SOURCE);
 			oController._updateMetaFileName();
 		},
 
@@ -264,6 +265,29 @@ sap.ui.define([
 		},
 
 		/**
+		 * Get the different table name depending on the source
+		 * @param  {[type]} sSource [source from the selected dropdown]
+		 * @return {[type]}         []
+		 */
+		readTableNameBySource: function (sSource) {
+			let oController = this;
+			//bind automatically from the model for all the valid address
+			oController.getModel("metadataModel").read("/tableNameBySourceParameters(IP_SOURCE='" + sSource + "')/Results", {
+
+				success: function (data) {
+					
+					oController.getModel("metaDataInfoHolder").setData(data.results, false);
+					
+					
+				},
+				error: function (oMessage) {
+					console.log(oMessage);
+				}
+			});
+
+		},
+
+		/**
 		 * Responsible for adding a new record depending on the selected source
 		 * @param  {[type]} oEvent [description]
 		 * @return {[type]}        [description]
@@ -346,6 +370,8 @@ sap.ui.define([
 			}, false);
 
 			oController.readMetadataBySource(sSelectedKey);
+			oController.readTableNameBySource(sSelectedKey);
+			
 		},
 
 		/**
@@ -696,8 +722,8 @@ sap.ui.define([
 						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
 					} else if (error.status === 401) {
 						oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
-						oController._reloadWindow();//refresh page.
-						
+						oController._reloadWindow(); //refresh page.
+
 					} else if (error.responseText === "No Data") {
 						return;
 					} else {
