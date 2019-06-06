@@ -76,6 +76,8 @@ sap.ui.define([
 			oController.getView().byId("source-select").setSelectedKey(oController.oPayloadHolder.SOURCE);
 			oController.readMetadataBySource(oController.oPayloadHolder.SOURCE);
 			oController.readTableNameBySource(oController.oPayloadHolder.SOURCE);
+			oController.getView().byId("table-name-select").setSelectedKey("");
+			oController.oPayloadHolder.SVALUE = "";
 			oController._updateMetaFileName();
 		},
 
@@ -275,10 +277,9 @@ sap.ui.define([
 			oController.getModel("metadataModel").read("/tableNameBySourceParameters(IP_SOURCE='" + sSource + "')/Results", {
 
 				success: function (data) {
-					
+
 					oController.getModel("metaDataInfoHolder").setData(data.results, false);
-					
-					
+
 				},
 				error: function (oMessage) {
 					console.log(oMessage);
@@ -325,12 +326,12 @@ sap.ui.define([
 		 */
 		_updateMetaFileName: function () {
 			let oController = this;
-			if (typeof oController.oPayloadHolder.SVALUE === "undefined") {
+			if (typeof oController.oPayloadHolder.SVALUE === "undefined" || oController.oPayloadHolder.SVALUE === "") {
 				oController.oPayloadHolder.SVALUE = "";
 			}
 			oController.getModel("formPayloadValue").setData({
 				META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder
-					.SVALUE.toUpperCase()
+					.SVALUE.toUpperCase() + "_" + oController.oPayloadHolder.SFILE_EXT
 			}, true);
 		},
 
@@ -366,12 +367,47 @@ sap.ui.define([
 			let sSelectedKey = oEvent.getSource().getSelectedKey();
 			//clear the JSON model for payload
 			oController.getModel("formPayloadValue").setData({
-				SOURCE: sSelectedKey
+				SOURCE: sSelectedKey,
+				META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_"
 			}, false);
 
 			oController.readMetadataBySource(sSelectedKey);
 			oController.readTableNameBySource(sSelectedKey);
+
+		},
+
+		onTableNameSelectChange: function (oEvent) {
+
+			let oController = this;
+			oController.oPayloadHolder.SVALUE = oEvent.getSource().getSelectedKey();
+			let sSourceInput = oEvent.getSource().data().sourceInput;
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_";
+
+			sCurrentFileName += oController.oPayloadHolder.SVALUE.toUpperCase();
 			
+			if(typeof oController.oPayloadHolder.SFILE_EXT !== "undefined"){
+				sCurrentFileName += oController.oPayloadHolder.SFILE_EXT;
+			}
+			
+			oController.getModel("formPayloadValue").setData({
+				META_FILE_NAME: sCurrentFileName
+			}, true);
+
+		},
+
+		onFileExtensionSelectChange: function (oEvent) {
+			let oController = this;
+			oController.oPayloadHolder.SFILE_EXT = oEvent.getSource().getSelectedKey();
+			let sSourceInput = oEvent.getSource().data().sourceInput;
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder
+				.SVALUE;
+
+			sCurrentFileName += oController.oPayloadHolder.SFILE_EXT;
+
+			oController.getModel("formPayloadValue").setData({
+				META_FILE_NAME: sCurrentFileName
+			}, true);
+
 		},
 
 		/**

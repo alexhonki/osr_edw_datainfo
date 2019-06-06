@@ -51,6 +51,7 @@
               forceSelection="false"
               selectedKey="{formPayloadValue>/RAF_TABLE_NAME}"
               items="{path: 'metaDataInfoHolder>/'}"
+              change="onTableNameSelectChange"
               visible="{= (${viewHolder>/updateMode} === false)}">
         <core:Item key="{metaDataInfoHolder>TABLE_NAME}"
                    text="{metaDataInfoHolder>TABLE_NAME}" />
@@ -60,6 +61,7 @@
               forceSelection="false"
               selectedKey="{formPayloadValue>/FILE_EXTENSION}"
               items="{path: 'dropdownModel>/FileExtension'}"
+              change="onFileExtensionSelectChange"
               visible="{= (${viewHolder>/showSourceDropdown} === true)}">
         <core:Item key="{dropdownModel>VALUE}"
                    text="{dropdownModel>TEXT}" />
