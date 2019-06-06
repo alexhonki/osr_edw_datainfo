@@ -162,7 +162,13 @@
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.data_input}" />
-      <Input value="{formPayloadValue>/DATA_INPUT}" />
+      <Select id="data-input-select"
+              forceSelection="false"
+              selectedKey="{formPayloadValue>/DATA_INPUT}"
+              items="{ path: 'dropdownModel>/DataInput'}">
+        <core:Item key="{dropdownModel>VALUE}"
+                   text="{dropdownModel>TEXT}" />
+      </Select>
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.raw_file_name}" />

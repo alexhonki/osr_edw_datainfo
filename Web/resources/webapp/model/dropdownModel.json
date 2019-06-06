@@ -80,5 +80,15 @@
       "VALUE": ".txt",
       "TEXT":".txt"
     }
+  ], 
+  "DataInput": [
+    {
+      "VALUE": "MASTER_DATA",
+      "TEXT":"Master Data"
+    },
+    {
+      "VALUE": "TRANSACTIONA_DATA",
+      "TEXT":"Transactional Data"
+    }
   ]
 }
