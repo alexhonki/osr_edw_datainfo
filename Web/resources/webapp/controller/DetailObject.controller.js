@@ -700,12 +700,14 @@ sap.ui.define([
 								//loading effect end if needed
 							},
 							success: function (data) {
+								
 								oController._onLoadSources();
 								oController._bSetShowSourceDropdown(true);
 								oController._bShowMainTable(true);
 								oController._bShowForm(false);
 								oController._bShowCreateMetadataBtn(false);
-
+								oController._bSetShowCancelNewRecordBtn(false);
+								
 								let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 								oController.readMetadataBySource(sSelectedKey);
 							},

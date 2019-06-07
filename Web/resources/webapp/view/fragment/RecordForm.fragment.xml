@@ -170,7 +170,7 @@
              text="{i18n>dataInput.data_input}" />
       <Select id="data-input-select"
               forceSelection="false"
-              selectedKey="{formPayloadValue>/DATA_INPUT}"
+              selectedKey="{formPayloadValue>/TYPE}"
               items="{ path: 'dropdownModel>/DataInput'}">
         <core:Item key="{dropdownModel>VALUE}"
                    text="{dropdownModel>TEXT}" />

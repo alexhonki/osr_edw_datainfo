@@ -161,7 +161,7 @@ module.exports = {
 
 		//grab all the body payload, all parameters as folow.
 		//CHANGE_DATATYPE
-		//DATA_INPUT
+		//TYPE
 		//DATA_SET_TYPE
 		//FILE_RECEIVED_DATE
 		//FREQUENCY
@@ -220,7 +220,7 @@ module.exports = {
 					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
 					oFinalPayload.FREQUENCY + "'," +
 					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', 'TYPE', '" + oFinalPayload.RAF_TABLE_NAME +
+					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', '"+oFinalPayload.TYPE+"', '" + oFinalPayload.RAF_TABLE_NAME +
 					"', '" +
 					oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +

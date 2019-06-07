@@ -26,8 +26,8 @@ context DATA_INFO {
             META_FILE_NAME     : String(200) not null;
             TIMESTAMP          : UTCDateTime not null;
             SOURCE             : String(200);
-            TYPE               : String(200);
-            RAF_TABLE_NAME     : String(200);
+            TYPE               : String(200); //data input
+            RAF_TABLE_NAME     : String(200); 
             RAF_FILE_NAME      : String(200);
             SOURCE_FIELD_VALUE : String(200);
             EDW_FILE_NAME      : String(200);
