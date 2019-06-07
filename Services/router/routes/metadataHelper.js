@@ -285,10 +285,15 @@ module.exports = {
 		//convert everything to uppercase.
 		for (let sProperty in oPayload) {
 			if (oPayload.hasOwnProperty(sProperty)) {
-
-				oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase().trim(); //remove white space
+				
+				oFinalPayload[sProperty] = oPayload[sProperty].trim(); //remove white space
+				
+				if(sProperty !== "META_FILE_NAME"){
+					oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
+				}
+				
 				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g, "_"); //replace all space with '_' in between char
-
+				
 				//change boolean value to "Y" || "N" for insertion to table.
 				if (sProperty === "HAS_LOADED_IN_EDW") {
 					if (oPayload[sProperty] === "true") {
