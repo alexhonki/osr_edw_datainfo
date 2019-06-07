@@ -220,7 +220,7 @@ module.exports = {
 					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
 					oFinalPayload.FREQUENCY + "'," +
 					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', '"+oFinalPayload.TYPE+"', '" + oFinalPayload.RAF_TABLE_NAME +
+					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.TYPE + "', '" + oFinalPayload.RAF_TABLE_NAME +
 					"', '" +
 					oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
@@ -285,15 +285,15 @@ module.exports = {
 		//convert everything to uppercase.
 		for (let sProperty in oPayload) {
 			if (oPayload.hasOwnProperty(sProperty)) {
-				
+
 				oFinalPayload[sProperty] = oPayload[sProperty].trim(); //remove white space
-				
-				if(sProperty !== "META_FILE_NAME"){
+
+				if (sProperty !== "META_FILE_NAME") {
 					oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
 				}
-				
+
 				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g, "_"); //replace all space with '_' in between char
-				
+
 				//change boolean value to "Y" || "N" for insertion to table.
 				if (sProperty === "HAS_LOADED_IN_EDW") {
 					if (oPayload[sProperty] === "true") {
@@ -304,6 +304,51 @@ module.exports = {
 				}
 
 			}
+		}
+		
+		//check for each field type, will need to be refactor
+		//still crude implementation to check correctness. 
+		if (typeof oFinalPayload.FREQUENCY === "undefined") {
+			oFinalPayload.FREQUENCY = "";
+		}
+		if (typeof oFinalPayload.ROW_COUNTS === "undefined") {
+			oFinalPayload.ROW_COUNTS = "";
+		}
+		if (typeof oFinalPayload.YEAR_TYPE === "undefined") {
+			oFinalPayload.YEAR_TYPE = "";
+		}
+		if (typeof oFinalPayload.DATA_SET_TYPE === "undefined") {
+			oFinalPayload.DATA_SET_TYPE = "";
+		}
+
+		if (typeof oFinalPayload.TYPE === "undefined") {
+			oFinalPayload.TYPE = "";
+		}
+		if (typeof oFinalPayload.RAF_TABLE_NAME === "undefined") {
+			oFinalPayload.RAF_TABLE_NAME = "";
+		}
+		if (typeof oFinalPayload.SOURCE_FIELD_VALUE === "undefined") {
+			oFinalPayload.SOURCE_FIELD_VALUE = "";
+		}
+
+		if (typeof oFinalPayload.FROM_DATE === "undefined") {
+			oFinalPayload.FROM_DATE = "";
+		}
+		if (typeof oFinalPayload.TO_DATE === "undefined") {
+			oFinalPayload.TO_DATE = "";
+		}
+		if (typeof oFinalPayload.ERRORS === "undefined") {
+			oFinalPayload.ERRORS = "";
+		}
+		if (typeof oFinalPayload.RAF_FILE_NAME === "undefined") {
+			oFinalPayload.RAF_FILE_NAME = "";
+		}
+
+		if (typeof oFinalPayload.CHANGE_DATATYPE === "undefined") {
+			oFinalPayload.CHANGE_DATATYPE = "";
+		}
+		if (typeof oFinalPayload.FILE_RECEIVED_DATE === "undefined") {
+			oFinalPayload.FILE_RECEIVED_DATE = "";
 		}
 		return oFinalPayload;
 	},
