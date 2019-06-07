@@ -87,7 +87,7 @@
       "TEXT":"Master Data"
     },
     {
-      "VALUE": "TRANSACTIONA_DATA",
+      "VALUE": "TRANSACTIONAL_DATA",
       "TEXT":"Transactional Data"
     }
   ]

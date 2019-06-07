@@ -86,6 +86,10 @@
       <viewAttribute id="SOURCE">
         <descriptions defaultDescription="SOURCE"/>
       </viewAttribute>
+    
+      <viewAttribute id="DATA_INPUT">
+        <descriptions defaultDescription="DATA_INPUT"/>
+      </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="METADATA_ID" datatype="VARCHAR" length="32" expressionLanguage="SQL">
@@ -131,6 +135,8 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="FILE_RECEIVED_DATE" source="FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_TYPE" source="YEAR_TYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE" source="SOURCE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATA_INPUT" source="DATA_INPUT"/>
     </input>
     <filter>(&quot;SOURCE&quot; = '$$IP_SOURCE$$')</filter>
   </calculationView>
@@ -256,6 +262,9 @@
       <viewAttribute id="S_CREATED_AT">
         <descriptions defaultDescription="S_CREATED_AT"/>
       </viewAttribute>
+      <viewAttribute id="DATA_INPUT">
+        <descriptions defaultDescription="DATA_INPUT"/>
+      </viewAttribute>
       <viewAttribute hidden="true" id="JOIN$S_CREATED_AT$S_CREATED_AT"/>
       <viewAttribute hidden="true" id="JOIN$META_FILE_NAME$META_FILE_NAME"/>
       <viewAttribute hidden="true" id="JOIN$SOURCE$SOURCE"/>
@@ -293,6 +302,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="S_TO_DATE" source="S_TO_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="S_FILE_RECEIVED_DATE" source="S_FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="S_CREATED_AT" source="S_CREATED_AT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATA_INPUT" source="DATA_INPUT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_CREATED_AT$S_CREATED_AT" source="S_CREATED_AT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$META_FILE_NAME$META_FILE_NAME" source="META_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SOURCE$SOURCE" source="SOURCE"/>
@@ -404,6 +414,11 @@
       <descriptions defaultDescription="S_CREATED_AT"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_CREATED_AT"/>
     </attribute>
+  
+    <attribute id="DATA_INPUT" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATA_INPUT"/>
+      <keyMapping columnObjectName="GetAllData" columnName="DATA_INPUT"/>
+    </attribute>
   </attributes>
   <calculatedAttributes/>
   <baseMeasures/>
@@ -413,25 +428,25 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="213.23951013324876" y="112"/>
+      <upperLeftCorner x="213" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
   
     <shape expanded="true" modelObjectName="AllRecordsBySource" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="301.99999999999994" y="356.9999988079071"/>
+      <upperLeftCorner x="301" y="356"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="BaseForDistinctRecord" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="91.99999999999997" y="481.9999988079071"/>
+      <upperLeftCorner x="91" y="481"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="GetMaxDate" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="91.99999999999997" y="366.9999988079071"/>
+      <upperLeftCorner x="91" y="366"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="GetAllData" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="213.23951013324876" y="217"/>
+      <upperLeftCorner x="213" y="217"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="GetMaxDate" modelObjectNameSpace="GetAllData" modelObjectType="JoinNodeInput">

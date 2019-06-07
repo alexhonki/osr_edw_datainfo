@@ -86,6 +86,10 @@
       <viewAttribute id="SOURCE">
         <descriptions defaultDescription="SOURCE"/>
       </viewAttribute>
+    
+      <viewAttribute id="DATA_INPUT">
+        <descriptions defaultDescription="DATA_INPUT"/>
+      </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="METADATA_ID" datatype="VARCHAR" length="32" expressionLanguage="SQL">
@@ -131,6 +135,8 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="FILE_RECEIVED_DATE" source="FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_TYPE" source="YEAR_TYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE" source="SOURCE"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATA_INPUT" source="DATA_INPUT"/>
     </input>
     <filter>(&quot;SOURCE&quot; = '$$IP_SOURCE$$')</filter>
   </calculationView>
@@ -256,6 +262,9 @@
       <viewAttribute id="S_CREATED_AT">
         <descriptions defaultDescription="S_CREATED_AT"/>
       </viewAttribute>
+      <viewAttribute id="DATA_INPUT">
+        <descriptions defaultDescription="DATA_INPUT"/>
+      </viewAttribute>
       <viewAttribute hidden="true" id="JOIN$S_CREATED_AT$S_CREATED_AT"/>
       <viewAttribute hidden="true" id="JOIN$META_FILE_NAME$META_FILE_NAME"/>
       <viewAttribute hidden="true" id="JOIN$SOURCE$SOURCE"/>
@@ -293,6 +302,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="S_TO_DATE" source="S_TO_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="S_FILE_RECEIVED_DATE" source="S_FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="S_CREATED_AT" source="S_CREATED_AT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATA_INPUT" source="DATA_INPUT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_CREATED_AT$S_CREATED_AT" source="S_CREATED_AT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$META_FILE_NAME$META_FILE_NAME" source="META_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SOURCE$SOURCE" source="SOURCE"/>
@@ -332,77 +342,78 @@
       <descriptions defaultDescription="META_FILE_NAME"/>
       <keyMapping columnObjectName="GetAllData" columnName="META_FILE_NAME"/>
     </attribute>
-    <attribute id="TYPE" order="8" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="TYPE"/>
-      <keyMapping columnObjectName="GetAllData" columnName="TYPE"/>
-    </attribute>
-    <attribute id="RAF_TABLE_NAME" order="9" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="RAF_TABLE_NAME" order="8" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RAF_TABLE_NAME"/>
       <keyMapping columnObjectName="GetAllData" columnName="RAF_TABLE_NAME"/>
     </attribute>
-    <attribute id="SOURCE_FIELD_VALUE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SOURCE_FIELD_VALUE" order="9" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SOURCE_FIELD_VALUE"/>
       <keyMapping columnObjectName="GetAllData" columnName="SOURCE_FIELD_VALUE"/>
     </attribute>
-    <attribute id="EDW_FILE_NAME" order="11" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="EDW_FILE_NAME" order="10" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="EDW_FILE_NAME"/>
       <keyMapping columnObjectName="GetAllData" columnName="EDW_FILE_NAME"/>
     </attribute>
-    <attribute id="FROM_DATE" order="12" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="FROM_DATE" order="11" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FROM_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="FROM_DATE"/>
     </attribute>
-    <attribute id="TO_DATE" order="13" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="TO_DATE" order="12" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="TO_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="TO_DATE"/>
     </attribute>
-    <attribute id="ERRORS" order="14" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ERRORS" order="13" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ERRORS"/>
       <keyMapping columnObjectName="GetAllData" columnName="ERRORS"/>
     </attribute>
-    <attribute id="RAF_FILE_NAME" order="15" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="RAF_FILE_NAME" order="14" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RAF_FILE_NAME"/>
       <keyMapping columnObjectName="GetAllData" columnName="RAF_FILE_NAME"/>
     </attribute>
-    <attribute id="HAS_LOADED_IN_EDW" order="16" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="HAS_LOADED_IN_EDW" order="15" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="HAS_LOADED_IN_EDW"/>
       <keyMapping columnObjectName="GetAllData" columnName="HAS_LOADED_IN_EDW"/>
     </attribute>
-    <attribute id="CHANGE_DATATYPE" order="17" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="CHANGE_DATATYPE" order="16" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="CHANGE_DATATYPE"/>
       <keyMapping columnObjectName="GetAllData" columnName="CHANGE_DATATYPE"/>
     </attribute>
-    <attribute id="FILE_RECEIVED_DATE" order="18" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="FILE_RECEIVED_DATE" order="17" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FILE_RECEIVED_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="FILE_RECEIVED_DATE"/>
     </attribute>
-    <attribute id="YEAR_TYPE" order="19" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="YEAR_TYPE" order="18" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="YEAR_TYPE"/>
       <keyMapping columnObjectName="GetAllData" columnName="YEAR_TYPE"/>
     </attribute>
-    <attribute id="SOURCE" order="20" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SOURCE" order="19" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SOURCE"/>
       <keyMapping columnObjectName="GetAllData" columnName="SOURCE"/>
     </attribute>
-    <attribute id="METADATA_ID" order="21" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="METADATA_ID" order="20" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="METADATA_ID"/>
       <keyMapping columnObjectName="GetAllData" columnName="METADATA_ID"/>
     </attribute>
-    <attribute id="S_FROM_DATE" order="22" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_FROM_DATE" order="21" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_FROM_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_FROM_DATE"/>
     </attribute>
-    <attribute id="S_TO_DATE" order="23" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_TO_DATE" order="22" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_TO_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_TO_DATE"/>
     </attribute>
-    <attribute id="S_FILE_RECEIVED_DATE" order="24" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_FILE_RECEIVED_DATE" order="23" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_FILE_RECEIVED_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_FILE_RECEIVED_DATE"/>
     </attribute>
-    <attribute id="S_CREATED_AT" order="25" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_CREATED_AT" order="24" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_CREATED_AT"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_CREATED_AT"/>
+    </attribute>
+  
+    <attribute id="DATA_INPUT" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATA_INPUT"/>
+      <keyMapping columnObjectName="GetAllData" columnName="DATA_INPUT"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
@@ -413,25 +424,25 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="213.23951013324876" y="112"/>
+      <upperLeftCorner x="213" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
   
     <shape expanded="true" modelObjectName="AllRecordsBySource" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="301.99999999999994" y="356.9999988079071"/>
+      <upperLeftCorner x="301" y="356"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="BaseForDistinctRecord" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="91.99999999999997" y="481.9999988079071"/>
+      <upperLeftCorner x="91" y="481"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="GetMaxDate" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="91.99999999999997" y="366.9999988079071"/>
+      <upperLeftCorner x="91" y="366"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="GetAllData" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="213.23951013324876" y="217"/>
+      <upperLeftCorner x="213" y="217"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="GetMaxDate" modelObjectNameSpace="GetAllData" modelObjectType="JoinNodeInput">

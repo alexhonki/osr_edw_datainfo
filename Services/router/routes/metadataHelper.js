@@ -216,18 +216,18 @@ module.exports = {
 				let sInsertToMetadata = "INSERT INTO \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\"  " +
 					"(METADATA_ID, SOURCE, TIMESTAMP, CREATED_AT, CREATED_BY, FREQUENCY, ROW_COUNTS, YEAR_TYPE, DATA_SET_TYPE," +
 					"META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE," +
-					"ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, CHANGE_DATATYPE, FILE_RECEIVED_DATE)" +
+					"ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, CHANGE_DATATYPE, FILE_RECEIVED_DATE, DATA_INPUT)" +
 					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
 					oFinalPayload.FREQUENCY + "'," +
 					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.TYPE + "', '" + oFinalPayload.RAF_TABLE_NAME +
+					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.RAF_TABLE_NAME + "', '" + oFinalPayload.RAF_TABLE_NAME +
 					"', '" +
 					oFinalPayload.SOURCE_FIELD_VALUE +
 					"'," +
 					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
 					" '" + oFinalPayload.ERRORS + "', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" +
 					oFinalPayload.CHANGE_DATATYPE +
-					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "')";
+					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "','"+oFinalPayload.DATA_INPUT+"')";
 
 				client.prepare(
 					sInsertToMetadata,
@@ -349,6 +349,9 @@ module.exports = {
 		}
 		if (typeof oFinalPayload.FILE_RECEIVED_DATE === "undefined") {
 			oFinalPayload.FILE_RECEIVED_DATE = "";
+		}
+		if (typeof oFinalPayload.DATA_INPUT === "undefined") {
+			oFinalPayload.DATA_INPUT = "";
 		}
 		return oFinalPayload;
 	},
