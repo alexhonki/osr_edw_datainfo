@@ -63,7 +63,7 @@
               selectedKey="{formPayloadValue>/FILE_EXTENSION}"
               items="{path: 'dropdownModel>/FileExtension'}"
               change="onFileExtensionSelectChange"
-              visible="{= (${viewHolder>/showSourceDropdown} === true)}">
+              visible="{= (${viewHolder>/updateMode} === false)}">
         <core:Item key="{dropdownModel>VALUE}"
                    text="{dropdownModel>TEXT}" />
       </Select>
@@ -77,7 +77,8 @@
                   busyIndicatorDelay="5"
                   value="{formPayloadValue>/FILE_RECEIVED_DATE}"
                   valueFormat="YYYY-MM-dd"
-                  displayFormat="dd-MM-YYYY" />
+                  displayFormat="dd-MM-YYYY"
+                  visible="{= (${viewHolder>/updateMode} === false)}"/>
                   
       <Label vAlign="Middle"
              text="{i18n>dataInput.source_field_value}" />
