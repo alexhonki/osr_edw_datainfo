@@ -41,7 +41,8 @@
       <Text text="{formPayloadValue>/META_FILE_NAME}" />
 
       <Label vAlign="Middle"
-             text="{i18n>dataInput.table_name}" />
+             text="{i18n>dataInput.table_name}"
+             required="true"/>
       <!--<Input value="{formPayloadValue>/RAF_TABLE_NAME}"-->
       <!--       liveChange="onGenerationMetaFileName"-->
       <!--       app:sourceInput="table_name"-->
@@ -67,6 +68,17 @@
                    text="{dropdownModel>TEXT}" />
       </Select>
 
+	 <Label vAlign="Middle"
+             text="{i18n>dataInput.file_received_date}"
+             required="true"/>
+      <DatePicker id="file_received_date"
+    			  placeholder="File Received Date"
+                  change="onFileReceiveDateChange"
+                  busyIndicatorDelay="5"
+                  value="{formPayloadValue>/FILE_RECEIVED_DATE}"
+                  valueFormat="YYYY-MM-dd"
+                  displayFormat="dd-MM-YYYY" />
+                  
       <Label vAlign="Middle"
              text="{i18n>dataInput.source_field_value}" />
       <Input value="{formPayloadValue>/SOURCE_FIELD_VALUE}" />
@@ -106,14 +118,7 @@
                    text="{dropdownModel>TEXT}" />
       </Select>
 
-      <Label vAlign="Middle"
-             text="{i18n>dataInput.file_received_date}" />
-      <DatePicker placeholder="From Date"
-                  change="handleChange"
-                  busyIndicatorDelay="5"
-                  value="{formPayloadValue>/FILE_RECEIVED_DATE}"
-                  valueFormat="YYYY-MM-dd"
-                  displayFormat="dd-MM-YYYY" />
+      
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.period_key}" />

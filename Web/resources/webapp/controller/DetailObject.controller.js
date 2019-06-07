@@ -307,7 +307,9 @@ sap.ui.define([
 			oController._clearFormPayload();
 			let sSelectedSource = oController.getView().byId("source-select").getSelectedKey();
 
-			oController.oPayloadHolder.TIMESTAMP = moment().format("YYYYMMDDHHMM");
+			oController.oPayloadHolder.TIMESTAMP = "";
+			oController.oPayloadHolder.SVALUE = "";
+			
 			oController.oPayloadHolder.SOURCE = sSelectedSource;
 
 			oController.getModel("formPayloadValue").setData({
@@ -317,6 +319,27 @@ sap.ui.define([
 				HAS_LOADED_IN_EDW: false
 			}, false);
 
+		},
+		
+		onFileReceiveDateChange: function(oEvent){
+			let oController = this; 
+			
+			oController.oPayloadHolder.TIMESTAMP = oEvent.getSource().getValue();
+			oController.oPayloadHolder.TIMESTAMP = oController.oPayloadHolder.TIMESTAMP.replace(/-/g, "");
+			
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE;
+			
+			if(typeof oController.oPayloadHolder.SVALUE !== "undefined"){
+				sCurrentFileName += "_" + oController.oPayloadHolder.SVALUE;
+			}
+			
+			if(typeof oController.oPayloadHolder.SFILE_EXT !== "undefined"){
+				sCurrentFileName += oController.oPayloadHolder.SFILE_EXT;
+			}
+			
+			oController.getModel("formPayloadValue").setData({
+				META_FILE_NAME: sCurrentFileName
+			}, true);
 		},
 
 		/**
@@ -394,7 +417,7 @@ sap.ui.define([
 			}, true);
 
 		},
-
+	
 		onFileExtensionSelectChange: function (oEvent) {
 			let oController = this;
 			oController.oPayloadHolder.SFILE_EXT = oEvent.getSource().getSelectedKey();
