@@ -7,8 +7,9 @@ sap.ui.define([
 	"osr/edw/data/info/controller/SuperController",
 	"sap/ui/model/json/JSONModel",
 	"osr/edw/data/info/asset/lib/Formatters",
-	"sap/m/Text"
-], function (SuperController, JSONModel, Formatters, Text) {
+	"sap/m/Text",
+	"sap/ui/model/Sorter"
+], function (SuperController, JSONModel, Formatters, Text, Sorter) {
 	"use strict";
 
 	let DetailObject = SuperController.extend("osr.edw.data.info.controller.DetailObject", {
@@ -265,8 +266,15 @@ sap.ui.define([
 			let oController = this;
 
 			//bind automatically from the model for all the valid address
-			oController.getView().byId("metadata-records-table").bindRows("metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +
-				"')/Results");
+			
+			let oBindingInfo = {
+				path : "metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +"')/Results",
+				sorter : new Sorter("CREATED_AT", true)
+			};
+			oController.getView().byId("metadata-records-table").bindRows(oBindingInfo);
+				
+			// oController.getView().byId("metadata-records-table").bindRows("metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +
+			// 	"')/Results");
 
 		},
 
