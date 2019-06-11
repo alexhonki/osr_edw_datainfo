@@ -309,7 +309,7 @@ sap.ui.define([
 
 			let oController = this;
 			oController._bShowMainTable(false);
-			oController._bShowForm(true);
+			oController._bShowRecordForm(true);
 			oController._bSetShowCancelNewRecordBtn(true);
 			oController._bSetShowUpdateRecordBtn(false);
 			oController._bSetShowAddNewRecordBtn(false);
@@ -503,7 +503,7 @@ sap.ui.define([
 					//set the data for for the entire view information.
 					oController.getModel("formPayloadValue").setData(oTransformedResult, false);
 					oController._bShowMainTable(false);
-					oController._bShowForm(true);
+					oController._bShowRecordForm(true);
 				},
 				error: function (oMessage) {
 					console.log(oMessage);
@@ -589,7 +589,7 @@ sap.ui.define([
 		 * @param  {[type]} bShow [boolean status depending parameter]
 		 * @return {[type]}       [description]
 		 */
-		_bShowForm: function (bShow) {
+		_bShowRecordForm: function (bShow) {
 
 			let oController = this;
 			//reset all JSON model that the view dependent on.
@@ -738,7 +738,7 @@ sap.ui.define([
 
 									oController._onLoadSources();
 									oController._bShowMainTable(true);
-									oController._bShowForm(false);
+									oController._bShowRecordForm(false);
 									oController._bShowEntireSourceForm(true);
 									oController._bSetShowSourceDropdown(true);
 									oController._bSetShowAddNewRecordBtn(true);
@@ -839,12 +839,13 @@ sap.ui.define([
 				success: function (data) {
 
 					//on success do all the different visiblity on different control
+					oController._bShowEntireSourceForm(true);
 					oController._bSetShowSourceDropdown(true);
 					oController._bShowMainTable(true);
-					oController._bShowForm(false);
+					oController._bShowRecordForm(false);
 					oController._bSetShowCancelNewRecordBtn(false);
 					oController._bSetShowAddNewRecordBtn(true);
-
+					
 					let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 					oController.readMetadataBySource(sSelectedKey);
 				},
@@ -910,7 +911,7 @@ sap.ui.define([
 		onCancelNewRecord: function (oEvent) {
 			let oController = this;
 			oController._bShowMainTable(true);
-			oController._bShowForm(false);
+			oController._bShowRecordForm(false);
 			oController._bSetShowCancelNewRecordBtn(false);
 			oController._bSetShowAddNewRecordBtn(true);
 			oController._bShowEntireSourceForm(true);
