@@ -179,12 +179,14 @@
       <Label vAlign="Middle"
              text="{i18n>dataInput.raw_file_name}" />
       <Input value="{formPayloadValue>/RAF_FILE_NAME}" />
-
+    
     </f:content>
+    
+    
 
   </f:SimpleForm>
-  <OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
-
+<OverflowToolbar width="35%" visible="{= (${viewHolder>/showForm} === true)}">
+	<ToolbarSpacer></ToolbarSpacer>
     <Button id="form-next"
             press="onCreateMetadaRecord"
             text="{i18n>dataInput.createInfo}"
@@ -194,6 +196,12 @@
             press="onUpdateRecord"
             text="{i18n>dataInput.updateRecord}"
             visible="{= (${viewHolder>/showUpdateRecord} === true)}" />
+            
+    <Button text="Cancel"
+          press="onCancelNewRecord"
+          icon="sap-icon://sys-cancel"
+          ariaDescribedBy="onCancelNewRecord"
+          visible="{= (${viewHolder>/showSourceDropdown} === true) &amp;&amp; (${viewHolder>/showCancelNewBtn} === true) }" />
 
   </OverflowToolbar>
 </core:FragmentDefinition>
