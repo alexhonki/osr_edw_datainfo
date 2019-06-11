@@ -292,7 +292,8 @@ module.exports = {
 					oFinalPayload[sProperty] = oPayload[sProperty].toUpperCase();
 				}
 
-				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g, "_"); //replace all space with '_' in between char
+				//replace all space with '_' in between char
+				oFinalPayload[sProperty] = oFinalPayload[sProperty].replace(/ /g, "_");
 
 				//change boolean value to "Y" || "N" for insertion to table.
 				if (sProperty === "HAS_LOADED_IN_EDW") {
@@ -305,9 +306,9 @@ module.exports = {
 
 			}
 		}
-		
+
 		//check for each field type, will need to be refactor
-		//still crude implementation to check correctness. 
+		//still crude implementation to check correctness.
 		if (typeof oFinalPayload.FREQUENCY === "undefined") {
 			oFinalPayload.FREQUENCY = "";
 		}

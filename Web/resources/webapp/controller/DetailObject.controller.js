@@ -116,8 +116,12 @@ sap.ui.define([
 
 		},
 
+		/**
+		 * Reload current window for a refresh with a timeout.
+		 * @return {[type]} [description]
+		 */
 		_reloadWindow: function () {
-			//reload within 1.5 secs at least. 
+			//reload within 1.5 secs at least.
 			setTimeout(location.reload(), 3000);
 		},
 
@@ -321,6 +325,12 @@ sap.ui.define([
 
 		},
 
+		/**
+		 * Responsible for updating META_FILE_NAME when file received date
+		 * picker is changed
+		 * @param  {[type]} oEvent [control event triggered]
+		 * @return {[type]}        []
+		 */
 		onFileReceiveDateChange: function (oEvent) {
 			let oController = this;
 
@@ -399,6 +409,12 @@ sap.ui.define([
 
 		},
 
+		/**
+		 * Responsible for updating META_FILE_NAME when TABLE NAME
+		 * dropdown selection is changed
+		 * @param  {[type]} oEvent [control event triggered]
+		 * @return {[type]}        []
+		 */
 		onTableNameSelectChange: function (oEvent) {
 
 			let oController = this;
@@ -418,6 +434,12 @@ sap.ui.define([
 
 		},
 
+		/**
+		 * Responsible for updating META_FILE_NAME when TABLE NAME
+		 * dropdown selection is changed
+		 * @param  {[type]} oEvent [control event triggered]
+		 * @return {[type]}        []
+		 */
 		onFileExtensionSelectChange: function (oEvent) {
 			let oController = this;
 			oController.oPayloadHolder.SFILE_EXT = oEvent.getSource().getSelectedKey();
@@ -601,6 +623,7 @@ sap.ui.define([
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 
+			//check uniqueness of the file name to the back-end
 			$.ajax(sApiUrl + "checkSourceUniqueness", {
 				data: {
 					SOURCE_NAME: sNewSource
@@ -749,7 +772,7 @@ sap.ui.define([
 			}
 
 		},
-		
+
 		/**
 		 * Return boolean status depending on the validity of
 		 * of the test from the payload
@@ -757,9 +780,9 @@ sap.ui.define([
 		 * @return {[type]}        [Boolean status depending on oPayload]
 		 */
 		_bValidatePayload: function (oPayload) {
-			//minium of these 3 fields that need to be validated. 
-			//check table name 
-			//check file extension 
+			//minium of these 3 fields that need to be validated.
+			//check table name
+			//check file extension
 			//check file received date
 			let oController = this;
 			let sTableNameSelect = oController.getView().byId("table-name-select").getSelectedKey();
@@ -777,7 +800,7 @@ sap.ui.define([
 			if (typeof sFileReceivedDate === "undefined" || sFileReceivedDate === "") {
 				return false;
 			}
-			
+
 			//if all cases passes through, return true at the end;
 			return true;
 		},
