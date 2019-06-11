@@ -186,7 +186,7 @@
   <OverflowToolbar visible="{= (${viewHolder>/showForm} === true)}">
 
     <Button id="form-next"
-            press="onCreatePressed"
+            press="onCreateMetadaRecord"
             text="{i18n>dataInput.createInfo}"
             visible="{= (${viewHolder>/showCreateMetadataBtn} === true)}" />
 

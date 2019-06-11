@@ -309,7 +309,7 @@ sap.ui.define([
 
 			oController.oPayloadHolder.TIMESTAMP = "";
 			oController.oPayloadHolder.SVALUE = "";
-			
+
 			oController.oPayloadHolder.SOURCE = sSelectedSource;
 
 			oController.getModel("formPayloadValue").setData({
@@ -320,23 +320,23 @@ sap.ui.define([
 			}, false);
 
 		},
-		
-		onFileReceiveDateChange: function(oEvent){
-			let oController = this; 
-			
+
+		onFileReceiveDateChange: function (oEvent) {
+			let oController = this;
+
 			oController.oPayloadHolder.TIMESTAMP = oEvent.getSource().getValue();
 			oController.oPayloadHolder.TIMESTAMP = oController.oPayloadHolder.TIMESTAMP.replace(/-/g, "");
-			
+
 			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE;
-			
-			if(typeof oController.oPayloadHolder.SVALUE !== "undefined"){
+
+			if (typeof oController.oPayloadHolder.SVALUE !== "undefined") {
 				sCurrentFileName += "_" + oController.oPayloadHolder.SVALUE;
 			}
-			
-			if(typeof oController.oPayloadHolder.SFILE_EXT !== "undefined"){
+
+			if (typeof oController.oPayloadHolder.SFILE_EXT !== "undefined") {
 				sCurrentFileName += oController.oPayloadHolder.SFILE_EXT;
 			}
-			
+
 			oController.getModel("formPayloadValue").setData({
 				META_FILE_NAME: sCurrentFileName
 			}, true);
@@ -407,17 +407,17 @@ sap.ui.define([
 			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_";
 
 			sCurrentFileName += oController.oPayloadHolder.SVALUE.toUpperCase();
-			
-			if(typeof oController.oPayloadHolder.SFILE_EXT !== "undefined"){
+
+			if (typeof oController.oPayloadHolder.SFILE_EXT !== "undefined") {
 				sCurrentFileName += oController.oPayloadHolder.SFILE_EXT;
 			}
-			
+
 			oController.getModel("formPayloadValue").setData({
 				META_FILE_NAME: sCurrentFileName
 			}, true);
 
 		},
-	
+
 		onFileExtensionSelectChange: function (oEvent) {
 			let oController = this;
 			oController.oPayloadHolder.SFILE_EXT = oEvent.getSource().getSelectedKey();
@@ -672,77 +672,114 @@ sap.ui.define([
 		 * @param  {[type]} oEvent [as described]
 		 * @return {[type]}        []
 		 */
-		onCreatePressed: function (oEvent) {
+		onCreateMetadaRecord: function (oEvent) {
 			let oController = this;
 
 			let oPayload = oController._processPayload(oController.getModel("formPayloadValue").getData());
 
 			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 
-			//check uniqueness of the record
-			$.ajax(sApiUrl + "checkUniqueness", {
-				data: {
-					META_FILE_NAME: oPayload.META_FILE_NAME
-				},
-				type: "POST",
-				success: function (data) {
+			//check whether there's table name, file extension and file received date thats already selected.
+			if (oController._bValidatePayload(oPayload)) {
+				//check uniqueness of the record
+				$.ajax(sApiUrl + "checkUniqueness", {
+					data: {
+						META_FILE_NAME: oPayload.META_FILE_NAME
+					},
+					type: "POST",
+					success: function (data) {
 
-					if (data.Results.length > 0) {
-						oController.sendMessageToast("File with this name already exist! Please double check.");
-					} else {
-						$.ajax(sApiUrl + "createNewRecord", {
-							data: oPayload,
-							type: "POST",
-							beforeSend: function () {
-								//loading effect start if needed
-							},
-							complete: function () {
-								//loading effect end if needed
-							},
-							success: function (data) {
-								
-								oController._onLoadSources();
-								oController._bSetShowSourceDropdown(true);
-								oController._bShowMainTable(true);
-								oController._bShowForm(false);
-								oController._bShowCreateMetadataBtn(false);
-								oController._bSetShowCancelNewRecordBtn(false);
-								
-								let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
-								oController.readMetadataBySource(sSelectedKey);
-							},
-							error: function (error) {
-								//check for http error and serve accordingly.
-								if (error.status === 403) {
-									oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
-								} else if (error.status === 401) {
-									oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
-									oController._reloadWindow(); //refresh page.
-								} else if (error.responseText === "No Data") {
-									return;
-								} else {
-									oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+						if (data.Results.length > 0) {
+							oController.sendMessageToast("File with this name already exist! Please double check.");
+						} else {
+							$.ajax(sApiUrl + "createNewRecord", {
+								data: oPayload,
+								type: "POST",
+								beforeSend: function () {
+									//loading effect start if needed
+								},
+								complete: function () {
+									//loading effect end if needed
+								},
+								success: function (data) {
+
+									oController._onLoadSources();
+									oController._bSetShowSourceDropdown(true);
+									oController._bShowMainTable(true);
+									oController._bShowForm(false);
+									oController._bShowCreateMetadataBtn(false);
+									oController._bSetShowCancelNewRecordBtn(false);
+
+									let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
+									oController.readMetadataBySource(sSelectedKey);
+								},
+								error: function (error) {
+									//check for http error and serve accordingly.
+									if (error.status === 403) {
+										oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+									} else if (error.status === 401) {
+										oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+										oController._reloadWindow(); //refresh page.
+									} else if (error.responseText === "No Data") {
+										return;
+									} else {
+										oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+									}
+
 								}
+							});
+						}
+					},
+					error: function (error) {
+						//check for http error and serve accordingly.
+						if (error.status === 403) {
+							oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+						} else if (error.status === 401) {
+							location.reload(); //refresh page.
+						} else if (error.responseText === "No Data") {
+							return;
+						} else {
+							oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+						}
 
-							}
-						});
 					}
-				},
-				error: function (error) {
-					//check for http error and serve accordingly.
-					if (error.status === 403) {
-						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
-					} else if (error.status === 401) {
-						location.reload(); //refresh page.
-					} else if (error.responseText === "No Data") {
-						return;
-					} else {
-						oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
-					}
+				});
+			} else {
+				oController.sendMessageToast("Please fill in table name, extension file and received date at a minimum!");
+			}
 
-				}
-			});
+		},
+		
+		/**
+		 * Return boolean status depending on the validity of
+		 * of the test from the payload
+		 * @param  {[type]} oPayload [oPayload of the form]
+		 * @return {[type]}        [Boolean status depending on oPayload]
+		 */
+		_bValidatePayload: function (oPayload) {
+			//minium of these 3 fields that need to be validated. 
+			//check table name 
+			//check file extension 
+			//check file received date
+			let oController = this;
+			let sTableNameSelect = oController.getView().byId("table-name-select").getSelectedKey();
+			let sExtensionSelect = oController.getView().byId("extension-select").getSelectedKey();
+			let sFileReceivedDate = oController.getView().byId("file_received_date").getValue();
 
+			if (typeof sTableNameSelect === "undefined" || sTableNameSelect === "") {
+				return false;
+			}
+
+			if (typeof sExtensionSelect === "undefined" || sExtensionSelect === "") {
+				return false;
+			}
+
+			if (typeof sFileReceivedDate === "undefined" || sFileReceivedDate === "") {
+				return false;
+			}
+			
+			//if all cases passes through, return true at the end;
+			return true;
 		},
 
 		/**
