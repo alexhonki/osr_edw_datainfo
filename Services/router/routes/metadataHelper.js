@@ -24,8 +24,8 @@ module.exports = {
 	getSources: function (oRequest, oResponse) {
 		let oQuery = oRequest.query;
 		let sFinalSearchString =
-			"SELECT TO_VARCHAR(SOURCE_ID) AS SOURCE_ID, CREATED_AT,CREATED_BY,SOURCE_NAME " +
-			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.SOURCES\" ";
+			`SELECT TO_VARCHAR(SOURCE_ID) AS SOURCE_ID, CREATED_AT,CREATED_BY,SOURCE_NAME
+			FROM "osr.edw.source.data.info.db.data::DATA_INFO.SOURCES"`.trim();
 
 		let client = oRequest.db;
 		let oController = this;
@@ -106,9 +106,9 @@ module.exports = {
 			//sql prepared statement for insertion to table
 			function prepareInsertionToSourceTable(execErr, results, callback) {
 
-				let sInsertToSource = "INSERT INTO \"osr.edw.source.data.info.db.data::DATA_INFO.SOURCES\" " +
-					"(SOURCE_ID, CREATED_AT, CREATED_BY, SOURCE_NAME)" +
-					"VALUES(SYSUUID,CURRENT_TIMESTAMP,'" + results[0].VALUE.toUpperCase() + "','" + oRequest.body.sSource.toUpperCase() + "')";
+				let sInsertToSource = `INSERT INTO "osr.edw.source.data.info.db.data::DATA_INFO.SOURCES"
+					(SOURCE_ID, CREATED_AT, CREATED_BY, SOURCE_NAME)
+					VALUES(SYSUUID,CURRENT_TIMESTAMP,'${results[0].VALUE.toUpperCase()}','${oRequest.body.sSource.toUpperCase()}')`.trim();
 
 				client.prepare(
 					sInsertToSource,
@@ -213,22 +213,17 @@ module.exports = {
 
 				let oFinalPayload = oController.sanitisePayload(oRequest.body);
 
-				let sInsertToMetadata = "INSERT INTO \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\"  " +
-					"(METADATA_ID, SOURCE, TIMESTAMP, CREATED_AT, CREATED_BY, FREQUENCY, ROW_COUNTS, YEAR_TYPE, DATA_SET_TYPE," +
-					"META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE," +
-					"ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, CHANGE_DATATYPE, FILE_RECEIVED_DATE, DATA_INPUT)" +
-					"VALUES(SYSUUID,'" + oFinalPayload.SOURCE + "',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '" + results[0].VALUE.toUpperCase() + "', '" +
-					oFinalPayload.FREQUENCY + "'," +
-					" '" + oFinalPayload.ROW_COUNTS + "', '" + oFinalPayload.YEAR_TYPE + "', " +
-					" '" + oFinalPayload.DATA_SET_TYPE + "', '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.RAF_TABLE_NAME + "', '" + oFinalPayload.RAF_TABLE_NAME +
-					"', '" +
-					oFinalPayload.SOURCE_FIELD_VALUE +
-					"'," +
-					" '" + oFinalPayload.META_FILE_NAME + "', '" + oFinalPayload.FROM_DATE + "', '" + oFinalPayload.TO_DATE + "', " +
-					" '" + oFinalPayload.ERRORS + "', '" + oFinalPayload.RAF_FILE_NAME + "', '" + oFinalPayload.HAS_LOADED_IN_EDW + "', '" +
-					oFinalPayload.CHANGE_DATATYPE +
-					"', '" + oFinalPayload.FILE_RECEIVED_DATE + "','"+oFinalPayload.DATA_INPUT+"')";
-
+				let sInsertToMetadata = `INSERT INTO "osr.edw.source.data.info.db.data::DATA_INFO.METADATA"
+					(METADATA_ID, SOURCE, TIMESTAMP, CREATED_AT, CREATED_BY, FREQUENCY, ROW_COUNTS, YEAR_TYPE, DATA_SET_TYPE, 
+					META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE, 
+					ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, FILE_RECEIVED_DATE, DATA_INPUT) 
+					VALUES(SYSUUID,'${oFinalPayload.SOURCE}',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '${results[0].VALUE.toUpperCase()}',
+					 '${oFinalPayload.FREQUENCY}','${oFinalPayload.ROW_COUNTS}','${oFinalPayload.YEAR_TYPE}',
+					 '${oFinalPayload.DATA_SET_TYPE}', '${oFinalPayload.META_FILE_NAME}', '${oFinalPayload.RAF_TABLE_NAME}', '${oFinalPayload.RAF_TABLE_NAME}',
+					 '${oFinalPayload.SOURCE_FIELD_VALUE}','${oFinalPayload.META_FILE_NAME}','${oFinalPayload.FROM_DATE}','${oFinalPayload.TO_DATE}',
+					 '${oFinalPayload.ERRORS}','${oFinalPayload.RAF_FILE_NAME}','${oFinalPayload.HAS_LOADED_IN_EDW}',
+					 '${oFinalPayload.FILE_RECEIVED_DATE}','${oFinalPayload.DATA_INPUT}')`.trim();
+					
 				client.prepare(
 					sInsertToMetadata,
 					function (err, statement) {
@@ -383,8 +378,8 @@ module.exports = {
 	checkUniqueness: function (oRequest, oResponse) {
 		let sMetaFileName = oRequest.body.META_FILE_NAME;
 		let sFinalSearchString =
-			"SELECT DISTINCT(\"META_FILE_NAME\") AS \"META_FILE_NAME\" " +
-			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\" WHERE META_FILE_NAME='" + sMetaFileName + "'";
+			`SELECT DISTINCT(META_FILE_NAME) AS META_FILE_NAME 
+			FROM "osr.edw.source.data.info.db.data::DATA_INFO.METADATA" WHERE META_FILE_NAME='${sMetaFileName}'`.trim();
 
 		let client = oRequest.db;
 		let oController = this;
@@ -432,8 +427,8 @@ module.exports = {
 	checkSourceUniqueness: function (oRequest, oResponse) {
 		let sSourceName = oRequest.body.SOURCE_NAME;
 		let sFinalSearchString =
-			"SELECT DISTINCT(\"SOURCE_NAME\") AS \"SOURCE_NAME\" " +
-			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.SOURCES\" WHERE SOURCE_NAME='" + sSourceName + "'";
+			`SELECT DISTINCT(SOURCE_NAME) AS SOURCE_NAME  
+			FROM "osr.edw.source.data.info.db.data::DATA_INFO.SOURCES" WHERE SOURCE_NAME='${sSourceName}'`;
 
 		let client = oRequest.db;
 		let oController = this;
@@ -479,11 +474,11 @@ module.exports = {
 	getMetadata: function (oRequest, oResponse) {
 		let oQuery = oRequest.query;
 		let sFinalSearchString =
-			"SELECT TO_VARCHAR(METADATA_ID) AS METADATA_ID,CREATED_AT,CREATED_BY,META_FILE_NAME,TIMESTAMP,SOURCE,TYPE, " +
-			"RAF_TABLE_NAME,RAF_FILE_NAME,SOURCE_FIELD_VALUE," +
-			"EDW_FILE_NAME,FREQUENCY,ROW_COUNTS,YEAR_TYPE,FILE_RECEIVED,FROM_DATE,TO_DATE,ERRORS," +
-			"DATA_SET_TYPE " +
-			"FROM \"osr.edw.source.data.info.db.data::DATA_INFO.METADATA\" ";
+			`SELECT TO_VARCHAR(METADATA_ID) AS METADATA_ID,CREATED_AT,CREATED_BY,META_FILE_NAME,TIMESTAMP,SOURCE,TYPE,  
+			RAF_TABLE_NAME,RAF_FILE_NAME,SOURCE_FIELD_VALUE, 
+			EDW_FILE_NAME,FREQUENCY,ROW_COUNTS,YEAR_TYPE,FILE_RECEIVED,FROM_DATE,TO_DATE,ERRORS, 
+			DATA_SET_TYPE  
+			FROM "osr.edw.source.data.info.db.data::DATA_INFO.METADATA" `;
 
 		let client = oRequest.db;
 		let oController = this;
