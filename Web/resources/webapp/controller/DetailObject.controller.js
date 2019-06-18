@@ -662,6 +662,7 @@ sap.ui.define([
 								oController._setDropdownSource(sNewSource);
 								oController.getView().byId("new-source-input").setValue(""); //reset the value
 								oController.sendMessageToast("New source created succesfully!");
+								oController.readMetadataBySource(sNewSource);
 							},
 							error: function (error) {
 								//check for http error and serve accordingly.
