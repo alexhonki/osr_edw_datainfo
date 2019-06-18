@@ -73,9 +73,6 @@
       <viewAttribute id="HAS_LOADED_IN_EDW">
         <descriptions defaultDescription="HAS_LOADED_IN_EDW"/>
       </viewAttribute>
-      <viewAttribute id="CHANGE_DATATYPE">
-        <descriptions defaultDescription="CHANGE_DATATYPE"/>
-      </viewAttribute>
     
       <viewAttribute id="FILE_RECEIVED_DATE">
         <descriptions defaultDescription="FILE_RECEIVED_DATE"/>
@@ -130,7 +127,6 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ERRORS" source="ERRORS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="RAF_FILE_NAME" source="RAF_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HAS_LOADED_IN_EDW" source="HAS_LOADED_IN_EDW"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_DATATYPE" source="CHANGE_DATATYPE"/>
     
       <mapping xsi:type="Calculation:AttributeMapping" target="FILE_RECEIVED_DATE" source="FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_TYPE" source="YEAR_TYPE"/>
@@ -235,9 +231,6 @@
       <viewAttribute id="HAS_LOADED_IN_EDW">
         <descriptions defaultDescription="HAS_LOADED_IN_EDW"/>
       </viewAttribute>
-      <viewAttribute id="CHANGE_DATATYPE">
-        <descriptions defaultDescription="CHANGE_DATATYPE"/>
-      </viewAttribute>
       <viewAttribute id="FILE_RECEIVED_DATE">
         <descriptions defaultDescription="FILE_RECEIVED_DATE"/>
       </viewAttribute>
@@ -293,7 +286,6 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ERRORS" source="ERRORS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="RAF_FILE_NAME" source="RAF_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="HAS_LOADED_IN_EDW" source="HAS_LOADED_IN_EDW"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="CHANGE_DATATYPE" source="CHANGE_DATATYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="FILE_RECEIVED_DATE" source="FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_TYPE" source="YEAR_TYPE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE" source="SOURCE"/>
@@ -374,46 +366,44 @@
       <descriptions defaultDescription="HAS_LOADED_IN_EDW"/>
       <keyMapping columnObjectName="GetAllData" columnName="HAS_LOADED_IN_EDW"/>
     </attribute>
-    <attribute id="CHANGE_DATATYPE" order="16" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CHANGE_DATATYPE"/>
-      <keyMapping columnObjectName="GetAllData" columnName="CHANGE_DATATYPE"/>
-    </attribute>
-    <attribute id="FILE_RECEIVED_DATE" order="17" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="FILE_RECEIVED_DATE" order="16" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FILE_RECEIVED_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="FILE_RECEIVED_DATE"/>
     </attribute>
-    <attribute id="YEAR_TYPE" order="18" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="YEAR_TYPE" order="17" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="YEAR_TYPE"/>
       <keyMapping columnObjectName="GetAllData" columnName="YEAR_TYPE"/>
     </attribute>
-    <attribute id="SOURCE" order="19" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SOURCE" order="18" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SOURCE"/>
       <keyMapping columnObjectName="GetAllData" columnName="SOURCE"/>
     </attribute>
-    <attribute id="METADATA_ID" order="20" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="METADATA_ID" order="19" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="METADATA_ID"/>
       <keyMapping columnObjectName="GetAllData" columnName="METADATA_ID"/>
     </attribute>
-    <attribute id="S_FROM_DATE" order="21" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_FROM_DATE" order="20" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_FROM_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_FROM_DATE"/>
     </attribute>
-    <attribute id="S_TO_DATE" order="22" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_TO_DATE" order="21" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_TO_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_TO_DATE"/>
     </attribute>
-    <attribute id="S_FILE_RECEIVED_DATE" order="23" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_FILE_RECEIVED_DATE" order="22" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_FILE_RECEIVED_DATE"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_FILE_RECEIVED_DATE"/>
     </attribute>
-    <attribute id="S_CREATED_AT" order="24" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="S_CREATED_AT" order="23" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="S_CREATED_AT"/>
       <keyMapping columnObjectName="GetAllData" columnName="S_CREATED_AT"/>
     </attribute>
   
-    <attribute id="DATA_INPUT" order="25" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="DATA_INPUT" order="24" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="DATA_INPUT"/>
+  
       <keyMapping columnObjectName="GetAllData" columnName="DATA_INPUT"/>
+  
     </attribute>
   </attributes>
   <calculatedAttributes/>
