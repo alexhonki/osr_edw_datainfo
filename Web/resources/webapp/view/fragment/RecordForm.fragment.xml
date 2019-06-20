@@ -50,7 +50,7 @@
              
      <Select id="table-name-select"
               forceSelection="false"
-              selectedKey="{formPayloadValue>/RAF_TABLE_NAME}"
+              selectedKey="{formPayloadValue>/TYPE}"
               items="{path: 'metaDataInfoHolder>/'}"
               change="onTableNameSelectChange"
               visible="{= (${viewHolder>/updateMode} === false)}">
@@ -175,6 +175,10 @@
         <core:Item key="{dropdownModel>VALUE}"
                    text="{dropdownModel>TEXT}" />
       </Select>
+      
+      <Label vAlign="Middle"
+             text="{i18n>dataInput.raw_table_name}" />
+      <Input value="{formPayloadValue>/RAF_TABLE_NAME}" />
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.raw_file_name}" />

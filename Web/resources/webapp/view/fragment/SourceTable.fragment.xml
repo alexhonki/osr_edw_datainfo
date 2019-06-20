@@ -38,12 +38,12 @@
         </t:template>
       </t:Column>
 
-      <t:Column sortProperty="RAF_TABLE_NAME"
+      <t:Column sortProperty="TYPE"
                 autoResizable="true"
-                filterProperty="RAF_TABLE_NAME">
+                filterProperty="TYPE">
         <Label text="{i18n>source.table_name}" />
         <t:template>
-          <Text text="{metadataModel>RAF_TABLE_NAME}"
+          <Text text="{metadataModel>TYPE}"
                 wrapping="false" />
         </t:template>
       </t:Column>

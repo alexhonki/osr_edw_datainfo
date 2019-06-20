@@ -219,7 +219,7 @@ module.exports = {
 					ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, FILE_RECEIVED_DATE, DATA_INPUT) 
 					VALUES(SYSUUID,'${oFinalPayload.SOURCE}',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '${results[0].VALUE.toUpperCase()}',
 					 '${oFinalPayload.FREQUENCY}','${oFinalPayload.ROW_COUNTS}','${oFinalPayload.YEAR_TYPE}',
-					 '${oFinalPayload.DATA_SET_TYPE}', '${oFinalPayload.META_FILE_NAME}', '${oFinalPayload.RAF_TABLE_NAME}', '${oFinalPayload.RAF_TABLE_NAME}',
+					 '${oFinalPayload.DATA_SET_TYPE}', '${oFinalPayload.META_FILE_NAME}', '${oFinalPayload.TYPE}', '${oFinalPayload.RAF_TABLE_NAME}',
 					 '${oFinalPayload.SOURCE_FIELD_VALUE}','${oFinalPayload.META_FILE_NAME}','${oFinalPayload.FROM_DATE}','${oFinalPayload.TO_DATE}',
 					 '${oFinalPayload.ERRORS}','${oFinalPayload.RAF_FILE_NAME}','${oFinalPayload.HAS_LOADED_IN_EDW}',
 					 '${oFinalPayload.FILE_RECEIVED_DATE}','${oFinalPayload.DATA_INPUT}')`.trim();
