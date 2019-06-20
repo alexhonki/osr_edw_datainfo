@@ -63,7 +63,7 @@
                 filterProperty="SOURCE_FIELD_VALUE">
         <Label text="{i18n>source.source_field_value}" />
         <t:template>
-          <Text text="{path:'metadataModel>SOURCE_FIELD_VALUE', formatter:'.Formatters.capitaliseFirstLetterAndRmvUnderscore'}"
+          <Text text="{path:'metadataModel>SOURCE_FIELD_VALUE'}"
                 wrapping="false" />
         </t:template>
       </t:Column>
