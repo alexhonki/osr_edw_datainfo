@@ -19,8 +19,6 @@
 	}, {
 		"source": "^/(.*)$",
 		"localDir": "resources",
-		"scope": ["$XSAPPNAME.DATA_INFO"],
-		"authenticationType": "xsuaa",
 		"replace": {
 			"pathSuffixes": ["index.html"],
 			"vars": ["ui5liburl"]
