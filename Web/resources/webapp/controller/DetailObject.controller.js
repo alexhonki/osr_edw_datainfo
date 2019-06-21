@@ -266,13 +266,13 @@ sap.ui.define([
 			let oController = this;
 
 			//bind automatically from the model for all the valid address
-			
+
 			let oBindingInfo = {
-				path : "metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +"')/Results",
-				sorter : new Sorter("CREATED_AT", true)
+				path: "metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource + "')/Results",
+				sorter: new Sorter("CREATED_AT", true)
 			};
 			oController.getView().byId("metadata-records-table").bindRows(oBindingInfo);
-				
+
 			// oController.getView().byId("metadata-records-table").bindRows("metadataModel>/metadataRecordsParameters(IP_SOURCE='" + sSource +
 			// 	"')/Results");
 
@@ -489,7 +489,7 @@ sap.ui.define([
 			oController._bUpdateMode(true);
 			oController._bShowEntireSourceForm(false);
 			oController._bShowCreateMetadataBtn(false);
-			
+
 			let sMetadataId = oEvent.getSource().data().metadataId;
 			let sSource = oEvent.getSource().data().source;
 
@@ -631,73 +631,77 @@ sap.ui.define([
 			//input form value and transform to uppercase and trim
 			let sNewSource = oController.getView().byId("new-source-input").getValue().toUpperCase().trim();
 
-			let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
+			if (typeof sNewSource === "undefined" || sNewSource === "") {
+				oController.sendMessageToast("Source can't be empty! Please input something.");
+			} else {
+				let sApiUrl = this.getOwnerComponent().getMetadata().getConfig("metadataHelper");
 
-			//check uniqueness of the file name to the back-end
-			$.ajax(sApiUrl + "checkSourceUniqueness", {
-				data: {
-					SOURCE_NAME: sNewSource
-				},
-				type: "POST",
-				success: function (data) {
+				//check uniqueness of the file name to the back-end
+				$.ajax(sApiUrl + "checkSourceUniqueness", {
+					data: {
+						SOURCE_NAME: sNewSource
+					},
+					type: "POST",
+					success: function (data) {
 
-					if (data.Results.length > 0) {
-						oController.sendMessageToast("Source with this name already exist! Please double check.");
-					} else {
-						$.ajax(sApiUrl + "createNewSource", {
-							data: {
-								sSource: sNewSource
-							},
-							type: "POST",
-							beforeSend: function () {
-								//loading effect start if needed
-							},
-							complete: function () {
-								//loading effect end if needed
-							},
-							success: function (data) {
-								oController._onLoadSources();
-								oController._bSetShowSourceDropdown(true);
-								oController._bSetShowAddNewRecordBtn(true);
-								oController._setDropdownSource(sNewSource);
-								oController.getView().byId("new-source-input").setValue(""); //reset the value
-								oController.sendMessageToast("New source created succesfully!");
-								oController.readMetadataBySource(sNewSource);
-							},
-							error: function (error) {
-								//check for http error and serve accordingly.
-								if (error.status === 403) {
-									oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
-								} else if (error.status === 401) {
-									oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
-									oController._reloadWindow(); //refresh page.
+						if (data.Results.length > 0) {
+							oController.sendMessageToast("Source with this name already exist! Please double check.");
+						} else {
+							$.ajax(sApiUrl + "createNewSource", {
+								data: {
+									sSource: sNewSource
+								},
+								type: "POST",
+								beforeSend: function () {
+									//loading effect start if needed
+								},
+								complete: function () {
+									//loading effect end if needed
+								},
+								success: function (data) {
+									oController._onLoadSources();
+									oController._bSetShowSourceDropdown(true);
+									oController._bSetShowAddNewRecordBtn(true);
+									oController._setDropdownSource(sNewSource);
+									oController.getView().byId("new-source-input").setValue(""); //reset the value
+									oController.sendMessageToast("New source created succesfully!");
+									oController.readMetadataBySource(sNewSource);
+								},
+								error: function (error) {
+									//check for http error and serve accordingly.
+									if (error.status === 403) {
+										oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+									} else if (error.status === 401) {
+										oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+										oController._reloadWindow(); //refresh page.
 
-								} else if (error.responseText === "No Data") {
-									return;
-								} else {
-									oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+									} else if (error.responseText === "No Data") {
+										return;
+									} else {
+										oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+									}
+
 								}
+							});
+						}
 
-							}
-						});
+					},
+					error: function (error) {
+						//check for http error and serve accordingly.
+						if (error.status === 403) {
+							oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
+						} else if (error.status === 401) {
+							oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
+							oController._reloadWindow(); //refresh page.
+						} else if (error.responseText === "No Data") {
+							return;
+						} else {
+							oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
+						}
+
 					}
-
-				},
-				error: function (error) {
-					//check for http error and serve accordingly.
-					if (error.status === 403) {
-						oController.sendMessageToast("You do not have enough authorisation please contact your system admin.");
-					} else if (error.status === 401) {
-						oController.sendMessageToast("It seems you are logged out, we will refresh this page automatically in 2 seconds.");
-						oController._reloadWindow(); //refresh page.
-					} else if (error.responseText === "No Data") {
-						return;
-					} else {
-						oController.sendMessageToast("Something went wrong, our apologies. Please close the browser and try again.");
-					}
-
-				}
-			});
+				});
+			}
 
 		},
 
@@ -846,7 +850,7 @@ sap.ui.define([
 					oController._bShowRecordForm(false);
 					oController._bSetShowCancelNewRecordBtn(false);
 					oController._bSetShowAddNewRecordBtn(true);
-					
+
 					let sSelectedKey = oController.getView().byId("source-select").getSelectedKey();
 					oController.readMetadataBySource(sSelectedKey);
 				},
