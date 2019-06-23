@@ -36,6 +36,7 @@ context DATA_INFO {
             FREQUENCY          : String(200);
             ROW_COUNTS         : String(200);
             YEAR_TYPE          : String(200);
+            PERIOD_KEY		   : String(200);
             FILE_RECEIVED_DATE : UTCDateTime;
             FROM_DATE          : LocalDate;
             TO_DATE            : LocalDate;

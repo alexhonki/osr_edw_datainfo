@@ -87,6 +87,10 @@
       <viewAttribute id="DATA_INPUT">
         <descriptions defaultDescription="DATA_INPUT"/>
       </viewAttribute>
+    
+      <viewAttribute id="PERIOD_KEY">
+        <descriptions defaultDescription="PERIOD_KEY"/>
+      </viewAttribute>
     </viewAttributes>
     <calculatedViewAttributes>
       <calculatedViewAttribute id="METADATA_ID" datatype="VARCHAR" length="32" expressionLanguage="SQL">
@@ -133,6 +137,8 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE" source="SOURCE"/>
     
       <mapping xsi:type="Calculation:AttributeMapping" target="DATA_INPUT" source="DATA_INPUT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="PERIOD_KEY" source="PERIOD_KEY"/>
     </input>
     <filter>(&quot;SOURCE&quot; = '$$IP_SOURCE$$')</filter>
   </calculationView>
@@ -258,6 +264,9 @@
       <viewAttribute id="DATA_INPUT">
         <descriptions defaultDescription="DATA_INPUT"/>
       </viewAttribute>
+      <viewAttribute id="PERIOD_KEY">
+        <descriptions defaultDescription="PERIOD_KEY"/>
+      </viewAttribute>
       <viewAttribute hidden="true" id="JOIN$S_CREATED_AT$S_CREATED_AT"/>
       <viewAttribute hidden="true" id="JOIN$META_FILE_NAME$META_FILE_NAME"/>
       <viewAttribute hidden="true" id="JOIN$SOURCE$SOURCE"/>
@@ -295,6 +304,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="S_FILE_RECEIVED_DATE" source="S_FILE_RECEIVED_DATE"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="S_CREATED_AT" source="S_CREATED_AT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="DATA_INPUT" source="DATA_INPUT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PERIOD_KEY" source="PERIOD_KEY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$S_CREATED_AT$S_CREATED_AT" source="S_CREATED_AT"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$META_FILE_NAME$META_FILE_NAME" source="META_FILE_NAME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SOURCE$SOURCE" source="SOURCE"/>
@@ -404,6 +414,11 @@
   
       <keyMapping columnObjectName="GetAllData" columnName="DATA_INPUT"/>
   
+    </attribute>
+  
+    <attribute id="PERIOD_KEY" order="25" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PERIOD_KEY"/>
+      <keyMapping columnObjectName="GetAllData" columnName="PERIOD_KEY"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
