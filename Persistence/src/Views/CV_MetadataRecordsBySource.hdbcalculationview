@@ -418,7 +418,14 @@
   
     <attribute id="PERIOD_KEY" order="25" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PERIOD_KEY"/>
+  
       <keyMapping columnObjectName="GetAllData" columnName="PERIOD_KEY"/>
+  
+    </attribute>
+  
+    <attribute id="TYPE" order="26" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TYPE"/>
+      <keyMapping columnObjectName="GetAllData" columnName="TYPE"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
