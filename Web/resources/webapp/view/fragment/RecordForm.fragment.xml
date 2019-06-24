@@ -50,7 +50,7 @@
              
      <Select id="table-name-select"
               forceSelection="false"
-              selectedKey="{formPayloadValue>/TYPE}"
+              selectedKey="{formPayloadValue>/TABLE_NAME}"
               items="{path: 'metaDataInfoHolder>/'}"
               change="onTableNameSelectChange"
               visible="{= (${viewHolder>/updateMode} === false)}">
@@ -171,10 +171,10 @@
              value="{formPayloadValue>/ERRORS}" />
 
       <Label vAlign="Middle"
-             text="{i18n>dataInput.data_input}" />
+             text="{i18n>dataInput.data_type}" />
       <Select id="data-input-select"
               forceSelection="false"
-              selectedKey="{formPayloadValue>/DATA_INPUT}"
+              selectedKey="{formPayloadValue>/DATA_TYPE}"
               items="{ path: 'dropdownModel>/DataInput'}">
         <core:Item key="{dropdownModel>VALUE}"
                    text="{dropdownModel>TEXT}" />
@@ -185,8 +185,8 @@
       <Input value="{formPayloadValue>/RAF_TABLE_NAME}" />
 
       <Label vAlign="Middle"
-             text="{i18n>dataInput.raw_file_name}" />
-      <Input value="{formPayloadValue>/RAF_FILE_NAME}" />
+             text="{i18n>dataInput.external_file_name}" />
+      <Input value="{formPayloadValue>/EXTERNAL_FILE_NAME}" />
     
     </f:content>
     

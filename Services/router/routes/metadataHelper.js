@@ -215,14 +215,14 @@ module.exports = {
 
 				let sInsertToMetadata = `INSERT INTO "osr.edw.source.data.info.db.data::DATA_INFO.METADATA"
 					(METADATA_ID, SOURCE, TIMESTAMP, CREATED_AT, CREATED_BY, FREQUENCY, ROW_COUNTS, YEAR_TYPE, DATA_SET_TYPE, 
-					META_FILE_NAME, TYPE, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, EDW_FILE_NAME, FROM_DATE, TO_DATE, 
-					ERRORS, RAF_FILE_NAME, HAS_LOADED_IN_EDW, FILE_RECEIVED_DATE, DATA_INPUT, PERIOD_KEY, INACTIVE) 
+					META_FILE_NAME, TABLE_NAME, RAF_TABLE_NAME, SOURCE_FIELD_VALUE, FROM_DATE, TO_DATE, 
+					ERRORS, EXTERNAL_FILE_NAME, HAS_LOADED_IN_EDW, FILE_RECEIVED_DATE, DATA_TYPE, PERIOD_KEY, INACTIVE) 
 					VALUES(SYSUUID,'${oFinalPayload.SOURCE}',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '${results[0].VALUE.toUpperCase()}',
 					 '${oFinalPayload.FREQUENCY}','${oFinalPayload.ROW_COUNTS}','${oFinalPayload.YEAR_TYPE}',
-					 '${oFinalPayload.DATA_SET_TYPE}', '${oFinalPayload.META_FILE_NAME}', '${oFinalPayload.TYPE}', '${oFinalPayload.RAF_TABLE_NAME}',
-					 '${oFinalPayload.SOURCE_FIELD_VALUE}','${oFinalPayload.META_FILE_NAME}','${oFinalPayload.FROM_DATE}','${oFinalPayload.TO_DATE}',
-					 '${oFinalPayload.ERRORS}','${oFinalPayload.RAF_FILE_NAME}','${oFinalPayload.HAS_LOADED_IN_EDW}',
-					 '${oFinalPayload.FILE_RECEIVED_DATE}','${oFinalPayload.DATA_INPUT}','${oFinalPayload.PERIOD_KEY}','N')`.trim();
+					 '${oFinalPayload.DATA_SET_TYPE}', '${oFinalPayload.META_FILE_NAME}', '${oFinalPayload.TABLE_NAME}', '${oFinalPayload.RAF_TABLE_NAME}',
+					 '${oFinalPayload.SOURCE_FIELD_VALUE}','${oFinalPayload.FROM_DATE}','${oFinalPayload.TO_DATE}',
+					 '${oFinalPayload.ERRORS}','${oFinalPayload.EXTERNAL_FILE_NAME}','${oFinalPayload.HAS_LOADED_IN_EDW}',
+					 '${oFinalPayload.FILE_RECEIVED_DATE}','${oFinalPayload.DATA_TYPE}','${oFinalPayload.PERIOD_KEY}','N')`.trim();
 					
 				client.prepare(
 					sInsertToMetadata,
@@ -317,8 +317,8 @@ module.exports = {
 			oFinalPayload.DATA_SET_TYPE = "";
 		}
 
-		if (typeof oFinalPayload.TYPE === "undefined") {
-			oFinalPayload.TYPE = "";
+		if (typeof oFinalPayload.TABLE_NAME === "undefined") {
+			oFinalPayload.TABLE_NAME = "";
 		}
 		if (typeof oFinalPayload.RAF_TABLE_NAME === "undefined") {
 			oFinalPayload.RAF_TABLE_NAME = "";
@@ -336,8 +336,8 @@ module.exports = {
 		if (typeof oFinalPayload.ERRORS === "undefined") {
 			oFinalPayload.ERRORS = "";
 		}
-		if (typeof oFinalPayload.RAF_FILE_NAME === "undefined") {
-			oFinalPayload.RAF_FILE_NAME = "";
+		if (typeof oFinalPayload.EXTERNAL_FILE_NAME === "undefined") {
+			oFinalPayload.EXTERNAL_FILE_NAME = "";
 		}
 
 		if (typeof oFinalPayload.CHANGE_DATATYPE === "undefined") {
@@ -346,8 +346,8 @@ module.exports = {
 		if (typeof oFinalPayload.FILE_RECEIVED_DATE === "undefined") {
 			oFinalPayload.FILE_RECEIVED_DATE = "";
 		}
-		if (typeof oFinalPayload.DATA_INPUT === "undefined") {
-			oFinalPayload.DATA_INPUT = "";
+		if (typeof oFinalPayload.DATA_TYPE === "undefined") {
+			oFinalPayload.DATA_TYPE = "";
 		}
 		if (typeof oFinalPayload.PERIOD_KEY === "undefined") {
 			oFinalPayload.PERIOD_KEY = "";

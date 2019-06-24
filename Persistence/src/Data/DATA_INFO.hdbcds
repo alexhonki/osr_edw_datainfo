@@ -26,12 +26,11 @@ context DATA_INFO {
             META_FILE_NAME     : String(200) not null;
             TIMESTAMP          : UTCDateTime not null;
             SOURCE             : String(200);
-            TYPE               : String(200); 
-            DATA_INPUT		   : String(200); 
+            TABLE_NAME         : String(200); 
+            DATA_TYPE		   : String(200); 
             RAF_TABLE_NAME     : String(200); 
-            RAF_FILE_NAME      : String(200);
+            EXTERNAL_FILE_NAME : String(200);
             SOURCE_FIELD_VALUE : String(200);
-            EDW_FILE_NAME      : String(200);
             HAS_LOADED_IN_EDW  : String(1);
             FREQUENCY          : String(200);
             ROW_COUNTS         : String(200);
