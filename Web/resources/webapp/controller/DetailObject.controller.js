@@ -321,7 +321,7 @@ sap.ui.define([
 
 			oController.oPayloadHolder.TIMESTAMP = "";
 			oController.oPayloadHolder.SVALUE = "";
-
+			oController.oPayloadHolder.SOURCE_FIELD_VALUE = "";
 			oController.oPayloadHolder.SOURCE = sSelectedSource;
 
 			oController.getModel("formPayloadValue").setData({
@@ -345,7 +345,7 @@ sap.ui.define([
 			oController.oPayloadHolder.TIMESTAMP = oEvent.getSource().getValue();
 			oController.oPayloadHolder.TIMESTAMP = oController.oPayloadHolder.TIMESTAMP.replace(/-/g, "");
 
-			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE;
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE_FIELD_VALUE + "_" + oController.oPayloadHolder.SOURCE;
 
 			if (typeof oController.oPayloadHolder.SVALUE !== "undefined") {
 				sCurrentFileName += "_" + oController.oPayloadHolder.SVALUE;
@@ -386,7 +386,7 @@ sap.ui.define([
 			let oController = this;
 			oController.oPayloadHolder.SVALUE = oEvent.getSource().getValue();
 			let sSourceInput = oEvent.getSource().data().sourceInput;
-			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_";
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE_FIELD_VALUE + "_" + oController.oPayloadHolder.SOURCE + "_";
 			if (sSourceInput === "table_name") {
 				sCurrentFileName += oController.oPayloadHolder.SVALUE.toUpperCase();
 
@@ -428,7 +428,7 @@ sap.ui.define([
 			let oController = this;
 			oController.oPayloadHolder.SVALUE = oEvent.getSource().getSelectedKey();
 			let sSourceInput = oEvent.getSource().data().sourceInput;
-			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_";
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE_FIELD_VALUE + "_" + oController.oPayloadHolder.SOURCE + "_";
 
 			sCurrentFileName += oController.oPayloadHolder.SVALUE.toUpperCase();
 
@@ -452,10 +452,30 @@ sap.ui.define([
 			let oController = this;
 			oController.oPayloadHolder.SFILE_EXT = oEvent.getSource().getSelectedKey();
 			let sSourceInput = oEvent.getSource().data().sourceInput;
-			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder
-				.SVALUE;
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE_FIELD_VALUE + "_" + 
+			oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder.SVALUE;
 
 			sCurrentFileName += oController.oPayloadHolder.SFILE_EXT;
+
+			oController.getModel("formPayloadValue").setData({
+				META_FILE_NAME: sCurrentFileName
+			}, true);
+
+		},
+		
+		/**
+		 * Responsible for updating META_FILE_NAME when 
+		 * Source Field Value is changed
+		 * @param  {[type]} oEvent [control event triggered]
+		 * @return {[type]}        []
+		 */
+		onSourceFieldValueChange: function (oEvent) {
+			
+			let oController = this;
+			oController.oPayloadHolder.SOURCE_FIELD_VALUE = oEvent.getSource().getValue().toUpperCase().trim();
+			let sSourceInput = oEvent.getSource().data().sourceInput;
+			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE_FIELD_VALUE + 
+			"_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder.SVALUE;
 
 			oController.getModel("formPayloadValue").setData({
 				META_FILE_NAME: sCurrentFileName
@@ -784,7 +804,7 @@ sap.ui.define([
 					}
 				});
 			} else {
-				oController.sendMessageToast("Please fill in table name, extension file and received date at a minimum!");
+				oController.sendMessageToast("Please fill in table name, extension file, received date and source field value at a minimum!");
 			}
 
 		},
@@ -804,7 +824,8 @@ sap.ui.define([
 			let sTableNameSelect = oController.getView().byId("table-name-select").getSelectedKey();
 			let sExtensionSelect = oController.getView().byId("extension-select").getSelectedKey();
 			let sFileReceivedDate = oController.getView().byId("file_received_date").getValue();
-
+			let sSourceFieldValue = oController.getView().byId("source-field-value").getValue();
+			
 			if (typeof sTableNameSelect === "undefined" || sTableNameSelect === "") {
 				return false;
 			}
@@ -814,6 +835,10 @@ sap.ui.define([
 			}
 
 			if (typeof sFileReceivedDate === "undefined" || sFileReceivedDate === "") {
+				return false;
+			}
+			
+			if (typeof sSourceFieldValue === "undefined" || sSourceFieldValue === "") {
 				return false;
 			}
 

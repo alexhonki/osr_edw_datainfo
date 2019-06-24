@@ -349,6 +349,9 @@ module.exports = {
 		if (typeof oFinalPayload.DATA_INPUT === "undefined") {
 			oFinalPayload.DATA_INPUT = "";
 		}
+		if (typeof oFinalPayload.PERIOD_KEY === "undefined") {
+			oFinalPayload.PERIOD_KEY = "";
+		}
 		return oFinalPayload;
 	},
 

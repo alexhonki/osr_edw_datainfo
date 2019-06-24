@@ -81,8 +81,12 @@
                   visible="{= (${viewHolder>/updateMode} === false)}"/>
                   
       <Label vAlign="Middle"
-             text="{i18n>dataInput.source_field_value}" />
-      <Input value="{formPayloadValue>/SOURCE_FIELD_VALUE}" />
+             text="{i18n>dataInput.source_field_value}"
+             required="true"/>
+      <Input id="source-field-value"
+    		 value="{formPayloadValue>/SOURCE_FIELD_VALUE}"
+    		 visible="{= (${viewHolder>/updateMode} === false)}"
+    		 liveChange="onSourceFieldValueChange"/>
 
       <Label vAlign="Middle"
              text="{i18n>dataInput.frequency}" />
