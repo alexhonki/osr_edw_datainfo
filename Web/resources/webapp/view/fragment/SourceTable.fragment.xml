@@ -38,22 +38,22 @@
         </t:template>
       </t:Column>
 
-      <t:Column sortProperty="TYPE"
+      <t:Column sortProperty="TABLE_NAME"
                 autoResizable="true"
                 filterProperty="TYPE">
         <Label text="{i18n>source.table_name}" />
         <t:template>
-          <Text text="{metadataModel>TYPE}"
+          <Text text="{metadataModel>TABLE_NAME}"
                 wrapping="false" />
         </t:template>
       </t:Column>
 
-      <t:Column sortProperty="RAF_FILE_NAME"
+      <t:Column sortProperty="EXTERNAL_FILE_NAME"
                 autoResizable="true"
-                filterProperty="RAF_FILE_NAME">
+                filterProperty="EXTERNAL_FILE_NAME">
         <Label text="{i18n>source.external_file_name}" />
         <t:template>
-          <Text text="{metadataModel>RAF_FILE_NAME}"
+          <Text text="{metadataModel>EXTERNAL_FILE_NAME}"
                 wrapping="false" />
         </t:template>
       </t:Column>
