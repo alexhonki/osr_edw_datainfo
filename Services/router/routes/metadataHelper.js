@@ -107,8 +107,8 @@ module.exports = {
 			function prepareInsertionToSourceTable(execErr, results, callback) {
 
 				let sInsertToSource = `INSERT INTO "osr.edw.source.data.info.db.data::DATA_INFO.SOURCES"
-					(SOURCE_ID, CREATED_AT, CREATED_BY, SOURCE_NAME)
-					VALUES(SYSUUID,CURRENT_TIMESTAMP,'${results[0].VALUE.toUpperCase()}','${oRequest.body.sSource.toUpperCase()}')`.trim();
+					(SOURCE_ID, CREATED_AT, CREATED_BY, SOURCE_NAME, INACTIVE)
+					VALUES(SYSUUID,CURRENT_TIMESTAMP,'${results[0].VALUE.toUpperCase()}','${oRequest.body.sSource.toUpperCase()}','N')`.trim();
 
 				client.prepare(
 					sInsertToSource,
