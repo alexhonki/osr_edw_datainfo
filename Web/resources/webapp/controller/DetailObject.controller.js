@@ -475,7 +475,7 @@ sap.ui.define([
 			oController.oPayloadHolder.SOURCE_FIELD_VALUE = oEvent.getSource().getValue().toUpperCase().trim();
 			let sSourceInput = oEvent.getSource().data().sourceInput;
 			let sCurrentFileName = oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE_FIELD_VALUE + 
-			"_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder.SVALUE + "_" + oController.oPayloadHolder.SFILE_EXT;
+			"_" + oController.oPayloadHolder.SOURCE + "_" + oController.oPayloadHolder.SVALUE + oController.oPayloadHolder.SFILE_EXT;
 
 			oController.getModel("formPayloadValue").setData({
 				META_FILE_NAME: sCurrentFileName
