@@ -16,7 +16,7 @@
     <headerContent>
     </headerContent>
     <content>
-      <IconTabBar id="scv-tabbar"
+      <IconTabBar id="data-info-tabbar"
                   expanded="true"
                   class="sapUiResponsiveContentPadding"
                   select="onSelectTab"

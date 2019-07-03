@@ -43,7 +43,7 @@ sap.ui.define([
 			oController.oPayloadHolder = {};
 			//set the icontab bar to select the first tab everytime.
 			//setting the key in the view.
-			oController.getView().byId("scv-tabbar").setSelectedKey("current-tab-key");
+			oController.getView().byId("data-info-tabbar").setSelectedKey("current-tab-key");
 			oController._setModels();
 			oController._onLoadSources();
 			oController._fetchCSRFToken();
@@ -323,7 +323,8 @@ sap.ui.define([
 			oController.oPayloadHolder.SVALUE = "";
 			oController.oPayloadHolder.SOURCE_FIELD_VALUE = "";
 			oController.oPayloadHolder.SOURCE = sSelectedSource;
-
+			oController.oPayloadHolder.SFILE_EXT = "";
+			
 			oController.getModel("formPayloadValue").setData({
 				SOURCE: sSelectedSource,
 				META_FILE_NAME: oController.oPayloadHolder.TIMESTAMP + "_" + oController.oPayloadHolder.SOURCE + "_",
