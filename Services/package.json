@@ -7,12 +7,12 @@
 		"@sap/xssec": "2.1.15",
 		"@sap/logging": "^3.0.0",
 		"@sap/hana-client": "^2.4.126",
-		"csurf": "^1.9.0",
+		"csurf": "1.9.0",
 		"express": "4.16.4",
 		"passport": "0.4.0",
-		"async": "^2.6.1",
-		"swagger-ui-express": "^4.0.1",
-		"body-parser": "^1.18.3"
+		"async": "2.6.1",
+		"swagger-ui-express": "4.0.1",
+		"body-parser": "1.18.3"
 	},
 	"devDependencies": {
 		"@sap/xsjs-test": "2.0.16"
