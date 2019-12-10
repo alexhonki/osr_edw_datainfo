@@ -2,7 +2,11 @@
   "role": {
     "name": "osr.edw.data.info::read_user_g#",
     "schema_privileges": [{
-      "privileges_with_grant_option": ["SELECT", "SELECT CDS METADATA","SELECT METADATA", "EXECUTE","DEBUG"]
+      "privileges_with_grant_option": [	"SELECT", 
+    									"SELECT CDS METADATA",
+    									"SELECT METADATA", 
+    									"EXECUTE",
+    									"DEBUG"]
     }]
   }
 }
