@@ -62,7 +62,7 @@ resources:
     parameters:
       service-name: OSR_EDW_SOURCE_DATA_INFO-uaa
       service-plan: space
-      path: ./xs-security.json
+      path: xs-security.json
   - name: OSR-EDW-PLATFORM-grantor
     properties:
       OSR-EDW-PLATFORM-grantor-service: '${service-name}'
