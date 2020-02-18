@@ -1,12 +1,12 @@
 {
 	"description": "OSR EDW Source Data Info",
 	"dependencies": {
-		"@sap/xsjs": "3.3.7",
-		"@sap/xsenv": "1.2.9",
-		"@sap/hdbext": "~4.3.0",
-		"@sap/xssec": "2.1.15",
-		"@sap/logging": "^3.0.0",
-		"@sap/hana-client": "^2.4.126",
+		"@sap/xsjs": "5.3.1",
+		"@sap/xsenv": "2.2.0",
+		"@sap/hdbext": "6.1.1",
+		"@sap/xssec": "2.2.4",
+		"@sap/logging": "5.2.0",
+		"@sap/hana-client": "2.4.182",
 		"csurf": "1.9.0",
 		"express": "4.16.4",
 		"passport": "0.4.0",
