@@ -4,7 +4,7 @@
 		"@sap/xsjs": "5.3.1",
 		"@sap/xsenv": "2.2.0",
 		"@sap/hdbext": "6.1.1",
-		"@sap/xssec": "2.2.4",
+		"@sap/xssec": "3.6.0",
 		"@sap/logging": "5.2.0",
 		"@sap/hana-client": "2.4.182",
 		"csurf": "1.9.0",
